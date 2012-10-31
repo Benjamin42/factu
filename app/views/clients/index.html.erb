@@ -1,0 +1,53 @@
+<%= render 'header'%>
+
+<h1>Listing clients</h1>
+
+<div class="center">
+	<%= link_to 'New Client', new_client_path, class:"btn btn-primary" %>
+</div>
+<br />
+
+<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+
+<%= file_field_tag :my_file %>
+<%= submit_tag("Search", class: "btn btn-primary") %>
+<% end %>
+
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
+
+<table class="table">
+	<tr>
+		<th>N° client</th>
+		<th>Nom</th>
+		<th>Num voie</th>
+		<th>Codepostal</th>
+		<th>Ville</th>
+		<th>Pays</th>
+		<th>Email</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @clients.each do |client| %>
+	<tr>
+		<td><%= client.num_client %></td>
+		<td><%= client.nom %></td>
+		<td><%= client.num_voie %></td>
+		<td><%= client.codepostal %></td>
+		<td><%= client.ville %></td>
+		<td><%= client.pays %></td>
+		<td><%= client.email %></td>
+		<td><%= link_to 'Show', client, class:"btn btn-info" %></td>
+		<td><%= link_to 'Edit', edit_client_path(client), class:"btn btn-warning" %></td>
+		<td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+	</tr>
+	<% end %>
+</table>
+
+<br />
+

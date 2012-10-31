@@ -1,0 +1,31 @@
+<%= render 'header' %>
+
+<h1>Listing produits</h1>
+
+<div class="center">
+	<%= link_to 'New Produit', new_produit_path, class:"btn btn-primary" %>
+</div>
+<br />
+
+<table class="table">
+	<tr>
+		<th>Label</th>
+		<th>Commentaire</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @produits.each do |produit| %>
+	<tr>
+		<td><%= produit.label %></td>
+		<td><%= produit.commentaire %></td>
+		<td><%= link_to 'Show', produit, class:"btn btn-info" %></td>
+		<td><%= link_to 'Edit', edit_produit_path(produit), class:"btn btn-warning" %></td>
+		<td><%= link_to 'Destroy', produit, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+	</tr>
+	<% end %>
+</table>
+
+<br />
+

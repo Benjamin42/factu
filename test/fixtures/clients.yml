@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  num_client: 1
+  num_tva: MyString
+  nom: MyString
+  nom_info: MyString
+  bat: MyString
+  num_voie: MyString
+  bp: MyString
+  codepostal: MyString
+  ville: MyString
+  pays: MyString
+  tel: MyString
+  portable: MyString
+  fax: MyString
+  email: MyString
+  commentaire: MyString
+
+two:
+  num_client: 1
+  num_tva: MyString
+  nom: MyString
+  nom_info: MyString
+  bat: MyString
+  num_voie: MyString
+  bp: MyString
+  codepostal: MyString
+  ville: MyString
+  pays: MyString
+  tel: MyString
+  portable: MyString
+  fax: MyString
+  email: MyString
+  commentaire: MyString

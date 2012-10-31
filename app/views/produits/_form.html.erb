@@ -1,0 +1,33 @@
+<%= form_for(@produit, :html => {:class => "form-horizontal"}) do |f| %>
+<% if @produit.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@produit.errors.count, "error") %> prohibited this produit from being saved:</h2>
+
+	<ul>
+		<% @produit.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="control-group">
+	<label  class="control-label"><%= f.label :label %></label>
+	<div class="controls">
+		<%= f.text_field :label %>
+	</div>
+</div>
+<div class="control-group">
+	<label  class="control-label"><%= f.label :commentaire %></label>
+	<div class="controls">
+		<%= f.text_field :commentaire %>
+	</div>
+</div>
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
+<% end %>
