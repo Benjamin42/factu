@@ -5,13 +5,23 @@
 <div class="center">
 	<%= link_to 'New Client', new_client_path, class:"btn btn-primary" %>
 </div>
+
+<div class="dropdown right">
+	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+		Chargement par fichier
+	</button>
+
+	<div id="uploadFile" class="collapse">
+		<br />
+
+		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+		<%= file_field_tag :my_file %>
+		<%= submit_tag("Charger", class: "btn btn-primary") %>
+		<% end %>
+	</div>
+</div>
+
 <br />
-
-<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
-
-<%= file_field_tag :my_file %>
-<%= submit_tag("Search", class: "btn btn-primary") %>
-<% end %>
 
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
