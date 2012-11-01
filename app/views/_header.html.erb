@@ -1,0 +1,10 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Factu</a>
+    <ul class="nav">
+      <li class="<%= if @token == :produits then "active" else "" end %>"><a href="/produits">Produits</a></li>
+      <li class="<%= if @token == :clients then "active" else "" end %>"><a href="/clients">Client</a></li>
+      <li class="<%= if @token == :tarifs then "active" else "" end %>"><a href="/tarifs">Tarifs</a></li>
+    </ul>
+  </div>
+</div>

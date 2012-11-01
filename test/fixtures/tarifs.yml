@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  prix_unitaire_ht: 1.5
+  annee: 1
+
+two:
+  prix_unitaire_ht: 1.5
+  annee: 1

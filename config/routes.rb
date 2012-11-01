@@ -1,4 +1,6 @@
 Factu::Application.routes.draw do
+  resources :tarifs
+
   resources :clients
   match 'clients/uploadFile' => 'clients#uploadFile'
 

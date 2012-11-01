@@ -2,10 +2,12 @@
 require 'csv'
 
 class ClientsController < ApplicationController
+
   # GET /clients
   # GET /clients.json
   def index
     @clients = Client.all
+    @token = :clients
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +19,7 @@ class ClientsController < ApplicationController
   # GET /clients/1.json
   def show
     @client = Client.find(params[:id])
+    @token = :clients
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,6 +32,7 @@ class ClientsController < ApplicationController
   def new
     @client = Client.new
     @client.num_client = "42" # TODO : récupérer le max(num_client)
+    @token = :clients
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,12 +43,14 @@ class ClientsController < ApplicationController
   # GET /clients/1/edit
   def edit
     @client = Client.find(params[:id])
+    @token = :clients
   end
 
   # POST /clients
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
+    @token = :clients
 
     respond_to do |format|
       if @client.save
@@ -61,6 +67,7 @@ class ClientsController < ApplicationController
   # PUT /clients/1.json
   def update
     @client = Client.find(params[:id])
+    @token = :clients
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
@@ -78,6 +85,7 @@ class ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.destroy
+    @token = :clients
 
     respond_to do |format|
       format.html { redirect_to clients_url }
@@ -86,6 +94,7 @@ class ClientsController < ApplicationController
   end
 
   def uploadFile
+    @token = :clients
     file_data = params[:my_file]
     errs = []
 

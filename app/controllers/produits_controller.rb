@@ -3,6 +3,7 @@ class ProduitsController < ApplicationController
   # GET /produits.json
   def index
     @produits = Produit.all
+    @token = :produits
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class ProduitsController < ApplicationController
   # GET /produits/1.json
   def show
     @produit = Produit.find(params[:id])
+    @token = :produits
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class ProduitsController < ApplicationController
   # GET /produits/new.json
   def new
     @produit = Produit.new
+    @token = :produits
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +38,14 @@ class ProduitsController < ApplicationController
   # GET /produits/1/edit
   def edit
     @produit = Produit.find(params[:id])
+    @token = :produits
   end
 
   # POST /produits
   # POST /produits.json
   def create
     @produit = Produit.new(params[:produit])
+    @token = :produits
 
     respond_to do |format|
       if @produit.save
@@ -57,6 +62,7 @@ class ProduitsController < ApplicationController
   # PUT /produits/1.json
   def update
     @produit = Produit.find(params[:id])
+    @token = :produits
 
     respond_to do |format|
       if @produit.update_attributes(params[:produit])
@@ -74,6 +80,7 @@ class ProduitsController < ApplicationController
   def destroy
     @produit = Produit.find(params[:id])
     @produit.destroy
+    @token = :produits
 
     respond_to do |format|
       format.html { redirect_to produits_url }

@@ -1,0 +1,31 @@
+<%= simple_form_for @tarif, :html => {:class => "form-horizontal"}  do |f| %>
+<% if @tarif.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@tarif.errors.count, "error") %> prohibited this tarif from being saved:</h2>
+
+	<ul>
+		<% @tarif.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<%= f.simple_fields_for @tarif.produit do |c| %>
+	<%= c.input :id, as: :hidden %>
+	<%= c.input :label, :disabled => true, label: "Produit", input_html: { id: c.object.label } %>
+<% end %>
+              
+<%= f.input :annee, :label => "Année", :disabled => true  %>
+
+<%= f.input :prix_unitaire_ht, :label => "Prix Unitaire"  %>
+<%= f.input :prix_unitaire_ht_livraison, :label => "Prix Unitaire (livraison)"  %>
+
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
+<% end %>

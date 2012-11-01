@@ -1,4 +1,4 @@
-<%= render 'header'%>
+<%= render :template => 'clients/../_header' %>
 
 <h1>Listing clients</h1>
 
@@ -18,7 +18,7 @@
 <div class="center">
 	<%= link_to 'New Client', new_client_path, class:"btn btn-primary" %>
 
-	<div class="right">
+ou
 		<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
 			Chargement par fichier
 		</button>
@@ -31,7 +31,7 @@
 			<%= submit_tag("Charger", class: "btn btn-primary") %>
 			<% end %>
 		</div>
-	</div>
+
 </div>
 
 <br />
