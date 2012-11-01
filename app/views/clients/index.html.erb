@@ -2,34 +2,41 @@
 
 <h1>Listing clients</h1>
 
+<% if flash[:error] %>
+<div class="alert alert-error fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= flash[:error] %>
+</div>
+<% end %>
+<% if flash[:notice] %>
+<div class="alert alert-block fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= flash[:notice] %>
+</div>
+<% end %>
+
 <div class="center">
 	<%= link_to 'New Client', new_client_path, class:"btn btn-primary" %>
-</div>
 
-<div class="dropdown right">
-	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
-		Chargement par fichier
-	</button>
+	<div class="right">
+		<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+			Chargement par fichier
+		</button>
 
-	<div id="uploadFile" class="collapse">
-		<br />
+		<div id="uploadFile" class="collapse">
+			<br />
 
-		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
-		<%= file_field_tag :my_file %>
-		<%= submit_tag("Charger", class: "btn btn-primary") %>
-		<% end %>
+			<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+			<%= file_field_tag :my_file %>
+			<%= submit_tag("Charger", class: "btn btn-primary") %>
+			<% end %>
+		</div>
 	</div>
 </div>
 
 <br />
 
-<div class="form-actions">
-	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-	<i class="icon-ok icon-white"></i> Save
-	<% end %>
-</div>
-
-<table class="table">
+<table class="table table-condensed">
 	<tr>
 		<th>N° client</th>
 		<th>Nom</th>

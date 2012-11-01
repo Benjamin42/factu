@@ -1,126 +1,54 @@
-<%= form_for(@client, :html => {:class => "form-horizontal"}) do |f| %>
-<fieldset>
-	<% if @client.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+<%= simple_form_for @client, :html => {:class => "form-horizontal"} do |f| %>
 
-		<ul>
-			<% @client.errors.full_messages.each do |msg| %>
-			<li>
-				<%= msg %>
-			</li>
-			<% end %>
-		</ul>
-	</div>
+<% if notification = f.error_notification %>
+<div class="alert alert-error fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= notification %>
+</div>
+<% end %>
+
+<%= f.input :num_client, :label => "Numéro de client"  %>
+<%= f.input :num_tva, :label => "Numéro TVA"  %>
+<%= f.input :nom, :label => "Nom"  %>
+<%= f.input :nom_info, :label => "Nom (info complémentaire)"  %>
+<%= f.input :bat, :label => "Bat / Immeuble / Z.I"  %>
+<%= f.input :num_voie, :label => "N° et Voie"  %>
+<%= f.input :bp, :label => "BP ou Lieu-Dit"  %>
+<%= f.input :codepostal, :label => "Codepostal"  %>
+<%= f.input :ville, :label => "Ville"  %>
+<%= f.input :pays, :label => "Pays"  %>
+
+<%= f.input :tel, :wrapper => :prepend do %>
+	<%= content_tag :div, :class => "add-on" do %>
+		<%= content_tag :div, :class => "icon-list" do %><% end %>
 	<% end %>
+	<%= f.input_field :tel %>
+<% end %>
 
-	<div class="control-group">
-		<label  class="control-label">Numéro de client</label>
-		<div class="controls">
-			<%= f.number_field :num_client %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Numéro TVA</label>
-		<div class="controls">
-			<%= f.text_field :num_tva %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Nom</label>
-		<div class="controls">
-			<%= f.text_field :nom %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Nom (info complémentaire)</label>
-		<div class="controls">
-			<%= f.text_field :nom_info %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Bat / Immeuble / Z.I</label>
-		<div class="controls">
-			<%= f.text_field :bat %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">N° et Voie</label>
-		<div class="controls">
-			<%= f.text_field :num_voie %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">BP ou Lieu-Dit</label>
-		<div class="controls">
-			<%= f.text_field :bp %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Codepostal</label>
-		<div class="controls">
-			<%= f.text_field :codepostal %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Ville</label>
-		<div class="controls">
-			<%= f.text_field :ville %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Pays</label>
-		<div class="controls">
-			<%= f.text_field :pays %>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Tel</label>
-		<div class="controls">
-			<div class="input-prepend">
-				<span class="add-on"><div class="icon-list"></div></span>
-				<%= f.text_field :tel %>
-			</div>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Portable</label>
-		<div class="controls">
-			<div class="input-prepend">
-				<span class="add-on"><div class="icon-signal"></div></span>
-				<%= f.text_field :portable %>
-			</div>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Fax</label>
-		<div class="controls">
-			<div class="input-prepend">
-				<span class="add-on"><div class="icon-print"></div></span>
-				<%= f.text_field :fax %>
-			</div>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Email</label>
-		<div class="controls">
-			<div class="input-prepend">
-				<span class="add-on"><div class="icon-envelope"></div></span>
-				<%= f.text_field :email %>
-			</div>
-		</div>
-	</div>
-	<div class="control-group">
-		<label  class="control-label">Commentaire</label>
-		<div class="controls">
-			<%= f.text_field :commentaire %>
-		</div>
-	</div>
+<%= f.input :portable, :wrapper => :prepend do %>
+	<%= content_tag :div, :class => "add-on" do %>
+		<%= content_tag :div, :class => "icon-signal" do %><% end %>
+	<% end %>
+	<%= f.input_field :portable %>
+<% end %>
 
-	<div class="form-actions">
-		<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-		<i class="icon-ok icon-white"></i> Save
-		<% end %>
-	</div>
-</fieldset>
+<%= f.input :fax, :wrapper => :prepend do %>
+	<%= content_tag :div, :class => "add-on" do %>
+		<%= content_tag :div, :class => "icon-print" do %><% end %>
+	<% end %>
+	<%= f.input_field :fax %>
+<% end %>
+
+<%= f.input :email, :wrapper => :prepend do %>
+	<%= content_tag :div, :class => "add-on" do %>@<% end %>
+	<%= f.input_field :email %>
+<% end %>
+
+<%= f.input :commentaire, :label => "Commentaire"  %>
+
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
 <% end %>
