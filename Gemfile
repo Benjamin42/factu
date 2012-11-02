@@ -24,7 +24,12 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
+  
+  gem 'jquery-datatables-rails'
+  gem 'jquery-ui-rails'
 end
+
+gem 'will_paginate'
 
 gem 'jquery-rails'
 gem 'simple_form', '~> 2.0.0'

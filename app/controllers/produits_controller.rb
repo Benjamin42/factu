@@ -7,7 +7,7 @@ class ProduitsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @produits }
+      format.json { render json: ProduitsDatatable.new(view_context) }
     end
   end
 
