@@ -38,4 +38,8 @@ class Client < ActiveRecord::Base
     return str
   end
 
+  def self.next_num_client
+    return find_by_sql("select max(num_client) + 1 as num_client from clients").first.num_client
+  end
+
 end

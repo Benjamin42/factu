@@ -28,9 +28,12 @@ class Tarif < ActiveRecord::Base
   def self.annee_suivante
     return find_by_sql("select max(annee) + 1 as annee from tarifs").first.annee
   end
+  
+  def self.list_annee
+    return find_by_sql("select distinct annee as annee from tarifs")
+  end  
 
   def self.create_tarif(produit, annee)
-    # find existing customer from email or create new
     tarif = Tarif.new()
     tarif.attributes = {
 
@@ -40,6 +43,14 @@ class Tarif < ActiveRecord::Base
       :prix_unitaire_ht_livraison => 0
     }
     return tarif
+  end
+  
+  def self.delete_tarif(idProduit)
+    @tarifs = self.find_by_id_produit(idProduit)
+    @tarifs.each do |tarif|
+      tarif.destroy
+    end
+    
   end
 
 end

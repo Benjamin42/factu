@@ -6,7 +6,9 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @q= Client.search(params[:q])
+    @clients = @q.result
+    #@clients = Client.all
     @token = :clients
 
     respond_to do |format|
@@ -31,7 +33,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.json
   def new
     @client = Client.new
-    @client.num_client = "42" # TODO : récupérer le max(num_client)
+    @client.num_client = Client.next_num_client
     @token = :clients
 
     respond_to do |format|
@@ -50,6 +52,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
+    @client.num_client = Client.next_num_client
     @token = :clients
 
     respond_to do |format|

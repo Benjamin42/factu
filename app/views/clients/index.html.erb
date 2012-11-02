@@ -25,7 +25,6 @@ ou
 
 		<div id="uploadFile" class="collapse">
 			<br />
-
 			<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
 			<%= file_field_tag :my_file %>
 			<%= submit_tag("Charger", class: "btn btn-primary") %>
@@ -35,6 +34,18 @@ ou
 </div>
 
 <br />
+
+<div class="center">
+	<a data-toggle="collapse" data-target="#filtre">
+		<b>Filtre</b>
+	</a>
+	<div id="filtre" class="collapse">
+		<%= search_form_for @q, :html => {:class => "form-horizontal"} do |f| %>
+		  <%= f.label "Nom" %> <%= f.text_field :nom_cont %>
+		  <%= f.submit %>
+		<% end %>
+	</div>
+</div>
 
 <table class="table table-condensed">
 	<tr>

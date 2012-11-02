@@ -49,6 +49,11 @@ class ProduitsController < ApplicationController
 
     respond_to do |format|
       if @produit.save
+        listAnnee = Tarif.list_annee
+        listAnnee.each do |anneeLine|
+          tarif = Tarif.create_tarif(@produit, anneeLine.annee)
+          tarif.save
+        end
         format.html { redirect_to @produit, notice: 'Produit was successfully created.' }
         format.json { render json: @produit, status: :created, location: @produit }
       else
@@ -79,6 +84,7 @@ class ProduitsController < ApplicationController
   # DELETE /produits/1.json
   def destroy
     @produit = Produit.find(params[:id])
+    Tarif.delete_tarif(params[:id])
     @produit.destroy
     @token = :produits
 
