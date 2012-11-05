@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  has_many :commande
 
   validates_presence_of :num_client
   validates_presence_of :nom
@@ -6,6 +7,10 @@ class Client < ActiveRecord::Base
   validates_presence_of :ville
 
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  
+  def form_title
+    return " #{id} - #{nom}"
+  end
   
   def self.build_from_csv(row)
     # find existing customer from email or create new

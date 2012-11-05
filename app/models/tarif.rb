@@ -1,5 +1,7 @@
 class Tarif < ActiveRecord::Base
   belongs_to :produit
+  has_many :commande_produit
+  
   def self.find_by_id_produit(idProduit)
     find_by_sql("select * from tarifs where produit_id = #{idProduit}")
 

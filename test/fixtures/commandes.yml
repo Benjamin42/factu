@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  num_factu: MyString
+  bdl_id: 1
+  client_id: 1
+  date_factu: 2012-11-05
+  nb_etiquette: 1
+  statut: MyString
+
+two:
+  num_factu: MyString
+  bdl_id: 1
+  client_id: 1
+  date_factu: 2012-11-05
+  nb_etiquette: 1
+  statut: MyString

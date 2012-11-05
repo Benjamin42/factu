@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  commande_id: 1
+  tarif_id: 1
+  qty: 1
+  cadeau: false
+
+two:
+  commande_id: 1
+  tarif_id: 1
+  qty: 1
+  cadeau: false

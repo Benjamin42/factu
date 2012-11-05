@@ -1,0 +1,41 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Listing commandes</h1>
+
+<div class="center">
+	<%= link_to 'New Commande', new_commande_path, class:"btn btn-primary" %>
+</div>
+
+<br />
+
+<table class="table">
+  <tr>
+    <th>Num factu</th>
+    <th>Bdl</th>
+    <th>Client</th>
+    <th>Date factu</th>
+    <th>Nb etiquette</th>
+    <th>Statut</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @commandes.each do |commande| %>
+  <tr>
+    <td><%= commande.num_factu %></td>
+    <td><%= commande.bdl_id %></td>
+    <td><%= commande.client_id %></td>
+    <td><%= commande.date_factu %></td>
+    <td><%= commande.nb_etiquette %></td>
+    <td><%= commande.statut %></td>
+    <td><%= link_to 'Show', commande, class:"btn btn-info" %></td>
+    <td><%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %></td>
+    <td><%= link_to 'Destroy', commande, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+  </tr>
+<% end %>
+</table>
+
+
+
+

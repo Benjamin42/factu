@@ -1,0 +1,37 @@
+<%= render :template => 'commons/_header' %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Num factu:</b>
+  <%= @commande.num_factu %>
+</p>
+
+<p>
+  <b>Bdl:</b>
+  <%= @commande.bdl_id %>
+</p>
+
+<p>
+  <b>Client:</b>
+  <%= @commande.client_id %>
+</p>
+
+<p>
+  <b>Date factu:</b>
+  <%= @commande.date_factu %>
+</p>
+
+<p>
+  <b>Nb etiquette:</b>
+  <%= @commande.nb_etiquette %>
+</p>
+
+<p>
+  <b>Statut:</b>
+  <%= @commande.statut %>
+</p>
+
+
+<%= link_to 'Edit', edit_commande_path(@commande) %> |
+<%= link_to 'Back', commandes_path %>

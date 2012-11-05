@@ -1,4 +1,6 @@
 Factu::Application.routes.draw do
+  resources :commandes
+
   get "accueil/index"
   root :to => "accueil#index"
 

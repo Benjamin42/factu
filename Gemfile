@@ -32,6 +32,7 @@ end
 gem 'will_paginate'
 
 gem 'jquery-rails'
+gem 'jquery_datepicker'
 gem 'simple_form', '~> 2.0.0'
 
 # To use ActiveModel has_secure_password
