@@ -13,4 +13,8 @@ class CommandeProduit < ActiveRecord::Base
     }
     return commandeProduit
   end
+  
+  def calcTarif(commande)
+    #if commande.date_factu.strftime('%y')
+  end
 end

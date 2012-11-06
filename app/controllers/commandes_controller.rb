@@ -2,7 +2,7 @@ class CommandesController < ApplicationController
   # GET /commandes
   # GET /commandes.json
   def index
-    @commandes = Commande.all
+    @commandes = Commande.find(:all, :include => [:client])
     @token = :commandes
 
     respond_to do |format|
@@ -14,7 +14,8 @@ class CommandesController < ApplicationController
   # GET /commandes/1
   # GET /commandes/1.json
   def show
-    @commande = Commande.find(params[:id])
+    @commande = Commande.find(params[:id], :include => [:client])
+    @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
     @token = :commandes
 
     respond_to do |format|
@@ -27,14 +28,13 @@ class CommandesController < ApplicationController
   # GET /commandes/new.json
   def new
     @commande = Commande.new
-    @arrayCommandeProduits = Array.new
+    @commande.date_factu = Date.today.strftime('%d/%m/%Y')
+    @commande.num_factu = Commande.next_num_factu
+    # TODO : @commande.client_id = 2737
     Produit.all.each do |produit|
-      @arrayCommandeProduits.push CommandeProduit.create_with_produit(@commande, produit)
+      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
+      #@commande.commande_produit.build
     end
-    # TODO : améliorable ???
-    @commande.attributes = {
-      :commande_produit => @arrayCommandeProduits,
-    }
     @token = :commandes
 
     respond_to do |format|
@@ -45,7 +45,8 @@ class CommandesController < ApplicationController
 
   # GET /commandes/1/edit
   def edit
-    @commande = Commande.find(params[:id])
+    @commande = Commande.find(params[:id], :include => [:client])
+    @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
     @token = :commandes
   end
 
@@ -55,15 +56,16 @@ class CommandesController < ApplicationController
     @commande = Commande.new(params[:commande])
     @token = :commandes
 
-    respond_to do |format|
       if @commande.save
-        format.html { redirect_to @commande, notice: 'Commande was successfully created.' }
-        format.json { render json: @commande, status: :created, location: @commande }
+        flash[:notice] = "Success"
+        redirect_to commandes_path
       else
-        format.html { render action: "new" }
-        format.json { render json: @commande.errors, status: :unprocessable_entity }
+        #Produit.all.each do |produit|
+        #  @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
+        #end
+        render :action => "new"
       end
-    end
+
   end
 
   # PUT /commandes/1

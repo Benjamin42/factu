@@ -4,82 +4,69 @@
 	<%= notice %>
 </p>
 
-<table class="table">
-	<tr>
-		<td>Num client:</td>
-		<td><%= @client.num_client %></td>
-	</tr>
+<div class="well">
+	<p>
+		<b>Num client:</b>
+		<%= @client.num_client %>
+	</p>
+	<p>
+		<b>Num tva:</b>
+		<%= @client.num_tva %>
+	</p>
+	<p>
+		<b>Nom:</b>
+		<%= @client.nom %>
+	</p>
+	<p>
+		<b>Nom info:</b>
+		<%= @client.nom_info %>
+	</p>
+	<p>
+		<b>Bat:</b>
+		<%= @client.bat %>
+	</p>
+	<p>
+		<b>Num voie:</b>
+		<%= @client.num_voie %>
+	</p>
+	<p>
+		<b>Bp:</b>
+		<%= @client.bp %>
+	</p>
+	<p>
+		<b>Codepostal:</b>
+		<%= @client.codepostal %>
+	</p>
+	<p>
+		<b>Ville:</b>
+		<%= @client.ville %>
+	</p>
+	<p>
+		<b>Pays:</b>
+		<%= @client.pays %>
+	</p>
+	<p>
+		<b>Tel:</b>
+		<%= @client.tel %>
+	</p>
+	<p>
+		<b>Portable:</b>
+		<%= @client.portable %>
+	</p>
+	<p>
+		<b>Fax:</b>
+		<%= @client.fax %>
+	</p>
+	<p>
+		<b>Email:</b>
+		<%= @client.email %>
+	</p>
+	<p>
+		<b>Commentaire:</b>
+		<%= @client.commentaire %>
+	</p>
+</div>
 
-	<tr>
-		<td>Num tva:</td>
-		<td><%= @client.num_tva %></td>
-	</tr>
-
-	<tr>
-		<td>Nom:</td>
-		<td><%= @client.nom %></td>
-	</tr>
-
-	<tr>
-		<td>Nom info:</td>
-		<td><%= @client.nom_info %></td>
-	</tr>
-
-	<tr>
-		<td>Bat:</td>
-		<td><%= @client.bat %></td>
-	</tr>
-
-	<tr>
-		<td>Num voie:</td>
-		<td><%= @client.num_voie %></td>
-	</tr>
-
-	<tr>
-		<td>Bp:</td>
-		<td><%= @client.bp %></td>
-	</tr>
-
-	<tr>
-		<td>Codepostal:</td>
-		<td><%= @client.codepostal %></td>
-	</tr>
-
-	<tr>
-		<td>Ville:</td>
-		<td><%= @client.ville %></td>
-	</tr>
-
-	<tr>
-		<td>Pays:</td>
-		<td><%= @client.pays %></td>
-	</tr>
-
-	<tr>
-		<td>Tel:</td>
-		<td><%= @client.tel %></td>
-	</tr>
-
-	<tr>
-		<td>Portable:</td>
-		<td><%= @client.portable %></td>
-	</tr>
-
-	<tr>
-		<td>Fax:</td>
-		<td><%= @client.fax %></td>
-	</tr>
-
-	<tr>
-		<td>Email:</td>
-		<td><%= @client.email %></td>
-	</tr>
-
-	<tr>
-		<td>Commentaire:</td>
-		<td><%= @client.commentaire %></td>
-	</tr>
-</table>
 
 <div class="center">
 	<%= link_to 'Back', clients_path, class:"btn btn-inverse" %> |

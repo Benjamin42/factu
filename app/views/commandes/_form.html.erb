@@ -1,37 +1,30 @@
 <%= simple_form_for @commande, :html => {:class => "form-horizontal"} do |f| %>
-<% if @commande.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@commande.errors.count, "error") %> prohibited this commande from being saved:</h2>
-
-	<ul>
-		<% @commande.errors.full_messages.each do |msg| %>
-		<li>
-			<%= msg %>
-		</li>
-		<% end %>
-	</ul>
+<% if notification = f.error_notification %>
+<div class="alert alert-error fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= notification %>
 </div>
 <% end %>
 
 <%= f.input :num_factu, :label => "Numéro de Facture" %>
 
-<div class="field">
-	<%= f.label :bdl_id %>
-	<br />
-	<%= f.number_field :bdl_id %>
+<%= f.input :bdl_id, :label => "Bon de Livraison" %>
+
+<%= f.association :client, :label => "Client", :collection => Client.all, :prompt => "Choisissez un client",
+  :key => :id , :label_method => :form_title %>
+
+<div class="control-group">
+	<label class="control-label">Date de Facturation</label>
+	<div class="controls">
+		<%= f.text_field :date_factu, :label => "Date Facturation", :class => "datepicker" %>
+		<script>
+			$('.datepicker').datepicker({"autoclose": true, "format": "dd/mm/yyyy"})
+		</script>
+	</div>
 </div>
-
-<%= f.association :client, :label => "Client", :collection => Client.all, :prompt => "Choose a location", 
-	:key => :id , :label_method => :form_title %>
-
-
-
-<%= f.text_field :date_factu, :class => 'datepicker', :size => 10, :maxlength => 10 %> 
-
 
 <%= f.input :nb_etiquette, :label => "Nombre d'étiquettes" %>
 
-<%= f.input :statut, :label => "Statut" %>
 
 <table class="table">
 	<tr>
@@ -39,14 +32,15 @@
 		<th>Quantité</th>
 		<th>Cadeau</th>
 	</tr>
-	<% for comProduit in @arrayCommandeProduits %>
-	<%= fields_for "...", comProduit do |comProduit_form| %>
-	<tr>
-		<td><%= comProduit.produit.label %> : </td>
-		<td><%= comProduit_form.text_field :qty %></td>
-		<td><%= comProduit_form.check_box :cadeau %></td>
-	</tr>
-	<% end %>
+	<% for comProduit in @commande.commande_produit %>
+		<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
+		<tr>
+			<td><%= comProduit.produit.label %> : </td>
+			<td><%= comProduit_form.text_field :qty %></td>
+			<td><%= comProduit_form.check_box :cadeau %></td>
+			<td><%= comProduit_form.hidden_field :produit_id %></td>
+		</tr>
+		<% end %>
 	<% end %>
 </table>
 

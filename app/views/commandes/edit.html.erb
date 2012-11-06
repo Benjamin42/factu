@@ -4,5 +4,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @commande %> |
-<%= link_to 'Back', commandes_path %>
+<div class="center">
+	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %> |
+	<%= link_to 'Show', @commande, class:"btn btn-info" %>
+</div>

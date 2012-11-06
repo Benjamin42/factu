@@ -1,37 +1,53 @@
 <%= render :template => 'commons/_header' %>
 
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Num factu:</b>
-  <%= @commande.num_factu %>
+<p id="notice">
+	<%= notice %>
 </p>
 
-<p>
-  <b>Bdl:</b>
-  <%= @commande.bdl_id %>
-</p>
+<div class="well">
+	<p>
+		<b>Num factu:</b>
+		<%= @commande.num_factu %>
+	</p>
+	<p>
+		<b>Bdl:</b>
+		<%= @commande.bdl_id %>
+	</p>
+	<p>
+		<b>Client:</b>
+		<%= @commande.client_id %>
+	</p>
+	<p>
+		<b>Date factu:</b>
+		<%= @commande.date_factu %>
+	</p>
+	<p>
+		<b>Nb etiquette:</b>
+		<%= @commande.nb_etiquette %>
+	</p>
+	<p>
+		<b>Statut:</b>
+		<%= @commande.statut %>
+	</p>
+</div>
 
-<p>
-  <b>Client:</b>
-  <%= @commande.client_id %>
-</p>
-
-<p>
-  <b>Date factu:</b>
-  <%= @commande.date_factu %>
-</p>
-
-<p>
-  <b>Nb etiquette:</b>
-  <%= @commande.nb_etiquette %>
-</p>
-
-<p>
-  <b>Statut:</b>
-  <%= @commande.statut %>
-</p>
-
-
-<%= link_to 'Edit', edit_commande_path(@commande) %> |
-<%= link_to 'Back', commandes_path %>
+<table class="table well">
+	<tr>
+		<th>Produit</th>
+		<th>Quantité</th>
+		<th>Cadeau</th>
+	</tr>
+	
+	<% for produitCommande in @commande.commande_produit %>
+		<tr>
+			<td><%= produitCommande.produit.label %></td>
+			<td><%= produitCommande.qty %></td>
+			<td><%= produitCommande.cadeau %></td>
+		</tr>
+	<%end%>
+	
+</table>
+<div class="center">
+	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %> |
+	<%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+</div>

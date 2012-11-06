@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 gem 'bootstrap-sass', '2.0.4'
+gem 'bootstrap-datepicker-rails'
 
 gem 'fastercsv'
 
@@ -32,7 +33,6 @@ end
 gem 'will_paginate'
 
 gem 'jquery-rails'
-gem 'jquery_datepicker'
 gem 'simple_form', '~> 2.0.0'
 
 # To use ActiveModel has_secure_password

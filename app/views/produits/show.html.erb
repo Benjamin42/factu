@@ -1,19 +1,16 @@
 <%= render :template => 'commons/_header' %>
 
-<p id="notice">
-	<%= notice %>
-</p>
+<div class="well">
+	<p>
+		<b>Label:</b>
+		<%= @produit.label %>
+	</p>
 
-<p>
-	<b>Label:</b>
-	<%= @produit.label %>
-</p>
-
-<p>
-	<b>Commentaire:</b>
-	<%= @produit.commentaire %>
-</p>
-
+	<p>
+		<b>Commentaire:</b>
+		<%= @produit.commentaire %>
+	</p>
+</div>
 <div class="center">
 	<%= link_to 'Back', produits_path, class:"btn btn-inverse" %> |
 	<%= link_to 'Edit', edit_produit_path(@produit), class:"btn btn-warning" %>
