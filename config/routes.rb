@@ -1,6 +1,7 @@
 Factu::Application.routes.draw do
-  resources :commandes
-
+  resources :commandes 
+  match 'commandes/uploadFile' => 'commandes#uploadFile'
+  
   get "accueil/index"
   root :to => "accueil#index"
 

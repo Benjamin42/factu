@@ -3,7 +3,19 @@
 <h1>Listing commandes</h1>
 
 <div class="center">
-	<%= link_to 'New Commande', new_commande_path, class:"btn btn-primary" %>
+	<%= link_to 'Nouvelle Commande', new_commande_path, class:"btn btn-primary" %>
+ou
+	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+		Chargement par fichier
+	</button>
+
+	<div id="uploadFile" class="collapse">
+		<br />
+		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+		<%= file_field_tag :my_file %>
+		<%= submit_tag("Charger", class: "btn btn-primary") %>
+		<% end %>
+	</div>	
 </div>
 
 <br />

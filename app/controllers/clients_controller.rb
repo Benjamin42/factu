@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 require 'csv'
 
 class ClientsController < ApplicationController
@@ -114,13 +114,13 @@ class ClientsController < ApplicationController
       # Save upon valid
       # otherwise collect error records to export
       if client.valid?
-      client.save
+        client.save
       else
-      errs << row
+        errs << row
       end
     end
 
-    File.open(Rails.root.join('public', 'uploads', "#{Date.today.strftime('%d%b%y')}" + file_data.original_filename), 'w') do |file|
+    File.open(Rails.root.join('public', 'uploads', "#{Date.today.strftime('%d%m%y')}_" + file_data.original_filename), 'w') do |file|
       file.write(file_data.read)
     end
 
@@ -132,8 +132,6 @@ class ClientsController < ApplicationController
       flash[:notice] = "File has been uploaded successfully"
     end
 
-
     redirect_to "/clients"
-    
   end
 end

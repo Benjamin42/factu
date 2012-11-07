@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105124056) do
+ActiveRecord::Schema.define(:version => 20121107101722) do
 
   create_table "clients", :force => true do |t|
     t.integer  "num_client"
@@ -37,28 +37,27 @@ ActiveRecord::Schema.define(:version => 20121105124056) do
     t.integer  "commande_id"
     t.integer  "tarif_id"
     t.integer  "qty"
-    t.boolean  "cadeau"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "produit_id"
+    t.integer  "qty_cadeau"
   end
 
   create_table "commandes", :force => true do |t|
-    t.string   "num_factu"
-    t.integer  "bdl_id"
-    t.integer  "client_id"
-    t.date     "date_factu"
-    t.integer  "nb_etiquette"
-    t.string   "statut"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer "num_factu"
+    t.integer "bdl_id"
+    t.integer "client_id"
+    t.date    "date_factu"
+    t.integer "nb_etiquette"
+    t.string  "statut"
   end
 
   create_table "produits", :force => true do |t|
     t.string   "label"
     t.string   "commentaire"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "id_columns_factu_csv"
   end
 
   create_table "tarifs", :force => true do |t|

@@ -8,18 +8,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Client.delete_all()
-Produit.delete_all()
-Tarif.delete_all()
+Client.delete_all
+Produit.delete_all
+Tarif.delete_all
+CommandeProduit.delete_all
+Commande.delete_all
 
-bouteille = Produit.create([label: 'Bouteille', commentaire: ''])
-demi = Produit.create([label: 'Demi Bouteille', commentaire: ''])
-magnum = Produit.create([label: 'Magnum', commentaire: ''])
-jero = Produit.create([label: 'Jéroboam', commentaire: ''])
-mathu = Produit.create([label: 'Mathusalem', commentaire: ''])
-privilege = Produit.create([label: 'Privilège', commentaire: 'La bouteille'])
-rose = Produit.create([label: 'Rosé', commentaire: 'La bouteille'])
-prestige = Produit.create([label: 'Prestige', commentaire: 'La bouteille'])
+bouteille = Produit.create([label: 'Bouteille', commentaire: '', id_columns_factu_csv: 5])
+demi = Produit.create([label: 'Demi Bouteille', commentaire: '', id_columns_factu_csv: 7])
+magnum = Produit.create([label: 'Magnum', commentaire: '', id_columns_factu_csv: 9])
+jero = Produit.create([label: 'Jéroboam', commentaire: '', id_columns_factu_csv:17])
+mathu = Produit.create([label: 'Mathusalem', commentaire: '', id_columns_factu_csv:19])
+privilege = Produit.create([label: 'Privilège', commentaire: 'La bouteille', id_columns_factu_csv:15])
+rose = Produit.create([label: 'Rosé', commentaire: 'La bouteille', id_columns_factu_csv: 13])
+prestige = Produit.create([label: 'Prestige', commentaire: 'La bouteille', id_columns_factu_csv: 11])
 
 Tarif.create([annee: 2010, prix_unitaire_ht: 6.9, prix_unitaire_ht_livraison: 6.9, produit: demi.first])
 Tarif.create([annee: 2010, prix_unitaire_ht: 11.9, prix_unitaire_ht_livraison: 12, produit: bouteille.first])

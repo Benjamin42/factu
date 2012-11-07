@@ -9,7 +9,20 @@ class CommandeProduit < ActiveRecord::Base
       :commande => commande,
       :produit => produit,
       :qty => 0,
-      :cadeau => false
+      :qty_cadeau => 0
+    }
+    return commandeProduit
+  end
+  
+  def self.build_from_csv(row, commande, produit)
+    # find existing customer from email or create new
+    commandeProduit = CommandeProduit.new
+    commandeProduit.attributes = {
+      :commande_id => commande,
+      :produit_id => produit.id,
+      #:tarif_id => row[0], # TODO
+      :qty => row[produit.id_columns_factu_csv],
+      :qty_cadeau => row[produit.id_columns_factu_csv + 1]
     }
     return commandeProduit
   end
