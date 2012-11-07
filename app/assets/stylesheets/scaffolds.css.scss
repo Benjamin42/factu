@@ -18,6 +18,13 @@ pre {
   font-size: 11px;
 }
 
+li a {
+  &:visited {
+    color: #000;
+  }
+}
+
+
 a {
   color: #000;
   &:visited {

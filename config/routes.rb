@@ -1,6 +1,7 @@
 Factu::Application.routes.draw do
   resources :commandes 
   match 'commandes/uploadFile' => 'commandes#uploadFile'
+  match 'commandes/new_with_client/:id' => 'commandes#new_with_client'
   
   get "accueil/index"
   root :to => "accueil#index"

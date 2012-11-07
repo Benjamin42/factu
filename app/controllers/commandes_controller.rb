@@ -26,17 +26,28 @@ class CommandesController < ApplicationController
       format.json { render json: @commande }
     end
   end
-
-  # GET /commandes/new
-  # GET /commandes/new.json
-  def new
+  
+  def new_with_client
     @commande = Commande.new
     @commande.date_factu = Date.today.strftime('%d/%m/%Y')
     @commande.num_factu = Commande.next_num_factu
-    # TODO : @commande.client_id = 2737
+    @commande.client_id = params[:id]
     Produit.all.each do |produit|
       @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
-      #@commande.commande_produit.build
+    end
+    @token = :commandes
+
+    render :action => "new"
+  end
+
+  # GET /commandes/new
+  # GET /commandes/new.json
+  def new(idClient=nil)
+    @commande = Commande.new
+    @commande.date_factu = Date.today.strftime('%d/%m/%Y')
+    @commande.num_factu = Commande.next_num_factu
+    Produit.all.each do |produit|
+      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
     end
     @token = :commandes
 
@@ -119,12 +130,14 @@ class CommandesController < ApplicationController
       if commande != nil && commande.valid?
         commande.save
         Produit.all.each do |produit|
-          commadeProduit = CommandeProduit.build_from_csv(row, commande, produit)
-          if commadeProduit.valid?
-            commadeProduit.save
-            commande.commande_produit.push commadeProduit
-          else
-            errs << row
+          if produit.id_columns_factu_csv != nil
+            commandeProduit = CommandeProduit.build_from_csv(row, commande, produit)
+            if commandeProduit.valid?
+              commandeProduit.save
+              commande.commande_produit.push commandeProduit
+            else
+              errs << row
+            end
           end
         end        
         
