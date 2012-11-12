@@ -14,6 +14,9 @@ gem 'sqlite3'
 # Ransack est un outil qui permet de créer un moteur de recherche
 gem 'ransack'
 
+# Geoloc
+gem 'geokit-rails3'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

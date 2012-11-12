@@ -160,4 +160,17 @@ class CommandesController < ApplicationController
 
     redirect_to "/commandes"
   end
+  
+  # GET /facturation/1
+  # GET /facturation/1.json
+  def facturation
+    @commande = Commande.find(params[:id], :include => [:client])
+    @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit, :tarif])
+    @token = :commandes
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @commande }
+    end
+  end
 end

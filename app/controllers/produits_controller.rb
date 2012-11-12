@@ -84,7 +84,7 @@ class ProduitsController < ApplicationController
   # DELETE /produits/1.json
   def destroy
     @produit = Produit.find(params[:id])
-    Tarif.delete_tarif(params[:id])
+    Tarif.delete_tarif(@produit)
     @produit.destroy
     @token = :produits
 

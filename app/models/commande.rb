@@ -3,12 +3,13 @@ class Commande < ActiveRecord::Base
   belongs_to :client
 
   validates_presence_of :client
+  
   def self.next_num_factu
     resReq = find_by_sql("select max(num_factu) + 1 as num_factu from commandes").first.num_factu
     if resReq != nil && resReq != "" then
-    return resReq
+      return resReq
     else
-    return 0
+      return 0
     end
   end
 

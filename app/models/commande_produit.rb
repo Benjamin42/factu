@@ -15,19 +15,22 @@ class CommandeProduit < ActiveRecord::Base
   end
   
   def self.build_from_csv(row, commande, produit)
-    # find existing customer from email or create new
     commandeProduit = CommandeProduit.new
     commandeProduit.attributes = {
       :commande_id => commande,
       :produit_id => produit.id,
-      #:tarif_id => row[0], # TODO
+      :tarif => Tarif.findTarif(produit, Date.strptime(row[4], '%d/%m/%y').strftime('%Y')),
       :qty => row[produit.id_columns_factu_csv],
       :qty_cadeau => row[produit.id_columns_factu_csv + 1]
     }
     return commandeProduit
   end
   
-  def calcTarif(commande)
-    #if commande.date_factu.strftime('%y')
+  def calcMontantTTC
+    if self.qty != nil
+      return self.qty * self.tarif.prix_unitaire_ht
+    else
+      return ""
+    end
   end
 end

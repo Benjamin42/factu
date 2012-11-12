@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 class Client < ActiveRecord::Base
   has_many :commande
+  
+  acts_as_mappable :lat_column_name => :lat,
+                   :lng_column_name => :lng
+  
+  require 'geoloc'
+  
+
 
   validates_presence_of :num_client
   validates_presence_of :nom
@@ -46,6 +53,10 @@ class Client < ActiveRecord::Base
 
   def self.next_num_client
     return find_by_sql("select max(num_client) + 1 as num_client from clients").first.num_client
+  end
+  
+  def printCoord
+    return GeoLoc.getCoord("toto")
   end
 
 end

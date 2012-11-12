@@ -1,0 +1,75 @@
+<%= render :template => 'commons/_header' %>
+
+<p id="notice">
+	<%= notice %>
+</p>
+
+<div class="well">
+	<p>
+		<b>Facture n°<%= @commande.num_factu %></b>
+	</p>
+	<p>
+		<b>Bdl:</b>
+		<%= @commande.bdl_id %>
+	</p>
+	<p>
+		<b>Client:</b>
+		<%= @commande.client_id %>
+	</p>
+	<p>
+		<b>Date factu:</b>
+		<%= @commande.date_factu %>
+	</p>
+	<p>
+		<b>Nb etiquette:</b>
+		<%= @commande.nb_etiquette %>
+	</p>
+	<p>
+		<b>Statut:</b>
+		<%= @commande.statut %>
+	</p>
+</div>
+
+<table border="1">
+
+	<tr>
+		<th>Produit</th>
+		<th>Quantité</th>
+		<th>Quantité Offerte</th>
+		<th>Prix Unitaire TTC</th>
+		<th>Montant TTC</th>
+	</tr>
+	
+	<% for produitCommande in @commande.commande_produit %>
+		<tr>
+			<td><%= produitCommande.produit.label %></td>
+			<td align="center"><%= produitCommande.qty %></td>
+			<td align="center"><%= produitCommande.qty_cadeau %></td>
+			<td align="center"><%= produitCommande.tarif.prix_unitaire_ht %> &euro;</td>
+			<td align="center"><%= produitCommande.calcMontantTTC %> &euro;</td>
+		</tr>
+	<%end%>
+	
+	<tr>
+		<td colspan="4" align="right">Total TTC</td>
+		<td align="center">42</td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right">Transport TTC</td>
+		<td align="center">42</td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right">dont TVA 19.60%</td>
+		<td align="center">42</td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right">Net à Payer</td>
+		<td align="center">42</td>
+	</tr>
+</table>
+
+
+<div class="center">
+	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %> |
+	<%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+</div>
