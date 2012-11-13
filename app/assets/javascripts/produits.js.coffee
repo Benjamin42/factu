@@ -8,3 +8,4 @@ jQuery ->
     bProcessing: true
     bServerSide: true
     sAjaxSource: $('#produits').data('source')
+    sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"

@@ -13,7 +13,7 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @clients }
+      format.json { render json: ClientsDatatable.new(view_context) }
     end
   end
 

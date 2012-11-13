@@ -13,11 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require_tree .
 //= require bootstrap
-//= require dataTables/jquery.dataTables
 //= require bootstrap-datepicker
+//= require_tree .
+//= require dataTables/jquery.dataTables
+
 
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
+

@@ -17,18 +17,18 @@
 
 <div class="center">
 	<%= link_to 'New Client', new_client_path, class:"btn btn-primary" %>
-ou
-		<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
-			Chargement par fichier
-		</button>
+	ou
+	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+		Chargement par fichier
+	</button>
 
-		<div id="uploadFile" class="collapse">
-			<br />
-			<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
-			<%= file_field_tag :my_file %>
-			<%= submit_tag("Charger", class: "btn btn-primary") %>
-			<% end %>
-		</div>
+	<div id="uploadFile" class="collapse">
+		<br />
+		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+		<%= file_field_tag :my_file %>
+		<%= submit_tag("Charger", class: "btn btn-primary") %>
+		<% end %>
+	</div>
 </div>
 
 <br />
@@ -44,6 +44,26 @@ ou
 		<% end %>
 	</div>
 </div>
+
+
+<table id="clients" class="display datatable table" data-source="<%= clients_url(format: "json") %>">
+	<thead>
+		<tr>
+			<th>Num</th>
+			<th>Nom</th>
+			<th>Num voie</th>
+			<th>Ville</th>
+			<th>Pays</th>
+			<th>Email</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 
 <table class="table table-condensed">
 	<tr>
