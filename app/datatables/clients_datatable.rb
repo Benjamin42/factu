@@ -25,10 +25,12 @@ private
         h(client.ville),
         h(client.pays),
         h(client.email),
-        link_to("Commande", "commandes/new_with_client/#{client.id}",  html_options = {:class => "btn btn-primary"}),
-        link_to("Show", client,  html_options = {:class => "btn btn-info"}),
-        link_to("Edit", "clients/#{client.id}/edit", html_options = {:class => "btn btn-warning"}),
-        link_to("Destroy", "commandes/new_with_client/#{client.id}",  html_options = {:class => "btn btn-danger"}),
+        h(client.longitude),
+        h(client.latitude),
+        link_to("Commande", "commandes/new_with_client/#{client.id}",  class: "btn btn-primary"),
+        link_to("Show", client, class: "btn btn-info"),
+        link_to("Edit", "clients/#{client.id}/edit", class: "btn btn-warning"),
+        link_to("Destroy", client, confirm: 'Are you sure?', method: :delete, class: "btn btn-danger"),
       ]
     end
   end
@@ -55,7 +57,7 @@ private
   end
 
   def sort_column
-    columns = %w[nom]
+    columns = %w[num_client nom num_voie ville pays email longitude latitude]
     columns[params[:iSortCol_0].to_i]
   end
 

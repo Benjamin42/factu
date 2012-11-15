@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109161703) do
+ActiveRecord::Schema.define(:version => 20121115160200) do
 
   create_table "clients", :force => true do |t|
     t.integer  "num_client"
@@ -29,12 +29,11 @@ ActiveRecord::Schema.define(:version => 20121109161703) do
     t.string   "fax"
     t.string   "email"
     t.string   "commentaire"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.float    "coord_x"
-    t.float    "coord_y"
-    t.float    "lat"
-    t.float    "lng"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "long_adresse"
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
   create_table "commande_produits", :force => true do |t|

@@ -15,7 +15,7 @@ gem 'sqlite3'
 gem 'ransack'
 
 # Geoloc
-gem 'geokit-rails3'
+gem 'geocoder'
 
 
 

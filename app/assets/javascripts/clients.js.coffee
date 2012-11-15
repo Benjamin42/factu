@@ -10,4 +10,4 @@ jQuery ->
     sAjaxSource: $('#clients').data('source')
     sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
     sWrapper: "dataTables_wrapper form-inline"
-  
+    sScrollY: "600px"

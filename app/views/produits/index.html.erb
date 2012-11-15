@@ -3,29 +3,9 @@
 <h1>Listing produits</h1>
 
 <div class="center">
-	<%= link_to 'New Produit', new_produit_path, class:"btn btn-primary" %>
+	<%= link_to 'Nouveau Produit', new_produit_path, class:"btn btn-primary" %>
 </div>
 <br />
-
-<table id="produits" class="display" data-source="<%= produits_url(format: "json") %>">
-  <thead>
-    <tr>
-		<th>Label</th>
-		<th>Commentaire</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-
-<script>
-	$(document).ready(function() {
-	    $('#produits').dataTable( {
-	    	"bRetrieve": true
-	        "sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
-	    });
-	});
-</script>
 
 <table class="table" >
 	<tr>

@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/alexreisner/geocoder.git
+  revision: 697d928b922c929d0c78994d9f8ab79ac845e630
+  branch: v1.2.0
+  specs:
+    geocoder (1.1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,11 +51,6 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
-    geokit (1.6.5)
-      multi_json
-    geokit-rails3 (0.1.5)
-      geokit (~> 1.5)
-      rails (~> 3.0)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -133,7 +135,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.0.4)
   coffee-rails (~> 3.2.1)
   fastercsv
-  geokit-rails3
+  geocoder!
   jquery-datatables-rails
   jquery-rails
   jquery-ui-rails
