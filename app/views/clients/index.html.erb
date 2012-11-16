@@ -1,5 +1,11 @@
 <%= render :template => 'commons/_header' %>
 
+<style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+
+</style>
+
 <h1>Listing clients</h1>
 
 <% if flash[:error] %>
@@ -54,8 +60,8 @@
 			<th>Ville</th>
 			<th>Pays</th>
 			<th>Email</th>
-			<th>Longitude</th>
 			<th>Latitude</th>
+			<th>Longitude</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
@@ -67,4 +73,39 @@
 </table>
 
 <br />
+<div class="center">
+	<div id="map_canvas" style="width:400px; height:400px;" class="center"></div>
+</div>
 
+<script>
+	function initialize() {
+		
+	  	var mapOptions = {
+	  		center: new google.maps.LatLng(46.227638, 2.213749),
+	  		zoom: 5,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP
+	  	}
+	  
+	  	var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+	  
+	  	<% @clients.each do |client| %>
+	  		<% if client.latitude != nil && client.longitude != nil then %>
+		  	new google.maps.Marker({
+		    	position: new google.maps.LatLng(<%= client.latitude %>, <%= client.longitude %>),
+		        map: map,
+		        title: "<%= client.nom %>"
+			});
+			<%end%>
+		<%end%>
+	}
+	
+	function loadScript() {
+	  var script = document.createElement("script");
+	  script.type = "text/javascript";
+	  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDIt0UOzmMBSaklD-XUtSqATQKaRp4HF5E&sensor=false&callback=initialize";
+	  document.body.appendChild(script);
+	}
+	
+	loadScript();
+</script>

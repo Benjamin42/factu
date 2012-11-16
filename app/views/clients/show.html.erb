@@ -3,74 +3,116 @@
 <p id="notice">
 	<%= notice %>
 </p>
+<style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+
+</style>
 
 <div class="well">
-	<p>
-		<b>Num client:</b>
-		<%= @client.num_client %>
-	</p>
-	<p>
-		<b>Num tva:</b>
-		<%= @client.num_tva %>
-	</p>
-	<p>
-		<b>Coordonnées:</b>
-		<%= @client.printCoord %>
-	</p>
-	<p>
-		<b>Nom:</b>
-		<%= @client.nom %>
-	</p>
-	<p>
-		<b>Nom info:</b>
-		<%= @client.nom_info %>
-	</p>
-	<p>
-		<b>Bat:</b>
-		<%= @client.bat %>
-	</p>
-	<p>
-		<b>Num voie:</b>
-		<%= @client.num_voie %>
-	</p>
-	<p>
-		<b>Bp:</b>
-		<%= @client.bp %>
-	</p>
-	<p>
-		<b>Codepostal:</b>
-		<%= @client.codepostal %>
-	</p>
-	<p>
-		<b>Ville:</b>
-		<%= @client.ville %>
-	</p>
-	<p>
-		<b>Pays:</b>
-		<%= @client.pays %>
-	</p>
-	<p>
-		<b>Tel:</b>
-		<%= @client.tel %>
-	</p>
-	<p>
-		<b>Portable:</b>
-		<%= @client.portable %>
-	</p>
-	<p>
-		<b>Fax:</b>
-		<%= @client.fax %>
-	</p>
-	<p>
-		<b>Email:</b>
-		<%= @client.email %>
-	</p>
-	<p>
-		<b>Commentaire:</b>
-		<%= @client.commentaire %>
-	</p>
+	<table>
+		<tr>
+			<td width="50%">
+				<p>
+					<b>Num client:</b>
+					<%= @client.num_client %>
+				</p>
+				<p>
+					<b>Num tva:</b>
+					<%= @client.num_tva %>
+				</p>
+				<p>
+					<b>Nom:</b>
+					<%= @client.nom %>
+				</p>
+				<p>
+					<b>Nom info:</b>
+					<%= @client.nom_info %>
+				</p>
+				<p>
+					<b>Bat:</b>
+					<%= @client.bat %>
+				</p>
+				<p>
+					<b>Num voie:</b>
+					<%= @client.num_voie %>
+				</p>
+				<p>
+					<b>Bp:</b>
+					<%= @client.bp %>
+				</p>
+				<p>
+					<b>Codepostal:</b>
+					<%= @client.codepostal %>
+				</p>
+				<p>
+					<b>Ville:</b>
+					<%= @client.ville %>
+				</p>
+				<p>
+					<b>Pays:</b>
+					<%= @client.pays %>
+				</p>
+				<p>
+					<b>Tel:</b>
+					<%= @client.tel %>
+				</p>
+				<p>
+					<b>Portable:</b>
+					<%= @client.portable %>
+				</p>
+				<p>
+					<b>Fax:</b>
+					<%= @client.fax %>
+				</p>
+				<p>
+					<b>Email:</b>
+					<%= @client.email %>
+				</p>
+				<p>
+					<b>Commentaire:</b>
+					<%= @client.commentaire %>
+				</p>
+			</td>
+			<td style="width:100%; height:100%">
+				 <div id="map_canvas" style="width:400px; height:400px;"></div>
+				<!--<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@client.latitude}%2C#{@client.longitude}" %>-->
+			</td>
+		</tr>
+	</table>
 </div>
 
+
+
+<script>
+function initialize() {
+	
+	var myLatlng = new google.maps.LatLng(<%= @client.latitude %>, <%= @client.longitude %>);
+	
+  	var mapOptions = {
+  		zoom: 16,
+    	center: myLatlng,
+    	mapTypeId: google.maps.MapTypeId.ROADMAP
+  	}
+  
+  	var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+  
+  	var marker = new google.maps.Marker({
+    	position: myLatlng,
+        map: map,
+        title: '<%= @client.nom %>'
+	});
+}
+
+function loadScript() {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDIt0UOzmMBSaklD-XUtSqATQKaRp4HF5E&sensor=false&callback=initialize";
+  document.body.appendChild(script);
+}
+
+loadScript();
+</script>
 
 <div class="center">
 	<%= link_to 'Back', clients_path, class:"btn btn-inverse" %> |
