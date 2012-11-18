@@ -14,7 +14,7 @@ class Commande < ActiveRecord::Base
   end
 
   def commande_produit_attributes=(commande_produit_attributes)
-    commande_produit_attributes.each do |id,attributes|
+    commande_produit_attributes.each do |id, attributes|
       commandeProduit = CommandeProduit.find(id)
       if commandeProduit == nil
         commandeProduit = commande_produit.build(attributes)

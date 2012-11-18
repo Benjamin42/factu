@@ -26,6 +26,8 @@
 <%= f.input :nb_etiquette, :label => "Nombre d'étiquettes" %>
 
 
+<%= f.input :statut, :label => "Statut", :collection => ['Mémorisée', 'Livrée', 'Payée', 'Finalisée'], :prompt => "--" %>
+
 <table class="table">
 	<tr>
 		<th>Produit</th>

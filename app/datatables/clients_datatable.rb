@@ -57,7 +57,7 @@ private
   end
 
   def sort_column
-    columns = %w[num_client nom num_voie ville pays email longitude latitude]
+    columns = %w[num_client nom num_voie ville pays email latitude longitude]
     columns[params[:iSortCol_0].to_i]
   end
 
