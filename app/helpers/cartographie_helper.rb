@@ -1,0 +1,2 @@
+module CartographieHelper
+end

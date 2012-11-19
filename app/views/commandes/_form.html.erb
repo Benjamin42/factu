@@ -35,6 +35,7 @@
 		<th>Cadeau</th>
 	</tr>
 	<% for comProduit in @commande.commande_produit %>
+	
 		<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
 		<tr>
 			<td><%= comProduit.produit.label %> : </td>

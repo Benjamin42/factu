@@ -27,6 +27,7 @@ ou
     <th>Date factu</th>
     <th>Nb etiquette</th>
     <th>Qty Totale</th>
+    <th>Statut</th>
     <th></th>
     <th></th>
     <th></th>
@@ -40,6 +41,7 @@ ou
     <td><%= commande.date_factu %></td>
     <td><%= commande.nb_etiquette %></td>
     <td><%= commande.qtyTotal %></td>
+    <td><%= commande.statut %></td>
     <td><%= link_to 'Facture', "commandes/facturation/#{commande.id}", class:"btn btn-inverse" %></td>
     <td><%= link_to 'Show', commande, class:"btn btn-info" %></td>
     <td><%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %></td>

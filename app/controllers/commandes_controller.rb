@@ -72,11 +72,8 @@ class CommandesController < ApplicationController
 
       if @commande.save
         flash[:notice] = "Success"
-        redirect_to commandes_path
+        render :action => "show"
       else
-        #Produit.all.each do |produit|
-        #  @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
-        #end
         render :action => "new"
       end
 

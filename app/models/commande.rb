@@ -2,7 +2,7 @@ class Commande < ActiveRecord::Base
   has_many :commande_produit
   belongs_to :client
 
-  validates_presence_of :client
+  validates_presence_of :client, :statut
   
   def self.next_num_factu
     resReq = find_by_sql("select max(num_factu) + 1 as num_factu from commandes").first.num_factu
@@ -14,19 +14,28 @@ class Commande < ActiveRecord::Base
   end
 
   def commande_produit_attributes=(commande_produit_attributes)
-    commande_produit_attributes.each do |id, attributes|
-      commandeProduit = CommandeProduit.find(id)
-      if commandeProduit == nil
-        commandeProduit = commande_produit.build(attributes)
+    if commande_produit_attributes.kind_of? Hash
+      commande_produit_attributes.each do |id, attributes|
+        commandeProduit = CommandeProduit.find(id)
+        set_attribute_and_save(commandeProduit, attributes)
       end
-      commandeProduit.attributes = {
-        :qty => attributes[:qty],
-        :qty_cadeau => attributes[:qty_cadeau],
-        :produit => Produit.find(attributes[:produit_id])
-      }
-      commandeProduit.save
+    else
+      commande_produit_attributes.each do |attributes|
+        commandeProduit = commande_produit.build(attributes)
+        set_attribute_and_save(commandeProduit, attributes)
+      end
     end
   end
+  
+  def set_attribute_and_save(commande_produit, attributes)
+    commande_produit.attributes = {
+      :qty => attributes[:qty],
+      :qty_cadeau => attributes[:qty_cadeau],
+      :produit => Produit.find(attributes[:produit_id])
+    }
+    commande_produit.save
+  end
+    
 
   def qtyTotal
     count = 0
