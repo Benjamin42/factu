@@ -53,7 +53,7 @@ class Commande < ActiveRecord::Base
     commande = nil
     client = Client.find(:all, :conditions => ['num_client = ?', row[3]]).first
     if client != nil
-      dateFactu = Date.strptime(row[4], '%d/%m/%y')
+      dateFactu = DateTime.strptime(row[4], '%d/%m/%y')
       
       commande = find_or_initialize_by_num_factu(row[0])
       commande.attributes = {
@@ -70,4 +70,5 @@ class Commande < ActiveRecord::Base
     end
     return commande
   end
+  
 end

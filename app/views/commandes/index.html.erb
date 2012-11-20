@@ -20,6 +20,18 @@ ou
 
 <br />
 
+<div class="center">
+	<a data-toggle="collapse" data-target="#filtre">
+		<b>Filtre</b>
+	</a>
+	<div id="filtre" class="collapse">
+		<%= search_form_for @q, :html => {:class => "form-horizontal"} do |f| %>
+		  <%= f.label "Num Factu" %> <%= f.text_field :num_factu_cont %>
+		  <%= f.submit %>
+		<% end %>
+	</div>
+</div>
+
 <table class="table">
   <tr onclick="">
     <th>Num factu</th>
@@ -38,7 +50,7 @@ ou
   <tr>
     <td><%= commande.num_factu %></td>
     <td><%= if commande.client != nil then commande.client.nom else "" end %></td>
-    <td><%= commande.date_factu %></td>
+    <td><%= commande.date_factu.strftime('%d/%m/%Y') %></td>
     <td><%= commande.nb_etiquette %></td>
     <td><%= commande.qtyTotal %></td>
     <td><%= commande.statut %></td>

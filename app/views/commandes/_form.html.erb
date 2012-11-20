@@ -7,24 +7,24 @@
 <% end %>
 
 <!-- Numéro de facture -->
-<%= f.input :num_factu, :label => "Numéro de Facture" %>
+<%= f.input :num_factu %>
 
 <!-- Bon de livraison -->
-<%= f.input :bdl_id, :label => "Bon de Livraison" %>
+<%= f.input :bdl_id %>
 
 <!-- Client -->
-<%= f.association :client, :label => "Client", :collection => Client.all, :prompt => "Choisissez un client",
+<%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
   :key => :id , :label_method => :form_title %>
 
 <!-- Nombre d'etiquette -->
-<%= f.input :nb_etiquette, :label => "Nombre d'étiquettes" %>
+<%= f.input :nb_etiquette %>
 
 <!-- Date de livraison -->
 <div class="control-group">
 	<label class="checkbox inline" >
-		<%= f.input :is_livraison, :label => 'Livrée' %>
+		<%= f.input :is_livraison %>
 	</label>
-	<%= f.text_field :date_livraison, :class => "datepicker hidden" %>
+	<%= f.text_field :date_livraison, :class => "datepicker hidden", :value => @commande.try(:date_livraison).try(:strftime, '%m/%d/%Y') %>
 
 </div>
 
@@ -33,7 +33,7 @@
 	<label class="checkbox inline" >
 		<%= f.input :is_paiement, :label => 'Payée' %>
 	</label>
-	<%= f.text_field :date_paiement, :class => "datepicker hidden" %>
+	<%= f.text_field :date_paiement, :class => "datepicker hidden", :value => @commande.try(:date_paiement).try(:strftime, '%m/%d/%Y') %>
 
 </div>
 

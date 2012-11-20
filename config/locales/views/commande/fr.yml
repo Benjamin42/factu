@@ -1,0 +1,19 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        commande:
+          attributes:
+            client:
+              blank: "Le client doit &ecirc;tre saisi"
+    models:
+      commande: "Commande"
+    attributes:
+      commande:
+        num_factu: "Num&eacute;ro de Factu"
+        bdl_id: "Bon de livraison"
+        client: "Client"
+        nb_etiquette: "Nombre d'&eacute;tiquettes"
+        is_livraison: "Livr&eacute;e"
+        is_paiement: "Pay&eacute;"
+        

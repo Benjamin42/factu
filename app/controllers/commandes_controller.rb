@@ -5,7 +5,9 @@ class CommandesController < ApplicationController
   # GET /commandes
   # GET /commandes.json
   def index
-    @commandes = Commande.find(:all, :include => [:client])
+    @q= Commande.search(params[:q], :include => [:client])
+    @commandes = @q.result
+    #@commandes = Commande.find(:all, :include => [:client])
     @token = :commandes
 
     respond_to do |format|
