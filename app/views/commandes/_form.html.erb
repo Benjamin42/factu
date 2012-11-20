@@ -6,27 +6,36 @@
 </div>
 <% end %>
 
+<!-- Numéro de facture -->
 <%= f.input :num_factu, :label => "Numéro de Facture" %>
 
+<!-- Bon de livraison -->
 <%= f.input :bdl_id, :label => "Bon de Livraison" %>
 
+<!-- Client -->
 <%= f.association :client, :label => "Client", :collection => Client.all, :prompt => "Choisissez un client",
   :key => :id , :label_method => :form_title %>
 
-<div class="control-group">
-	<label class="control-label">Date de Facturation</label>
-	<div class="controls">
-		<%= f.text_field :date_factu, :label => "Date Facturation", :class => "datepicker" %>
-		<script>
-			$('.datepicker').datepicker({"autoclose": true, "format": "dd/mm/yyyy"})
-		</script>
-	</div>
-</div>
-
+<!-- Nombre d'etiquette -->
 <%= f.input :nb_etiquette, :label => "Nombre d'étiquettes" %>
 
+<!-- Date de livraison -->
+<div class="control-group">
+	<label class="checkbox inline" >
+		<%= f.input :is_livraison, :label => 'Livrée' %>
+	</label>
+	<%= f.text_field :date_livraison, :class => "datepicker hidden" %>
 
-<%= f.input :statut, :label => "Statut", :collection => ['Mémorisée', 'Livrée', 'Payée', 'Finalisée'], :prompt => "--" %>
+</div>
+
+<!-- Date de paiement -->
+<div class="control-group">
+	<label class="checkbox inline" >
+		<%= f.input :is_paiement, :label => 'Payée' %>
+	</label>
+	<%= f.text_field :date_paiement, :class => "datepicker hidden" %>
+
+</div>
 
 <table class="table">
 	<tr>

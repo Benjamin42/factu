@@ -2,7 +2,7 @@ class Commande < ActiveRecord::Base
   has_many :commande_produit
   belongs_to :client
 
-  validates_presence_of :client, :statut
+  validates_presence_of :client
   
   def self.next_num_factu
     resReq = find_by_sql("select max(num_factu) + 1 as num_factu from commandes").first.num_factu
@@ -53,14 +53,19 @@ class Commande < ActiveRecord::Base
     commande = nil
     client = Client.find(:all, :conditions => ['num_client = ?', row[3]]).first
     if client != nil
+      dateFactu = Date.strptime(row[4], '%d/%m/%y')
+      
       commande = find_or_initialize_by_num_factu(row[0])
       commande.attributes = {
         :num_factu => row[0],
         #:bdl_id => row[1], # TODO
         :client_id => client.id,
-        :date_factu => Date.strptime(row[4], '%d/%m/%y'),
+        :date_factu => dateFactu,
         :nb_etiquette => row[21],
-        :statut => "" #row[0] # TODO
+        :is_livraison => true,
+        :date_livraison => dateFactu,
+        :is_paiement => true,
+        :date_paiement => dateFactu
       }
     end
     return commande
