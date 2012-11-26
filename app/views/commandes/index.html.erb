@@ -50,7 +50,7 @@ ou
   <tr>
     <td><%= commande.num_factu %></td>
     <td><%= if commande.client != nil then commande.client.nom else "" end %></td>
-    <td><%= commande.date_factu.strftime('%d/%m/%Y') %></td>
+    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
     <td><%= commande.nb_etiquette %></td>
     <td><%= commande.qtyTotal %></td>
     <td><%= commande.statut %></td>
