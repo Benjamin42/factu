@@ -16,3 +16,8 @@ jQuery ->
     
   if ($('#commande_is_paiement').is(":checked"))
     show('commande_date_paiement')
+
+  $('#commandes').dataTable(
+    sPaginationType: "full_numbers"
+  )
+    

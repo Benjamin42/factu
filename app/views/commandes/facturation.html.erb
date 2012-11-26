@@ -9,24 +9,28 @@
 		<b>Facture n°<%= @commande.num_factu %></b>
 	</p>
 	<p>
-		<b>Bdl:</b>
-		<%= @commande.bdl_id %>
-	</p>
-	<p>
 		<b>Client:</b>
-		<%= @commande.client_id %>
+		<%= @commande.client.nom %>
 	</p>
 	<p>
-		<b>Date factu:</b>
-		<%= @commande.date_factu %>
+		<b>A livrer :</b>
+		<%= @commande.a_livrer %>
 	</p>
 	<p>
 		<b>Nb etiquette:</b>
 		<%= @commande.nb_etiquette %>
 	</p>
 	<p>
-		<b>Statut:</b>
-		<%= @commande.statut %>
+		<% if @commande.is_livraison && @commande.date_livraison != nil %>
+			<b>Date livraison : </b>
+			<%= @commande.date_livraison.strftime('%d/%m/%Y') %>
+		<% end %>	
+	</p>
+	<p>
+		<% if @commande.is_paiement && @commande.date_paiement != nil %>
+			<b>Date de paiement : </b>
+			<%= @commande.date_paiement.strftime('%d/%m/%Y') %>
+		<% end %>	
 	</p>
 </div>
 
@@ -41,13 +45,22 @@
 	</tr>
 	
 	<% for produitCommande in @commande.commande_produit %>
-		<tr>
-			<td><%= produitCommande.produit.label %></td>
-			<td align="center"><%= produitCommande.qty %></td>
-			<td align="center"><%= produitCommande.qty_cadeau %></td>
-			<td align="center"><%= produitCommande.tarif.prix_unitaire_ht %> &euro;</td>
-			<td align="center"><%= produitCommande.calcMontantTTC %> &euro;</td>
-		</tr>
+		<% if (produitCommande.qty != nil && produitCommande.qty > 0) || (produitCommande.qty_cadeau != nil && produitCommande.qty_cadeau > 0) %>
+			<tr>
+				<td><%= produitCommande.produit.label %></td>
+				<td align="center"><%= produitCommande.qty %></td>
+				<td align="center"><%= produitCommande.qty_cadeau %></td>
+				<td align="center">
+					<% if @commande.a_livrer then %>	
+						<%= produitCommande.tarif.prix_unitaire_ht_livraison %>
+					<% else %>
+						<%= produitCommande.tarif.prix_unitaire_ht %>
+					<% end %>
+					 &euro;
+				</td>
+				<td align="center"><%= produitCommande.calcMontantTTC %> &euro;</td>
+			</tr>
+		<% end %>
 	<%end%>
 	
 	<tr>
@@ -70,6 +83,5 @@
 
 
 <div class="center">
-	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %> |
-	<%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %>
 </div>

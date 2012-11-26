@@ -20,46 +20,35 @@ ou
 
 <br />
 
-<div class="center">
-	<a data-toggle="collapse" data-target="#filtre">
-		<b>Filtre</b>
-	</a>
-	<div id="filtre" class="collapse">
-		<%= search_form_for @q, :html => {:class => "form-horizontal"} do |f| %>
-		  <%= f.label "Num Factu" %> <%= f.text_field :num_factu_cont %>
-		  <%= f.submit %>
+<table class="table" id="commandes">
+	<thead>
+	  <tr>
+	    <th>Num factu</th>
+	    <th>Client</th>
+	    <th>Date factu</th>
+	    <th>Nb etiquette</th>
+	    <th>Qty Totale</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  	</thead>
+	<tbody>
+		<% @commandes.each do |commande| %>
+		  <tr>
+		    <td><%= commande.num_factu %></td>
+		    <td><%= if commande.client != nil then commande.client.nom else "" end %></td>
+		    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
+		    <td><%= commande.nb_etiquette %></td>
+		    <td><%= commande.qtyTotal %></td>
+		    <td><%= link_to 'Facture', "commandes/facturation/#{commande.id}", class:"btn btn-inverse" %></td>
+		    <td><%= link_to 'Show', commande, class:"btn btn-info" %></td>
+		    <td><%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %></td>
+		    <td><%= link_to 'Destroy', commande, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+		  </tr>
 		<% end %>
-	</div>
-</div>
-
-<table class="table">
-  <tr onclick="">
-    <th>Num factu</th>
-    <th>Client</th>
-    <th>Date factu</th>
-    <th>Nb etiquette</th>
-    <th>Qty Totale</th>
-    <th>Statut</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @commandes.each do |commande| %>
-  <tr>
-    <td><%= commande.num_factu %></td>
-    <td><%= if commande.client != nil then commande.client.nom else "" end %></td>
-    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
-    <td><%= commande.nb_etiquette %></td>
-    <td><%= commande.qtyTotal %></td>
-    <td><%= commande.statut %></td>
-    <td><%= link_to 'Facture', "commandes/facturation/#{commande.id}", class:"btn btn-inverse" %></td>
-    <td><%= link_to 'Show', commande, class:"btn btn-info" %></td>
-    <td><%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %></td>
-    <td><%= link_to 'Destroy', commande, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
-  </tr>
-<% end %>
+	</tbody>
 </table>
 
 

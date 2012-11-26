@@ -28,9 +28,13 @@ class CommandeProduit < ActiveRecord::Base
   
   def calcMontantTTC
     if self.qty != nil
-      return self.qty * self.tarif.prix_unitaire_ht
+      return (self.qty * self.tarif.prix_unitaire_ht).round(2)
     else
       return ""
     end
+  end
+  
+  def self.total_on(date)
+    where("STRFTIME('%m', created_at) = ?", date).sum(:qty)
   end
 end

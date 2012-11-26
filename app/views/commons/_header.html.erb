@@ -5,7 +5,17 @@
       <li class="<%= if @token == :produits then "active" else "" end %>"><a href="/produits">Produits</a></li>
       <li class="<%= if @token == :clients then "active" else "" end %>"><a href="/clients">Client</a></li>
       <li class="<%= if @token == :tarifs then "active" else "" end %>"><a href="/tarifs">Tarifs</a></li>
-      <li class="<%= if @token == :commandes then "active" else "" end %>"><a href="/commandes">Commandes</a></li>
+      
+	  <li class="dropdown <%= if @token == :commandes then "active" else "" end %>">
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    	Commandes<b class="caret"></b>
+	    </a>
+	    <ul class="dropdown-menu">
+	      <li class=""><a href="/commandes">Listing</a></li>
+	      <li><a href="/commande_stats">Statistique</a></li>
+	    </ul>
+	  </li>
+	  
       <li class="<%= if @token == :carto then "active" else "" end %>"><a href="/cartographie">Carte</a></li>
 
       

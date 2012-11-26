@@ -28,10 +28,12 @@ class Commande < ActiveRecord::Base
   end
   
   def set_attribute_and_save(commande_produit, attributes)
+    produit = Produit.find(attributes[:produit_id])
     commande_produit.attributes = {
       :qty => attributes[:qty],
       :qty_cadeau => attributes[:qty_cadeau],
-      :produit => Produit.find(attributes[:produit_id])
+      :produit => produit,
+      :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y')),
     }
     commande_produit.save
   end
@@ -69,6 +71,10 @@ class Commande < ActiveRecord::Base
       }
     end
     return commande
+  end
+  
+  def isFreeze
+    return self.date_livraison != nil || self.date_paiement != nil || self.date_factu != nil
   end
   
 end

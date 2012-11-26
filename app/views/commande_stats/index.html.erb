@@ -1,0 +1,25 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Statistique commandes</h1>
+
+<br />
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: 'orders_chart' },
+    title: { text: 'Orders by Day' },
+    xAxis: { type: 'datetime' },
+    yAxis: {
+      title: { text: 'Dollars' }
+    },
+    series: [{
+	  pointInterval: <%= 1.day * 1000 %>,
+	  pointStart: <%= 3.months.ago.at_midnight.to_i * 1000 %>,
+	  data: <%= (3.months.ago.month..Date.today.month).map { |date| CommandeProduit.total_on(date).to_f}.inspect %>
+	 }]
+  });
+});
+</script>
+
+<div id="orders_chart" style="width: 560px; height: 300px;"></div>

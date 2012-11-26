@@ -1,10 +1,14 @@
 Factu::Application.routes.draw do
+  get "commande_stats/index"
+
   match 'cartographie/' => 'cartographie#index'
 
   resources :commandes 
   match 'commandes/uploadFile' => 'commandes#uploadFile'
   match 'commandes/new_with_client/:id' => 'commandes#new_with_client'
   match 'commandes/facturation/:id' => 'commandes#facturation'
+  
+  resources :commande_stats
   
   get "accueil/index"
   root :to => "accueil#index"

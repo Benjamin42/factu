@@ -21,6 +21,7 @@ gem 'geocoder'
 # This is a problem of Webrick. you can use "Thin" instead.
 gem 'thin'
 
+gem 'lazy_high_charts'
 
 # Gems used only for assets and not required
 # in production environments by default.

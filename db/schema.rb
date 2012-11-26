@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119191148) do
+ActiveRecord::Schema.define(:version => 20121126200921) do
 
   create_table "clients", :force => true do |t|
     t.integer  "num_client"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20121119191148) do
     t.date    "date_paiement"
     t.boolean "is_livraison"
     t.boolean "is_paiement"
+    t.boolean "a_livrer"
   end
 
   create_table "produits", :force => true do |t|

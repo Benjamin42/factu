@@ -6,32 +6,43 @@
 
 <div class="well">
 	<p>
-		<b>Num factu:</b>
+		<b>Num factu :</b>
 		<%= @commande.num_factu %>
 	</p>
 	<p>
-		<b>Bdl:</b>
-		<%= @commande.bdl_id %>
-	</p>
-	<p>
-		<b>Client:</b>
+		<b>Client :</b>
 		<%= @commande.client_id %>
 	</p>
 	<p>
-		<b>Date factu:</b>
-		<%= @commande.date_factu %>
+		<b>Date factu :</b>
+		<% if @commande.date_factu != nil %>
+			<%= @commande.date_factu.strftime('%d/%m/%Y') %>
+		<% end %>
 	</p>
 	<p>
-		<b>Nb etiquette:</b>
+		<% if @commande.is_livraison && @commande.date_livraison != nil %>
+			<b>Date livraison : </b>
+			<%= @commande.date_livraison.strftime('%d/%m/%Y') %>
+		<% end %>	
+	</p>
+	<p>
+		<% if @commande.is_paiement && @commande.date_paiement != nil %>
+			<b>Date de paiement : </b>
+			<%= @commande.date_paiement.strftime('%d/%m/%Y') %>
+		<% end %>	
+	</p>
+	<p>
+		<b>Nb etiquette :</b>
 		<%= @commande.nb_etiquette %>
 	</p>
 	<p>
-		<b>Statut:</b>
-		<%= @commande.statut %>
+		<% if @commande.a_livrer %>
+			<span class="label label-important">A livrer</span>
+		<% end %>
 	</p>
 </div>
 
-<table class="table well">
+<table class="table ">
 	<tr>
 		<th>Produit</th>
 		<th>Quantité</th>
