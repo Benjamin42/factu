@@ -13,11 +13,15 @@ $(function () {
     yAxis: {
       title: { text: 'Dollars' }
     },
-    series: [{
-	  pointInterval: <%= 1.day * 1000 %>,
-	  pointStart: <%= 3.months.ago.at_midnight.to_i * 1000 %>,
-	  data: <%= (3.months.ago.month..Date.today.month).map { |date| CommandeProduit.total_on(date).to_f}.inspect %>
-	 }]
+    series: [
+      <% { "Commandes" => Commande}.each do |name, commande| %>
+    {
+      name: "<%= name %>",
+      pointInterval: <%= 1.month * 1000 %>,
+      pointStart: <%= 10.months.ago.at_midnight.to_i * 1000 %>,
+      data: <%= commandes_chart_series(commande, 3.months.ago) %>
+    },
+    <% end %>]
   });
 });
 </script>

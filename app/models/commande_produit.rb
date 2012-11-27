@@ -33,8 +33,5 @@ class CommandeProduit < ActiveRecord::Base
       return ""
     end
   end
-  
-  def self.total_on(date)
-    where("STRFTIME('%m', created_at) = ?", date).sum(:qty)
-  end
+
 end
