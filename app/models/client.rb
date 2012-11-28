@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class Client < ActiveRecord::Base
   has_many :commande
+  has_many :bdl
   
   #attr_accessible :long_addresse, :latitude, :longitude
   geocoded_by :long_adresse

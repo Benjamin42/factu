@@ -1,0 +1,58 @@
+
+<%= simple_form_for @bdl, :html => {:class => "form-horizontal"} do |f| %>
+  <% if @bdl.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bdl.errors.count, "error") %> prohibited this bdl from being saved:</h2>
+
+      <ul>
+      <% @bdl.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<!-- Numéro de Bon de Livraison -->
+<%= f.input :num_bdl %>
+
+<!-- Client -->
+<%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
+  :key => :id , :label_method => :form_title %>
+
+<!-- Label -->
+<%= f.input :label %>
+
+<!-- Date Bon de Livraison -->
+
+<div class="control-group">
+  <label class="control-label">Date de Livraison</label>
+  <div class="controls">
+    <%= f.text_field :date_bdl, :label => "Date Bon de Livraison", :class => "datepicker" %>
+  </div>	  	
+</div>
+
+<table class="table">
+	<tr>
+		<th>Produit</th>
+		<th>Quantité</th>
+		<th>Cadeau</th>
+	</tr>
+	<% for comProduit in @bdl.commande_produit %>
+	
+		<%= fields_for "bdl[bdl_produit_attributes][]", comProduit do |comProduit_form| %>
+		<tr>
+			<td><%= comProduit.produit.label %> : </td>
+			<td><%= comProduit_form.text_field :qty %></td>
+			<td><%= comProduit_form.text_field :qty_cadeau %></td>
+			<td><%= comProduit_form.hidden_field :produit_id %></td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>
+  
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
+<% end %>

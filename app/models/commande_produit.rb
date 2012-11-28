@@ -1,14 +1,16 @@
 class CommandeProduit < ActiveRecord::Base
   belongs_to :commande
+  belongs_to :bdl
   belongs_to :tarif
   belongs_to :produit
   
   scope :bouteille, joins(:produit).where('produits.label' => 'Bouteille')
   
-  def self.create_with_produit(commande, produit)
+  def self.create_with_produit(commande, bdl, produit)
     commandeProduit = CommandeProduit.new()
     commandeProduit.attributes = {
       :commande => commande,
+      :bdl => bdl,
       :produit => produit,
       :qty => 0,
       :qty_cadeau => 0

@@ -1,0 +1,36 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Listing bdls</h1>
+
+<div class="center">
+	<%= link_to 'Nouveau Bon de Livraison', new_bdl_path, class:"btn btn-primary" %>
+</div>
+
+
+<table class="table" id="bdls">
+  <tr>
+    <th>Num bdl</th>
+    <th>Client</th>
+    <th>Label</th>
+    <th>Date bdl</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bdls.each do |bdl| %>
+  <tr>
+  	<td><%= bdl.num_bdl %></td>
+    <td><%= if bdl.client != nil then bdl.client.nom else "" end %></td>
+    <td><%= bdl.label %></td>
+    <td><%= if bdl.date_bdl != nil then bdl.date_bdl.strftime('%d/%m/%Y') else "" end %></td>
+    <td><%= link_to 'Show', bdl, class:"btn btn-info" %></td>
+    <td><%= link_to 'Edit', edit_bdl_path(bdl), class:"btn btn-warning" %></td>
+    <td><%= link_to 'Destroy', bdl, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

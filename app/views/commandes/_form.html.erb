@@ -10,7 +10,8 @@
 <%= f.input :num_factu, :disabled => @commande.isFreeze %>
 
 <!-- Bon de livraison -->
-<%= f.input :bdl_id, :disabled => @commande.isFreeze %>
+<%= f.association :bdl, :collection => Bdl.all, :prompt => "Choisissez un Bon de Livraison",
+  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
 
 <!-- Client -->
 <%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
@@ -28,7 +29,6 @@
 		<%= f.input :is_livraison %>
 	</label>
 	<%= f.text_field :date_livraison, :class => "datepicker hidden", :value => @commande.try(:date_livraison).try(:strftime, '%m/%d/%Y') %>
-
 </div>
 
 <!-- Date de paiement -->

@@ -1,0 +1,46 @@
+<%= render :template => 'commons/_header' %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="well">
+	<p>
+	  <b>Client:</b>
+	  <%= @bdl.client_id %>
+	</p>
+	
+	<p>
+	  <b>Label:</b>
+	  <%= @bdl.label %>
+	</p>
+	
+	<p>
+	  <b>Num bdl:</b>
+	  <%= @bdl.num_bdl %>
+	</p>
+	
+	<p>
+	  <b>Date bdl:</b>
+	  <%= @bdl.date_bdl %>
+	</p>
+</div>
+
+<table class="table ">
+	<tr>
+		<th>Produit</th>
+		<th>Quantité</th>
+		<th>Cadeau</th>
+	</tr>
+	
+	<% for produitCommande in @bdl.commande_produit %>
+		<tr>
+			<td><%= produitCommande.produit.label %></td>
+			<td><%= produitCommande.qty %></td>
+			<td><%= produitCommande.qty_cadeau %></td>
+		</tr>
+	<%end%>
+</table>
+
+<div class="center">
+<%= link_to 'Edit', edit_bdl_path(@bdl), class:"btn btn-inverse" %> |
+<%= link_to 'Back', bdls_path, class:"btn btn-warning" %>
+</div>

@@ -49,7 +49,7 @@ class CommandesController < ApplicationController
     @commande.date_factu = Date.today.strftime('%d/%m/%Y')
     @commande.num_factu = Commande.next_num_factu
     Produit.all.each do |produit|
-      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
+      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, nil, produit)
     end
     @token = :commandes
 

@@ -17,10 +17,6 @@ gem 'ransack'
 # Geoloc
 gem 'geocoder'
 
-# Pour ne plus avoir le warning : "WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true"
-# This is a problem of Webrick. you can use "Thin" instead.
-gem 'thin'
-
 gem 'lazy_high_charts'
 
 # Gems used only for assets and not required

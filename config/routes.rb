@@ -1,4 +1,6 @@
 Factu::Application.routes.draw do
+  resources :bdls
+
   get "commande_stats/index"
 
   match 'cartographie/' => 'cartographie#index'

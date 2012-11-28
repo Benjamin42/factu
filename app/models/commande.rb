@@ -1,5 +1,6 @@
 class Commande < ActiveRecord::Base
   has_many :commande_produit
+  belongs_to :bdl
   belongs_to :client
 
   validates_presence_of :client
