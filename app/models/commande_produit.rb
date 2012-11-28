@@ -3,6 +3,8 @@ class CommandeProduit < ActiveRecord::Base
   belongs_to :tarif
   belongs_to :produit
   
+  scope :bouteille, joins(:produit).where('produits.label' => 'Bouteille')
+  
   def self.create_with_produit(commande, produit)
     commandeProduit = CommandeProduit.new()
     commandeProduit.attributes = {
