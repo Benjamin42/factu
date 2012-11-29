@@ -1,44 +1,5 @@
 <%= render :template => 'commons/_header' %>
 
-    <style>
-      #directionsPanel {
-        height: 100%;
-        float: right;
-        width: 390px;
-        overflow: auto;
-      }
-      
-      .adp-text {
-      	padding-left : 40px;
-      }
-
-      #map-canvas {
-        margin-right: 400px;
-      }
-
-      #control {
-        background: #fff;
-        padding: 5px;
-        font-size: 14px;
-        font-family: Arial;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-        display: none;
-      }
-
-      @media print {
-        #map-canvas {
-          height: 500px;
-          margin: 0;
-        }
-
-        #directionsPanel {
-          float: none;
-          width: auto;
-        }
-      }
-    </style>
-    
 <h1>Cartographie</h1>
 	<br />
 	<div id="directionsPanel" style="">
@@ -52,7 +13,9 @@
 			</div>
 			<div class="span6">
 				<!--Body content-->
-				
+				Adresse de départ : <input type="text" value="11 rue des Ternes 75017 Paris" />
+				<br />
+				<br />
 				
 				<table class="table" id="clients_map">
 					<thead>
@@ -60,14 +23,20 @@
 					  	<th class="sSortableNone"><input type="checkbox" id="checkAllAuto" onclick="checkAll();"></th>
 					    <th>Nom</th>
 					    <th>Adresse</th>
+					    <th>Zoom</th>
 					  </tr>
 				  	</thead>
 					<tbody>
 						<% @clients.each do |client| %>
 						  <tr>
-						  	<td><input type="checkbox" id="checkboxChange_<%= client.id %>" onclick="inverseMarck(<%= client.id %>);"></td>
+						  	<td>
+						  		<% if client.latitude != nil && client.longitude != nil %>
+						  			<input type="checkbox" id="checkboxChange_<%= client.id %>" onclick="inverseMarck(<%= client.id %>);">
+						  		<% end %>
+						  	</td>
 						    <td><%= client.nom %></td>
 						    <td><%= client.long_adresse %></td>
+						    <td><a href="#"><img src="http://www.earthalivect.com/images/loupe.png" /></a></td>
 						  </tr>
 						<% end %>
 					</tbody>
@@ -158,7 +127,9 @@
 	  	map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 		
 		<% @clients.each do |client| %>
-			addMarck(<%= client.latitude %>, <%= client.longitude %>, '<%= client.nom %>', <%= client.id %>, '<%= client.long_adresse %>');
+			<% if client.latitude != nil && client.longitude != nil %>
+				addMarck(<%= client.latitude %>, <%= client.longitude %>, '<%= client.nom %>', <%= client.id %>, '<%= client.long_adresse %>');
+			<% end %>
 		<% end %>
 		
         directionsDisplay.setMap(map);

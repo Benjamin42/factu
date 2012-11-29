@@ -1,3 +1,39 @@
 // Place all the styles related to the cartographie controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#directionsPanel {
+  height: 100%;
+  float: right;
+  width: 390px;
+  overflow: auto;
+}
+
+.adp-text {
+  padding-left : 40px;
+}
+
+#map-canvas {
+  margin-right: 400px;
+}
+
+#control {
+  background: #fff;
+  padding: 5px;
+  font-size: 14px;
+  font-family: Arial;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+  display: none;
+}
+
+@media print {
+  #map-canvas {
+    height: 500px;
+    margin: 0;
+  }
+
+  #directionsPanel {
+    float: none;
+    width: auto;
+  }
+}
