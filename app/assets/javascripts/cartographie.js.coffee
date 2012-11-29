@@ -4,5 +4,10 @@
 jQuery -> 
   $('#clients_map').dataTable(
     sPaginationType: "full_numbers"
+    "aoColumns": [                                                                 
+       { "bSortable": false}
+       { "bSortable": true}
+       { "bSortable": true}
+      ]
   )
     
