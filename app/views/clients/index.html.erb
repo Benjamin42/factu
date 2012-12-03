@@ -31,31 +31,16 @@
 	</div>
 </div>
 
-<!-- >
-<div class="center">
-	<a data-toggle="collapse" data-target="#filtre">
-		<b>Filtre</b>
-	</a>
-	<div id="filtre" class="collapse">
-		<%= search_form_for @q, :html => {:class => "form-horizontal"} do |f| %>
-		  <%= f.label "Nom" %> <%= f.text_field :nom_cont %>
-		  <%= f.submit %>
-		<% end %>
-	</div>
-</div>
--->
-
-<table id="clients" border="0" cellpadding="0" cellspacing="0" class="pretty" data-source="<%= clients_url(format: "json") %>">
+<table id="clients" class="table" >
 	<thead>
 		<tr>
-			<th>Num</th>
+			<th>N° Client</th>
 			<th>Nom</th>
 			<th>Num voie</th>
+			<th>Code Postal</th>
 			<th>Ville</th>
 			<th>Pays</th>
 			<th>Email</th>
-			<th>Latitude</th>
-			<th>Longitude</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
@@ -63,6 +48,21 @@
 		</tr>
   </thead>
   <tbody>
+	<% @clients.each do |client| %>
+	<tr>
+	  <td><%= client.num_client %></td>
+	  <td><%= client.nom %></td>
+	  <td><%= client.num_voie %></td>
+	  <td><%= client.codepostal %></td>
+	  <td><%= client.ville %></td>
+	  <td><%= client.pays %></td>
+	  <td><%= client.email %></td>
+	  <td><%= link_to 'Commande', "commandes/new_with_client/#{client.id}", class:"btn btn-primary" %></td>
+	  <td><%= link_to 'Show', client, class:"btn btn-info" %></td>
+	  <td><%= link_to 'Edit', edit_client_path(client), class:"btn btn-warning" %></td>
+	  <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+	</tr>	
+	<% end %>
   </tbody>
 </table>
 

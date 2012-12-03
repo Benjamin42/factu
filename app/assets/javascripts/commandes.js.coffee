@@ -20,4 +20,19 @@ jQuery ->
   $('#commandes').dataTable(
     sPaginationType: "full_numbers"
   )
-    
+  
+  # onChange sur le bon de livraison
+  $("#commande_bdl_id").change(() ->
+    bdlId = $("#commande_bdl_id").val()
+    if bdlId isnt ""
+      $.getJSON("/commandes/bar/" + bdlId , (data) ->
+          $("#commande_client_id").val(data.idClient)
+      )
+    else
+      $("#commande_client_id").val("")
+  );
+  
+  # onChange sur le client : on clean le BdL
+  $("#commande_client_id").change(() ->
+    $("#commande_bdl_id").val("")
+   );

@@ -4,10 +4,13 @@ Factu::Application.routes.draw do
   resources :bdls
 
   get "commande_stats/index"
+  
 
   match 'cartographie/' => 'cartographie#index'
 
   resources :commandes 
+  match ':controller(/:action(/:id(.:format)))'
+
   match 'commandes/uploadFile' => 'commandes#uploadFile'
   match 'commandes/new_with_client/:id' => 'commandes#new_with_client'
   match 'commandes/facturation/:id' => 'commandes#facturation'

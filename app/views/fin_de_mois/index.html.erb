@@ -12,6 +12,31 @@
 	  <tr>
 	    <th>Date Factu</th>
 	    <th>N° Factu</th>
+	    <th>N° Bdl</th>
+	    <% @produits.each do |produit| %>
+	    	<th><%= produit.label %></th>
+	    <%end%>
+	  </tr>
+  	</thead>
+	<tbody>
+		<% @hashLine.each do |key, obj| %>
+		  <tr>
+		    <td><%= if obj.dater != nil then obj.dater.strftime('%d/%m/%Y') else "" end %></td>
+		    <td><%= obj.num_factu %></td>
+		    <td><%= obj.num_bdl %></td>
+		    <% @produits.each do |produit| %>
+	    		<td><%= obj.hashProduit[produit.label] %></td>
+	    	<%end%>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>
+
+<table class="table" id="fin_de_mois">
+	<thead>
+	  <tr>
+	    <th>Date Factu</th>
+	    <th>N° Factu</th>
 	    <th>Qty Totale</th>
 	    <% @produits.each do |produit| %>
 	    	<th><%= produit.label %></th>

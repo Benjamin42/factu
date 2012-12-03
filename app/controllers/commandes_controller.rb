@@ -2,6 +2,8 @@
 require 'csv'
 
 class CommandesController < ApplicationController
+  layout proc{ |c| c.request.xhr? ? false : "application" }
+  
   # GET /commandes
   # GET /commandes.json
   def index
@@ -172,4 +174,14 @@ class CommandesController < ApplicationController
       format.json { render json: @commande }
     end
   end
+  
+  def bar
+    @bdl = Bdl.find(params[:id])
+    @msg = { "success" => "true", "idClient" => @bdl.client_id}
+    respond_to do |format|
+      format.html
+      format.json { render json: @msg }
+    end
+  end
+
 end

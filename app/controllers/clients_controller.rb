@@ -6,15 +6,9 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @q= Client.search(params[:q])
-    @clients = @q.result
-    #@clients = Client.all
+    @clients = Client.all
     @token = :clients
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: ClientsDatatable.new(view_context) }
-    end
   end
 
   # GET /clients/1
