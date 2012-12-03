@@ -2,7 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery -> 
-  $('#fin_de_mois').dataTable(
+  # Methode de mise a jour du filtre
+  updateFilter = () -> 
+      oTable.fnFilter( (if $("#filter_month").val().length is 2 then $("#filter_month").val() else "0" + $("#filter_month").val()) + "/" + $("#filter_year").val() );
+
+  now = new Date()
+  $("#filter_month").val(now.getMonth())
+  $("#filter_year").val(now.getFullYear())
+
+  oTable = $('#fin_de_mois').dataTable(
     bPaginate: false
     "fnFooterCallback":  ( nFoot, aaData, iStart, iEnd, aiDisplay ) ->
       # Calculate the total market share for all browsers in this table (ie inc. outside
@@ -22,4 +30,10 @@ jQuery ->
       #  '% ('+ parseInt(iTotalMarket * 100)/100 +'% total)';
     
   )
+  updateFilter()
+  
+  # Mise a jour du filtre quand changement de date dans Select
+  $("#filter_month").change(updateFilter)
+  $("#filter_year").change(updateFilter)
+
   
