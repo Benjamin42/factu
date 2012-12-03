@@ -1,0 +1,33 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Fin De Mois</h1>
+
+
+
+<%= select( "payment", "id", @tabMonth) %>
+<%= select( "payment", "id", (2010..2015)) %>
+<table class="table" id="fin_de_mois">
+	<thead>
+	  <tr>
+	    <th>N° Factu</th>
+	    <th>Date Factu</th>
+	    <th>Qty Totale</th>
+	    <% @produits.each do |produit| %>
+	    	<th><%= produit.label %></th>
+	    <%end%>
+	  </tr>
+  	</thead>
+	<tbody>
+		<% @commandes.each do |commande| %>
+		  <tr>
+		    <td><%= commande.num_factu %></td>
+		    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
+		    <td><%= commande.qtyTotal %></td>
+		    <% hashProduit = @hash[commande.id] %>
+		    <% @produits.each do |produit| %>
+	    		<td><%= hashProduit[produit.label] %></td>
+	    	<%end%>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>

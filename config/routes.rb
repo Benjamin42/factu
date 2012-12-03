@@ -1,4 +1,6 @@
 Factu::Application.routes.draw do
+  resources :fin_de_mois
+
   resources :bdls
 
   get "commande_stats/index"

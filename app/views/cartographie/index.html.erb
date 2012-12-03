@@ -1,58 +1,83 @@
 <%= render :template => 'commons/_header' %>
 
 <h1>Cartographie</h1>
-	<br />
-	<div id="directionsPanel" style="">
-    </div>	
-	
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span6">
-				<!--Sidebar content-->
-				<div id="map_canvas" style="width:600px; height:600px;" class="center"></div>
-			</div>
-			<div class="span6">
-				<!--Body content-->
-				Adresse de départ : <input type="text" value="11 rue des Ternes 75017 Paris" />
-				<br />
-				<br />
-				
-				<table class="table" id="clients_map">
-					<thead>
+<br />
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="right" style="padding: 10px;">
+		<button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Fermer la fenêtre</button>
+	</div>
+  <div class="modal-body">
+    <div id="directionsPanel" style="">
+  </div>
+</div>
+<br />
+
+</div>	
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6">
+			<!--Sidebar content-->
+			<div id="map_canvas" style="width:600px; height:600px;" class="center"></div>
+		</div>
+		<div class="span6">
+			<!--Body content-->
+			<table>
+				<tr>
+					<td valign="middle">Adresse de départ : </td>
+					<td valign="middle"><input type="text" id="startAdresse" value="11 rue des Ternes 75017 Paris" disabled="true" /></td>
+					<td valign="middle">
+						<a href="#myModal" onclick="calcRoute();" data-toggle="modal" class="btn btn-primary">Calculer Trajet</a>
+					</td>
+					
+				</tr>
+			
+			
+			</table>
+			<br />
+			<br />
+			
+			<table class="table" id="clients_map">
+				<thead>
+				  <tr>
+				  	<th class="sSortableNone"><input type="checkbox" id="checkAllAuto" onclick="checkAll();"></th>
+				    <th>Nom</th>
+				    <th>Adresse</th>
+				    <th>&nbsp;</th>
+				  </tr>
+			  	</thead>
+				<tbody>
+					<% @clients.each do |client| %>
 					  <tr>
-					  	<th class="sSortableNone"><input type="checkbox" id="checkAllAuto" onclick="checkAll();"></th>
-					    <th>Nom</th>
-					    <th>Adresse</th>
-					    <th>Zoom</th>
+					  	<td>
+					  		<% if client.latitude != nil && client.longitude != nil %>
+					  			<input type="checkbox" id="checkboxChange_<%= client.id %>" onclick="inverseMarck(<%= client.id %>);">
+					  		<% end %>
+					  	</td>
+					    <td><%= client.nom %></td>
+					    <td><%= client.long_adresse %></td>
+					    <td>
+					    	<% if client.latitude != nil && client.longitude != nil %>
+					    		<div style="cursor: pointer;" onclick="zoom(<%= client.latitude %>, <%= client.longitude %>, 'checkboxChange_<%= client.id %>');" class="icon-zoom-in"></div>
+					    	<%end %>
+					    </td>
 					  </tr>
-				  	</thead>
-					<tbody>
-						<% @clients.each do |client| %>
-						  <tr>
-						  	<td>
-						  		<% if client.latitude != nil && client.longitude != nil %>
-						  			<input type="checkbox" id="checkboxChange_<%= client.id %>" onclick="inverseMarck(<%= client.id %>);">
-						  		<% end %>
-						  	</td>
-						    <td><%= client.nom %></td>
-						    <td><%= client.long_adresse %></td>
-						    <td><a href="#"><img src="http://www.earthalivect.com/images/loupe.png" /></a></td>
-						  </tr>
-						<% end %>
-					</tbody>
-				</table>
-				
-				
-			</div>
+					<% end %>
+				</tbody>
+			</table>
+			
 		</div>
 	</div>
+</div>
 
 
 <script>
 	var directionDisplay;
 	var directionsService;;
 	var map;
-	var hashMarcker = new Object();
+	var hashMarcker = {};
 	var lastOpenInfoWindow = null;
 	
 	function checkAll() {
@@ -72,6 +97,11 @@
 				}
 			});	        				
     	}	
+    	
+    	var options = createMapOptions(new google.maps.LatLng(46.227638, 2.213749), 6);
+    	if (map != null) {
+			map.setOptions(options);
+		}
     }	
 	
 	function inverseMarck(id) {
@@ -113,16 +143,22 @@
         contentString += '<span class="label label-important">Adresse</span> : ' + adresse + "<br/>";
 		return contentString;
 	}
+	
+	function zoom(lat, lng, idCheckBox) {
+		var options = createMapOptions(new google.maps.LatLng(lat, lng), 16);
+		if (map != null) {
+			map.setOptions(options);
+		}
+		if (!$('#' + idCheckBox).is(':checked')) {
+			$('#' + idCheckBox).click();
+		} 
+	}
       
 	function initialize() {
 		directionsService = new google.maps.DirectionsService()
 		directionsDisplay = new google.maps.DirectionsRenderer();
 		
-	  	var mapOptions = {
-	  		center: new google.maps.LatLng(46.227638, 2.213749),
-	  		zoom: 6,
-	    	mapTypeId: google.maps.MapTypeId.ROADMAP
-	  	}
+		var mapOptions = createMapOptions(new google.maps.LatLng(46.227638, 2.213749), 6);
 	  
 	  	map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 		
@@ -138,8 +174,14 @@
 		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
           computeTotalDistance(directionsDisplay.directions);
         });
-        
-		 //calcRoute();
+	}
+	
+	function createMapOptions(position, zoom) {
+		return mapOptions = {
+	  		center: position,
+	  		zoom: zoom,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP
+	  	}
 	}
 	
   function computeTotalDistance(result) {
@@ -163,13 +205,19 @@
 	
 
   function calcRoute() {
-    var start = "11 rue des ternes paris";
-    var end = "11 rue des ternes paris";
+    var start = $('#startAdresse').val();
+    var end = $('#startAdresse').val();
     var waypts = [];
     var checkboxArray = document.getElementById('waypoints');
-        waypts.push({
-            location:"18 rue euzenat 51530 magenta",
-            stopover:true});
+   
+    for (var key in hashMarcker) {
+    	var marker = hashMarcker[key];
+    	if (marker != null && marker.getMap() != null) {
+	    	waypts.push({
+	            location:marker.getPosition(),
+	            stopover:true});
+        }
+    }
 
     var request = {
         origin: start,
@@ -181,17 +229,7 @@
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        var route = response.routes[0];
-        var summaryPanel = document.getElementById('directionsPanel');
-        summaryPanel.innerHTML = '';
-        // For each route, display summary information.
-        for (var i = 0; i < route.legs.length; i++) {
-          var routeSegment = i + 1;
-          summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
-          summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-          summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-          summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-        }
+
       }
     });
     
