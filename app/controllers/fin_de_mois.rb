@@ -8,8 +8,8 @@ class FinDeMois
     @hashProduit = Hash.new
   end
   
-  
   def addProduit(label, qty, qty_cadeau)
     @hashProduit[label] = (qty != nil ? qty : 0) + (qty_cadeau != nil ? qty_cadeau : 0)
   end
+ 
 end

@@ -17,6 +17,9 @@ gem 'ransack'
 # Geoloc
 gem 'geocoder'
 
+# Edition a la volée des champs
+gem 'best_in_place'
+
 gem 'lazy_high_charts'
 
 # Gems used only for assets and not required

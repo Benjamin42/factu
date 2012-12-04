@@ -3,10 +3,18 @@
 <h1>Fin De Mois</h1>
 
 
+
 <div class="center">
 	<%= select( "filter", "month", @tabMonth) %>
 	<%= select( "filter", "year", (2010..2015)) %>
+
 </div>
+
+<div class="right">
+  <%= link_to image_tag("page_white_excel.png"), fin_de_mois_path(format: "xls"), :id=>"excelButton", :class=>"btn" %>
+  &nbsp;
+</div>	
+
 <table class="table" id="fin_de_mois">
 	<thead>
 	  <tr>
@@ -32,28 +40,3 @@
 	</tbody>
 </table>
 
-<table class="table" id="fin_de_mois">
-	<thead>
-	  <tr>
-	    <th>Date Factu</th>
-	    <th>N° Factu</th>
-	    <th>Qty Totale</th>
-	    <% @produits.each do |produit| %>
-	    	<th><%= produit.label %></th>
-	    <%end%>
-	  </tr>
-  	</thead>
-	<tbody>
-		<% @commandes.each do |commande| %>
-		  <tr>
-		    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
-		    <td><%= commande.num_factu %></td>
-		    <td><%= commande.qtyTotal %></td>
-		    <% hashProduit = @hash[commande.id] %>
-		    <% @produits.each do |produit| %>
-	    		<td><%= hashProduit[produit.label] %></td>
-	    	<%end%>
-		  </tr>
-		<% end %>
-	</tbody>
-</table>

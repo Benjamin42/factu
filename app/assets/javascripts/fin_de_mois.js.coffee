@@ -4,12 +4,18 @@
 jQuery -> 
   # Methode de mise a jour du filtre
   updateFilter = () -> 
-    if $("#filter_month").val() isnt null && $("#filter_year").val() isnt null
-      oTable.fnFilter( (if $("#filter_month").val().length is 2 then $("#filter_month").val() else "0" + $("#filter_month").val()) + "/" + $("#filter_year").val() );
+    if $("#filter_month").val() isnt undefined && $("#filter_year").val() isnt undefined
+      dateFilter = (if $("#filter_month").val().length is 2 then $("#filter_month").val() else "0" + $("#filter_month").val()) + "/" + $("#filter_year").val()
+      oTable.fnFilter( dateFilter );
+      hrefExcelButton = $("#excelButton").attr("href")
+      if /dateFilter/.test(hrefExcelButton)
+        hrefExcelButton = hrefExcelButton.replace /dateFilter=[0-9]{2}\/[0-9]{4}/, "dateFilter=#{ dateFilter }"
+      else
+        hrefExcelButton = "#{ hrefExcelButton }?dateFilter=#{ dateFilter }"
+      $("#excelButton").attr("href", hrefExcelButton)
 
   now = new Date()
-  #$("#filter_month").val(now.getMonth())
-  $("#filter_month").val("5")
+  $("#filter_month").val(now.getMonth() + 1)
   $("#filter_year").val(now.getFullYear())
 
   oTable = $('#fin_de_mois').dataTable(
@@ -33,8 +39,7 @@ jQuery ->
       #  '% ('+ parseInt(iTotalMarket * 100)/100 +'% total)';
     
   )
-  if oTable isnt null
-    updateFilter()
+  updateFilter()
   
   # Mise a jour du filtre quand changement de date dans Select
   $("#filter_month").change(updateFilter)

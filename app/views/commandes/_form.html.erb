@@ -6,39 +6,50 @@
 </div>
 <% end %>
 
-<!-- Numéro de facture -->
-<%= f.input :num_factu, :disabled => @commande.isFreeze %>
-
-<!-- Bon de livraison -->
-<%= f.association :bdl, :collection => Bdl.all, :prompt => "Choisissez un Bon de Livraison",
-  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
-
-<!-- Client -->
-<%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
-  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
-
-<!-- A livrer -->
-<%= f.input :a_livrer, :disabled => @commande.isFreeze %>
-
-<!-- Nombre d'etiquette -->
-<%= f.input :nb_etiquette, :disabled => @commande.isFreeze %>
-
-<!-- Date de livraison -->
-<div class="control-group">
-	<label class="checkbox inline" >
-		<%= f.input :is_livraison %>
-	</label>
-	<%= f.text_field :date_livraison, :class => "datepicker hidden", :value => @commande.try(:date_livraison).try(:strftime, '%m/%d/%Y') %>
-</div>
-
-<!-- Date de paiement -->
-<div class="control-group">
-	<label class="checkbox inline" >
-		<%= f.input :is_paiement, :label => 'Payée' %>
-	</label>
-	<%= f.text_field :date_paiement, :class => "datepicker hidden", :value => @commande.try(:date_paiement).try(:strftime, '%m/%d/%Y') %>
-
-</div>
+<table>
+	<tr>
+		<td>
+			<!-- Numéro de facture -->
+			<%= f.input :num_factu, :disabled => @commande.isFreeze %>
+			
+			<!-- Bon de livraison -->
+			<%= f.association :bdl, :collection => Bdl.all, :prompt => "Choisissez un Bon de Livraison",
+			  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
+			
+			<!-- Client -->
+			<%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
+			  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
+			
+			<!-- A livrer -->
+			<%= f.input :a_livrer, :disabled => @commande.isFreeze %>
+			
+			<!-- Nombre d'etiquette -->
+			<%= f.input :nb_etiquette, :disabled => @commande.isFreeze %>
+			
+			<!-- Date de livraison -->
+			<div class="control-group">
+				<label class="checkbox inline" >
+					<%= f.input :is_livraison %>
+				</label>
+				<%= f.text_field :date_livraison, :class => "datepicker hidden", :value => @commande.try(:date_livraison).try(:strftime, '%m/%d/%Y') %>
+			</div>
+			
+			<!-- Date de paiement -->
+			<div class="control-group">
+				<label class="checkbox inline" >
+					<%= f.input :is_paiement, :label => 'Payée' %>
+				</label>
+				<%= f.text_field :date_paiement, :class => "datepicker hidden", :value => @commande.try(:date_paiement).try(:strftime, '%m/%d/%Y') %>
+			
+			</div>
+		</td>
+		<td>
+			<div>
+				Stock Restant Bon de Livraison
+			</div>
+		</td>
+	</tr>
+</table>
 
 <table class="table">
 	<tr>

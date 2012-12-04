@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Date Factu</Data></Cell>
+        <Cell><Data ss:Type="String">N° Factu</Data></Cell>
+        <Cell><Data ss:Type="String">N° Bdl</Data></Cell>
+        <% @produits.each do |produit| %>
+        	<Cell><Data ss:Type="String"><%= produit.label %></Data></Cell>
+       	<%end%>
+      </Row>
+	<% @hashLine.each do |key, obj| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= if obj.dater != nil then obj.dater.strftime('%d/%m/%Y') else "" end %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= obj.num_factu %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= obj.num_bdl %></Data></Cell>
+        <% @produits.each do |produit| %>
+        	<Cell><Data ss:Type="Number"><%= obj.hashProduit[produit.label] %></Data></Cell>
+        <%end%>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+ 

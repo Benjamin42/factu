@@ -23,6 +23,8 @@ privilege = Produit.create([label: 'Privilège', commentaire: 'La bouteille', id
 rose = Produit.create([label: 'Rosé', commentaire: 'La bouteille', id_columns_factu_csv: 13])
 prestige = Produit.create([label: 'Prestige', commentaire: 'La bouteille', id_columns_factu_csv: 11])
 
+Parameter.create([p_name: 'default_adresse', p_value: '11 rue des Ternes Paris', grp: 'carto'])
+
 Tarif.create([annee: 2010, prix_unitaire_ht: 6.9, prix_unitaire_ht_livraison: 6.9, produit: demi.first])
 Tarif.create([annee: 2010, prix_unitaire_ht: 11.9, prix_unitaire_ht_livraison: 12, produit: bouteille.first])
 Tarif.create([annee: 2010, prix_unitaire_ht: 25.9, prix_unitaire_ht_livraison: 25.9, produit: magnum.first])

@@ -8,12 +8,12 @@
       
 	  <li class="dropdown <%= if @token == :commandes then "active" else "" end %>">
 	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    	Commandes<b class="caret"></b>
+	    	Factu<b class="caret"></b>
 	    </a>
 	    <ul class="dropdown-menu">
-	      <li class=""><a href="/commandes">Listing</a></li>
+	      <li class=""><a href="/commandes">Commandes</a></li>
 	      <li class=""><a href="/bdls">Bon de Livraison</a></li>
-	      <li><a href="/commande_stats">Statistique</a></li>
+	      <li><a href="/commande_stats">Statistiques</a></li>
 	    </ul>
 	  </li>
 	  
@@ -28,8 +28,7 @@
 	    	<div class="icon-wrench icon-white"></div><b class="caret"></b>
 	    </a>
 	    <ul class="dropdown-menu">
-	      <li><a href="/produits">Import CSV</a></li>
-	      <li><a href="/produits">Parametre Cartographie</a></li>
+	      <li><a href="/parameters">Paramètrage</a></li>
 	 
 	    </ul>
 	  </li>

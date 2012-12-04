@@ -9,3 +9,5 @@ jQuery ->
     bServerSide: true
     sAjaxSource: $('#produits').data('source')
     sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
+    
+  $('.best_in_place').best_in_place()

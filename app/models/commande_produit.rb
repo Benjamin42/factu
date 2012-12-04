@@ -37,5 +37,20 @@ class CommandeProduit < ActiveRecord::Base
       return ""
     end
   end
+  
+  def self.listForFinDeMois
+    find_by_sql("SELECT num_bdl, num_factu, label, qty, qty_cadeau, dater FROM (
+      SELECT null as num_bdl, num_factu as num_factu, P.label, qty, qty_cadeau, date_factu as dater FROM COMMANDE_PRODUITS CP
+        JOIN COMMANDES C ON C.id = CP.commande_id
+        JOIN PRODUITS P ON P.id = CP.produit_id
+        WHERE C.bdl_id is null
+          AND C.date_factu is not null
+      UNION ALL
+      SELECT num_bdl as num_bdl, null as num_factu, P.label, qty, qty_cadeau, date_bdl as dater FROM COMMANDE_PRODUITS CP
+        JOIN BDLS B ON B.id = CP.bdl_id
+        JOIN PRODUITS P ON P.id = CP.produit_id
+        WHERE B.date_bdl is not null
+      ) ORDER BY dater")
+  end
 
 end

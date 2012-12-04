@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name :</b>
+  <%= @parameter.p_name %>
+</p>
+
+<p>
+  <b>Value :</b>
+  <%= @parameter.p_value %>
+</p>
+
+<p>
+  <b>Groupement :</b>
+  <%= @parameter.grp %>
+</p>
+
+
+<%= link_to 'Edit', edit_parameter_path(@parameter) %> |
+<%= link_to 'Back', parameters_path %>

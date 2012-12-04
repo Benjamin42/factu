@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128203924) do
+ActiveRecord::Schema.define(:version => 20121204155211) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -68,6 +68,17 @@ ActiveRecord::Schema.define(:version => 20121128203924) do
     t.boolean "is_livraison"
     t.boolean "is_paiement"
     t.boolean "a_livrer"
+  end
+
+  create_table "parameters", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "grp"
+    t.string   "description"
+    t.string   "p_name"
+    t.string   "p_value"
   end
 
   create_table "produits", :force => true do |t|

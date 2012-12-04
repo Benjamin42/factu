@@ -1,0 +1,30 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Gestion des Paramètres</h1>
+
+<div class="center">
+	<%= link_to 'Nouveau Paramètre', new_parameter_path, class:"btn btn-primary" %>
+
+</div>
+<p id="notice"><%= notice %></p>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>Description</th>
+    <th>Groupement</th>
+    <th></th>
+  </tr>
+
+<% @parameters.each do |parameter| %>
+  <tr>
+    <td><%= parameter.p_name %></td>
+    <td><%= best_in_place parameter, :p_value %></td>
+    <td><%= best_in_place parameter, :description %></td>
+    <td><%= best_in_place parameter, :grp %></td>
+    <td><%= link_to 'Destroy', parameter, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+  </tr>
+<% end %>
+</table>
+
+

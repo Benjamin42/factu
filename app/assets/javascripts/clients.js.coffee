@@ -4,4 +4,17 @@
 jQuery ->
   $('#clients').dataTable(
     sPaginationType: "full_numbers"
+    "aoColumns": [                                                                 
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": false}
+       { "bSortable": false}
+       { "bSortable": false}
+       { "bSortable": false}
+      ]    
   )
+  
