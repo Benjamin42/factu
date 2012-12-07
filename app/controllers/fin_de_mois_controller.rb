@@ -32,8 +32,15 @@ class FinDeMoisController < ApplicationController
     
     # Liste des mois d'une année (pas très beau)
     @tabMonth = Hash.new
+    @tabMonth[""] = ""
     (1..12).each() do |id|
       @tabMonth[Date.parse("27/#{id}/1983").strftime('%B')] = id
+    end
+    
+    @tabYear = Hash.new
+    @tabYear[""] = ""
+    (2010..2020).each() do |id|
+      @tabYear[id] = id
     end
     
     @token = :finDeMois

@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        produit:
+          attributes:
+            label:
+              blank: "Le Label doit &ecirc;tre saisi"
+    models:
+      produit: "Produit"
+    attributes:
+      produit:
+        label: "Label"
+        commentaire: "Commentaire"
+        

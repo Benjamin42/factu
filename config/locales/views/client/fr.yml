@@ -1,0 +1,32 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        client:
+          attributes:
+            nom:
+              blank: "Le Nom doit &ecirc;tre saisi"
+            num_voie:
+              blank: "Le Num&eacute;ro de voie doit &ecirc;tre saisi"
+            ville:
+               blank: "La Ville doit &ecirc;tre saisie"
+    models:
+      client: "Client"
+    attributes:
+      client:
+        num_client: "Num&eacute;ro de client"
+        num_tva: "Num&eacute;ro TVA"
+        nom: "Nom"
+        nom_info: "Nom (info compl&eacute;mentaire)"
+        bat: "Bat / Immeuble / Z.I"
+        num_voie: "N° et Voie"
+        bp: "BP ou Lieu-Dit"
+        codepostal: "Codepostal"
+        ville: "Ville"
+        pays: "Pays"
+        tel: "Tel"
+        portable: "Portable"
+        fax: "Fax"
+        email : "Email"
+        commentaire: "Commentaire"
+        

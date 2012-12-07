@@ -4,8 +4,13 @@
 jQuery -> 
   # Methode de mise a jour du filtre
   updateFilter = () -> 
-    if $("#filter_month").val() isnt undefined && $("#filter_year").val() isnt undefined
-      dateFilter = (if $("#filter_month").val().length is 2 then $("#filter_month").val() else "0" + $("#filter_month").val()) + "/" + $("#filter_year").val()
+    month = $("#filter_month").val()
+    year = $("#filter_year").val()  
+    if month isnt undefined && year isnt undefined
+      dateFilter = ""
+
+      if month isnt "" && year isnt ""      
+        dateFilter = (if month.length is 2 then month else "0" + month) + "/" + year
       oTable.fnFilter( dateFilter );
       hrefExcelButton = $("#excelButton").attr("href")
       if /dateFilter/.test(hrefExcelButton)

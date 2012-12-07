@@ -37,7 +37,7 @@ class CommandesController < ApplicationController
     @commande.num_factu = Commande.next_num_factu
     @commande.client_id = params[:id]
     Produit.all.each do |produit|
-      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, produit)
+      @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, nil, produit)
     end
     @token = :commandes
 
@@ -177,7 +177,19 @@ class CommandesController < ApplicationController
   
   def bar
     @bdl = Bdl.find(params[:id])
-    @msg = { "success" => "true", "idClient" => @bdl.client_id}
+
+    tabOrigin = ""
+    
+    result = CommandeProduit.find_by_sql("select p.label, cp.qty, cp.qty - (select sum(qty) from commande_produits cp2 join commandes c on cp2.commande_id = c.id where produit_id = p.id and c.bdl_id = #{ @bdl.id } ) as rest from commande_produits cp join produits p on cp.produit_id = p.id where cp.bdl_id = #{ @bdl.id }")
+
+    
+    result.each do |res|
+      if res.qty != nil && res.qty != 0
+        tabOrigin += "<tr><td>#{res.label}</td><td>#{res.qty}</td><td><b>#{res.rest}</b></td></tr>"
+      end
+    end
+    
+    @msg = { "success" => "true", "labelBdl" => @bdl.label, "idClient" => @bdl.client_id, "tabOrigin" => tabOrigin}
     respond_to do |format|
       format.html
       format.json { render json: @msg }

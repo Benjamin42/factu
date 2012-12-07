@@ -7,16 +7,16 @@
 </div>
 <% end %>
 
-<%= f.input :num_client, :label => "Numéro de client", :disabled => true  %>
-<%= f.input :num_tva, :label => "Numéro TVA"  %>
-<%= f.input :nom, :label => "Nom"  %>
-<%= f.input :nom_info, :label => "Nom (info complémentaire)"  %>
-<%= f.input :bat, :label => "Bat / Immeuble / Z.I"  %>
-<%= f.input :num_voie, :label => "N° et Voie"  %>
-<%= f.input :bp, :label => "BP ou Lieu-Dit"  %>
-<%= f.input :codepostal, :label => "Codepostal"  %>
-<%= f.input :ville, :label => "Ville"  %>
-<%= f.input :pays, :label => "Pays"  %>
+<%= f.input :num_client, :disabled => true  %>
+<%= f.input :num_tva %>
+<%= f.input :nom %>
+<%= f.input :nom_info %>
+<%= f.input :bat %>
+<%= f.input :num_voie %>
+<%= f.input :bp %>
+<%= f.input :codepostal %>
+<%= f.input :ville %>
+<%= f.input :pays %>
 
 <%= f.input :tel, :wrapper => :prepend do %>
 	<%= content_tag :div, :class => "add-on" do %>
@@ -44,7 +44,7 @@
 	<%= f.input_field :email %>
 <% end %>
 
-<%= f.input :commentaire, :label => "Commentaire"  %>
+<%= f.input :commentaire  %>
 
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>

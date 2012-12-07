@@ -4,6 +4,7 @@ Factu::Application.routes.draw do
   resources :fin_de_mois
 
   resources :bdls
+  match 'bdls/new_with_client/:id' => 'bdls#new_with_client'
 
   get "commande_stats/index"
   

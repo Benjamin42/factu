@@ -22,6 +22,19 @@ class BdlsController < ApplicationController
       format.json { render json: @bdl }
     end
   end
+  
+  def new_with_client
+    @bdl = Bdl.new
+    @bdl.date_bdl = Date.today.strftime('%d/%m/%Y')
+    @bdl.num_bdl = Bdl.next_num_bdl
+    @bdl.client_id = params[:id]
+    Produit.all.each do |produit|
+      @bdl.commande_produit.push CommandeProduit.create_with_produit(nil, @bdl, produit)
+    end
+    @token = :commandes
+
+    render :action => "new"
+  end  
 
   # GET /bdls/new
   # GET /bdls/new.json

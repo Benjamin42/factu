@@ -1,0 +1,21 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        parameter:
+          attributes:
+            p_name:
+              blank: "Le Nom doit &ecirc;tre saisi"
+            p_value:
+              blank: "La Valeur doit &ecirc;tre saisi"
+            grp:
+              blank: "Le Groupement doit &ecirc;tre saisi"
+    models:
+      parameter: "Paramètre"
+    attributes:
+      parameter:
+        p_name: "Nom"
+        p_value: "Valeur"
+        grp: "Groupement"
+        description : "Description"
+        
