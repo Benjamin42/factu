@@ -1,0 +1,32 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Liste des Services</h1>
+
+<div class="center">
+	<%= link_to 'Nouveau Service', new_service_path, class:"btn btn-primary" %>
+</div>
+<br />
+
+<table class="table">
+  <tr>
+    <th>Label</th>
+    <th>Commentaire</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @services.each do |service| %>
+  <tr>
+    <td><%= service.label %></td>
+    <td><%= service.commentaire %></td>
+	<td><%= link_to 'Show', service, class:"btn btn-info" %></td>
+	<td><%= link_to 'Edit', edit_service_path(service), class:"btn btn-warning" %></td>
+	<td>
+		<% if service.countRef == 0 %>
+			<%= link_to 'Destroy', service, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %>
+		<%end%>
+	</td>
+  </tr>
+<% end %>
+</table>

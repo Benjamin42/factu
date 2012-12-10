@@ -1,5 +1,6 @@
 class Commande < ActiveRecord::Base
   has_many :commande_produit
+  has_many :commande_service
   belongs_to :bdl
   belongs_to :client
 
@@ -18,17 +19,17 @@ class Commande < ActiveRecord::Base
     if commande_produit_attributes.kind_of? Hash
       commande_produit_attributes.each do |id, attributes|
         commandeProduit = CommandeProduit.find(id)
-        set_attribute_and_save(commandeProduit, attributes)
+        set_produit_attribute_and_save(commandeProduit, attributes)
       end
     else
       commande_produit_attributes.each do |attributes|
         commandeProduit = commande_produit.build(attributes)
-        set_attribute_and_save(commandeProduit, attributes)
+        set_produit_attribute_and_save(commandeProduit, attributes)
       end
     end
   end
   
-  def set_attribute_and_save(commande_produit, attributes)
+  def set_produit_attribute_and_save(commande_produit, attributes)
     produit = Produit.find(attributes[:produit_id])
     commande_produit.attributes = {
       :qty => attributes[:qty],
@@ -38,6 +39,29 @@ class Commande < ActiveRecord::Base
     }
     commande_produit.save
   end
+  
+  def commande_service_attributes=(commande_service_attributes)
+    if commande_service_attributes.kind_of? Hash
+      commande_service_attributes.each do |id, attributes|
+        commandeService = CommandeService.find(id)
+        set_service_attribute_and_save(commandeService, attributes)
+      end
+    else
+      commande_service_attributes.each do |attributes|
+        commandeService = commande_service.build(attributes)
+        set_service_attribute_and_save(commandeService, attributes)
+      end
+    end
+  end
+  
+  def set_service_attribute_and_save(commande_service, attributes)
+    service = Service.find(attributes[:service_id])
+    commande_service.attributes = {
+      :montant => attributes[:montant],
+      :service => service
+    }
+    commande_service.save
+  end  
     
 
   def qtyTotal
@@ -64,7 +88,7 @@ class Commande < ActiveRecord::Base
         #:bdl_id => row[1], # TODO
         :client_id => client.id,
         :date_factu => dateFactu,
-        :nb_etiquette => row[21],
+        #:nb_etiquette => row[21],
         :is_livraison => true,
         :date_livraison => dateFactu,
         :is_paiement => true,

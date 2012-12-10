@@ -4,6 +4,11 @@ class Parameter < ActiveRecord::Base
   validates_presence_of :grp
   
   def self.findByName(name)
-    return Parameter.find(:first, :conditions => ['p_name = ?', name])
+    p = Parameter.find(:first, :conditions => ['p_name = ?', name])
+    res = ""
+    if p != nil
+      res = p.p_value
+    end
+    return res  
   end
 end

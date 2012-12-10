@@ -13,7 +13,6 @@ fr:
         num_factu: "Num&eacute;ro de Factu"
         bdl_id: "Bon de livraison"
         client: "Client"
-        nb_etiquette: "Nombre d'&eacute;tiquettes"
         is_livraison: "Livr&eacute;e"
         is_paiement: "Pay&eacute;"
         a_livrer: "A livrer"

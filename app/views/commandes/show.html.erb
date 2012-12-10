@@ -32,30 +32,49 @@
 		<% end %>	
 	</p>
 	<p>
-		<b>Nb etiquette :</b>
-		<%= @commande.nb_etiquette %>
-	</p>
-	<p>
 		<% if @commande.a_livrer %>
 			<span class="label label-important">A livrer</span>
 		<% end %>
 	</p>
 </div>
 
-<table class="table ">
+<table>
 	<tr>
-		<th>Produit</th>
-		<th>Quantité</th>
-		<th>Cadeau</th>
+		<th>Produits</th>
+		<th>Services</th>
 	</tr>
-	
-	<% for produitCommande in @commande.commande_produit %>
-		<tr>
-			<td><%= produitCommande.produit.label %></td>
-			<td><%= produitCommande.qty %></td>
-			<td><%= produitCommande.qty_cadeau %></td>
-		</tr>
-	<%end%>
+	<tr>
+		<td width="50%">
+			<table class="table " width="100%">
+				<tr>
+					<th>Produit</th>
+					<th>Quantité</th>
+					<th>Cadeau</th>
+				</tr>
+				<% for produitCommande in @commande.commande_produit %>
+					<tr>
+						<td><%= produitCommande.produit.label %></td>
+						<td><%= produitCommande.qty %></td>
+						<td><%= produitCommande.qty_cadeau %></td>
+					</tr>
+				<%end%>
+			</table>
+		</td>
+		<td width="50%" valign="top">
+			<table class="table" width="100%">
+				<tr>
+					<th>Service</th>
+					<th>Montant</th>
+				</tr>
+				<% for produitService in @commande.commande_service %>
+					<tr>
+						<td><%= produitService.service.label %></td>
+						<td><%= produitService.montant %></td>
+					</tr>
+				<%end%>
+			</table>	
+		</td>
+	</tr>
 </table>
 
 <div class="center">

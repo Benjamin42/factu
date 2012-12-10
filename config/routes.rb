@@ -1,4 +1,6 @@
 Factu::Application.routes.draw do
+  resources :services
+
   resources :parameters
 
   resources :fin_de_mois
@@ -18,6 +20,7 @@ Factu::Application.routes.draw do
   match 'commandes/uploadFile' => 'commandes#uploadFile'
   match 'commandes/new_with_client/:id' => 'commandes#new_with_client'
   match 'commandes/facturation/:id' => 'commandes#facturation'
+  match 'commandes/facturation/facture/:id' => 'commandes#facture'
   
   resources :commande_stats
   

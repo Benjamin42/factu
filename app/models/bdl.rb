@@ -1,6 +1,7 @@
 class Bdl < ActiveRecord::Base
   has_many :commande
   has_many :commande_produit
+  has_many :commande_service
   belongs_to :client
   
   def self.next_num_bdl

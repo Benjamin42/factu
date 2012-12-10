@@ -9,7 +9,6 @@ class CommandesController < ApplicationController
   def index
     @q= Commande.search(params[:q], :include => [:client])
     @commandes = @q.result
-    #@commandes = Commande.find(:all, :include => [:client])
     @token = :commandes
 
     respond_to do |format|
@@ -23,6 +22,7 @@ class CommandesController < ApplicationController
   def show
     @commande = Commande.find(params[:id], :include => [:client])
     @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
+    @commande.commande_service = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
     @token = :commandes
 
     respond_to do |format|
@@ -39,6 +39,10 @@ class CommandesController < ApplicationController
     Produit.all.each do |produit|
       @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, nil, produit)
     end
+    Service.all.each do |service|
+      @commande.commande_service.push CommandeService.create_with_service(@commande, nil, service)
+    end    
+    
     @token = :commandes
 
     render :action => "new"
@@ -53,6 +57,10 @@ class CommandesController < ApplicationController
     Produit.all.each do |produit|
       @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, nil, produit)
     end
+    Service.all.each do |service|
+      @commande.commande_service.push CommandeService.create_with_service(@commande, nil, service)
+    end    
+    
     @token = :commandes
 
     respond_to do |format|
@@ -167,12 +175,26 @@ class CommandesController < ApplicationController
   def facturation
     @commande = Commande.find(params[:id], :include => [:client])
     @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit, :tarif])
+    @gift = false
+    @commande.commande_produit.each do |cp|
+      if cp.qty_cadeau > 0
+        @gift = true
+      end
+    end
     @token = :commandes
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @commande }
     end
+  end
+  
+  def facture
+    @commande = Commande.find(params[:id])
+    @commande.date_factu = DateTime.now
+    @commande.save
+
+    redirect_to "/commandes/facturation/#{ @commande.id }"
   end
   
   def bar

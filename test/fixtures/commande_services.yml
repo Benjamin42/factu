@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  commande_id: 1
+  bdl_id: 1
+  service_id: 1
+  montant: 1.5
+
+two:
+  commande_id: 1
+  bdl_id: 1
+  service_id: 1
+  montant: 1.5

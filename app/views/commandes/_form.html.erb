@@ -23,9 +23,6 @@
 			<!-- A livrer -->
 			<%= f.input :a_livrer, :disabled => @commande.isFreeze %>
 			
-			<!-- Nombre d'etiquette -->
-			<%= f.input :nb_etiquette, :disabled => @commande.isFreeze %>
-			
 			<!-- Date de livraison -->
 			<div class="control-group">
 				<label class="checkbox inline" >
@@ -50,23 +47,52 @@
 	</tr>
 </table>
 
-<table class="table">
+
+<table>
 	<tr>
-		<th>Produit</th>
-		<th>Quantité</th>
-		<th>Cadeau</th>
+		<th><h3>Produits</h3></th>
+		<th><h3>Services</h3></th>
 	</tr>
-	<% for comProduit in @commande.commande_produit %>
-	
-		<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
-		<tr>
-			<td><%= comProduit.produit.label %> : </td>
-			<td><%= comProduit_form.text_field :qty, :disabled => @commande.isFreeze %></td>
-			<td><%= comProduit_form.text_field :qty_cadeau, :disabled => @commande.isFreeze %></td>
-			<td><%= comProduit_form.hidden_field :produit_id %></td>
-		</tr>
-		<% end %>
-	<% end %>
+	<tr>
+		<td width="50%">
+			<table class="table">
+				<tr>
+					<th>Produit</th>
+					<th>Quantité</th>
+					<th>Cadeau</th>
+				</tr>
+				<% for comProduit in @commande.commande_produit %>
+				
+					<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
+					<tr>
+						<td><%= comProduit.produit.label %> : </td>
+						<td><%= comProduit_form.text_field :qty, :disabled => @commande.isFreeze %></td>
+						<td><%= comProduit_form.text_field :qty_cadeau, :disabled => @commande.isFreeze %></td>
+						<%= comProduit_form.hidden_field :produit_id %>
+					</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</td>
+		<td width="50%" valign="top">
+			<table class="table" width="100%">
+				<tr>
+					<th>Service</th>
+					<th>Prix</th>
+				</tr>
+				<% for comService in @commande.commande_service %>
+				
+					<%= fields_for "commande[commande_service_attributes][]", comService do |comService_form| %>
+					<tr>
+						<td><%= comService.service.label %> : </td>
+						<td><%= comService_form.text_field :montant, :disabled => @commande.isFreeze %></td>
+						<%= comService_form.hidden_field :service_id %>
+					</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</td>		
+	</tr>
 </table>
 
 <div class="form-actions">

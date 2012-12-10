@@ -6,40 +6,51 @@
 
 <div class="well">
 	<p>
-		<b>Facture n°<%= @commande.num_factu %></b>
-	</p>
+		<b>Numéro de facture :</b>
+		<%= @commande.num_factu %>
+	</p>	
 	<p>
 		<b>Client:</b>
 		<%= @commande.client.nom %>
 	</p>
 	<p>
 		<b>A livrer :</b>
-		<%= @commande.a_livrer %>
+
+		<% if @commande.a_livrer %>
+			<span class="label label-important">Oui</span>
+		<%else%>
+			<span class="label label-success">Non</span>
+		<% end %>		
+		
 	</p>
 	<p>
-		<b>Nb etiquette:</b>
-		<%= @commande.nb_etiquette %>
+		<b>Date Facturation : </b>
+		<% if @commande.date_factu && @commande.date_factu != nil %>
+			<%= @commande.date_factu.strftime('%d/%m/%Y') %>
+		<% end %>	
 	</p>
 	<p>
+		<b>Date livraison : </b>
 		<% if @commande.is_livraison && @commande.date_livraison != nil %>
-			<b>Date livraison : </b>
 			<%= @commande.date_livraison.strftime('%d/%m/%Y') %>
 		<% end %>	
 	</p>
 	<p>
+		<b>Date de paiement : </b>
 		<% if @commande.is_paiement && @commande.date_paiement != nil %>
-			<b>Date de paiement : </b>
 			<%= @commande.date_paiement.strftime('%d/%m/%Y') %>
 		<% end %>	
 	</p>
 </div>
 
-<table border="1">
+<table class="table table-bordered">
 
 	<tr>
 		<th>Produit</th>
 		<th>Quantité</th>
-		<th>Quantité Offerte</th>
+		<% if @gift %>
+			<th>Quantité Offerte</th>
+		<%end%>
 		<th>Prix Unitaire TTC</th>
 		<th>Montant TTC</th>
 	</tr>
@@ -47,9 +58,11 @@
 	<% for produitCommande in @commande.commande_produit %>
 		<% if (produitCommande.qty != nil && produitCommande.qty > 0) || (produitCommande.qty_cadeau != nil && produitCommande.qty_cadeau > 0) %>
 			<tr>
-				<td><%= produitCommande.produit.label %></td>
+				<td><b><%= produitCommande.produit.label %></b></td>
 				<td align="center"><%= produitCommande.qty %></td>
-				<td align="center"><%= produitCommande.qty_cadeau %></td>
+				<% if @gift %>
+					<td align="center"><%= produitCommande.qty_cadeau %></td>
+				<%end%>
 				<td align="center">
 					<% if @commande.a_livrer then %>	
 						<%= produitCommande.tarif.prix_unitaire_ht_livraison %>
@@ -64,24 +77,33 @@
 	<%end%>
 	
 	<tr>
-		<td colspan="4" align="right">Total TTC</td>
+		<td colspan="3"></td>
+		<td colspan="1"><b>Total TTC</b></td>
 		<td align="center">42</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="right">Transport TTC</td>
+		<td colspan="3"></td>
+		<td colspan="1"><b>Transport TTC</b></td>
 		<td align="center">42</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="right">dont TVA 19.60%</td>
+		<td colspan="3"></td>
+		<td colspan="1"><b>dont TVA <%= Parameter.findByName "tva" %>%</b></td>
 		<td align="center">42</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="right">Net à Payer</td>
+		<td colspan="3"></td>
+		<td colspan="1"><b>Net à Payer</b></td>
 		<td align="center">42</td>
 	</tr>
 </table>
 
+<div class="center">
+	<%= link_to 'Imprimer', commandes_path, class:"btn btn-warning" %> | 
+	<%= link_to 'Facturer', "facture/#{ @commande.id }", class:"btn btn-danger" %>
+</div>
+<br/>
 
 <div class="center">
-	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %>
+	<%= link_to '< Back', commandes_path, class:"btn btn-inverse" %>
 </div>

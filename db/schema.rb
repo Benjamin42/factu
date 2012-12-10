@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204155211) do
+ActiveRecord::Schema.define(:version => 20121210120312) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(:version => 20121204155211) do
     t.integer  "bdl_id"
   end
 
+  create_table "commande_services", :force => true do |t|
+    t.integer  "commande_id"
+    t.integer  "bdl_id"
+    t.integer  "service_id"
+    t.float    "montant"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "commandes", :force => true do |t|
     t.integer "num_factu"
     t.integer "bdl_id"
@@ -71,14 +80,12 @@ ActiveRecord::Schema.define(:version => 20121204155211) do
   end
 
   create_table "parameters", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
+    t.string   "p_name"
+    t.string   "p_value"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "grp"
     t.string   "description"
-    t.string   "p_name"
-    t.string   "p_value"
   end
 
   create_table "produits", :force => true do |t|
@@ -87,6 +94,13 @@ ActiveRecord::Schema.define(:version => 20121204155211) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "id_columns_factu_csv"
+  end
+
+  create_table "services", :force => true do |t|
+    t.string   "label"
+    t.string   "commentaire"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tarifs", :force => true do |t|
