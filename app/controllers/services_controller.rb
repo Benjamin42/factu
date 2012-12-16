@@ -44,6 +44,11 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
+        # Ajout de ce service a toutes les commandes déjà existante
+        Commande.find(:all).each do |commande|
+          CommandeService.create_with_service(commande, nil, @service).save
+        end
+        
         format.html { redirect_to @service, notice: 'Service was successfully created.' }
         format.json { render json: @service, status: :created, location: @service }
       else
@@ -73,6 +78,7 @@ class ServicesController < ApplicationController
   # DELETE /services/1.json
   def destroy
     @service = Service.find(params[:id])
+    CommandeService.delete_line(@service)
     @service.destroy
 
     respond_to do |format|

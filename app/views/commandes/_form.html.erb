@@ -24,7 +24,7 @@
 			<%= f.input :a_livrer, :disabled => @commande.isFreeze %>
 			
 			<!-- Date de livraison -->
-			<div class="control-group">
+			<div class="">
 				<label class="checkbox inline" >
 					<%= f.input :is_livraison %>
 				</label>
@@ -32,7 +32,7 @@
 			</div>
 			
 			<!-- Date de paiement -->
-			<div class="control-group">
+			<div class="">
 				<label class="checkbox inline" >
 					<%= f.input :is_paiement, :label => 'Payée' %>
 				</label>
@@ -47,14 +47,10 @@
 	</tr>
 </table>
 
-
-<table>
-	<tr>
-		<th><h3>Produits</h3></th>
-		<th><h3>Services</h3></th>
-	</tr>
-	<tr>
-		<td width="50%">
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>Produits :</h3>
 			<table class="table">
 				<tr>
 					<th>Produit</th>
@@ -73,8 +69,9 @@
 					<% end %>
 				<% end %>
 			</table>
-		</td>
-		<td width="50%" valign="top">
+		</div>
+		<div class="span6">
+			<h3>Services :</h3>
 			<table class="table" width="100%">
 				<tr>
 					<th>Service</th>
@@ -91,9 +88,9 @@
 					<% end %>
 				<% end %>
 			</table>
-		</td>		
-	</tr>
-</table>
+		</div>
+	</div>
+</div>
 
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>

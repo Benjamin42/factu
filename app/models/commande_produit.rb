@@ -18,6 +18,13 @@ class CommandeProduit < ActiveRecord::Base
     return commandeProduit
   end
   
+  def self.delete_line(produit)
+    @commande_produits = find(:all, :conditions => ['produit_id = ?', produit])
+    @commande_produits.each do |cp|
+      cp.destroy
+    end
+  end
+    
   def self.build_from_csv(row, commande, produit)
     commandeProduit = CommandeProduit.new
     commandeProduit.attributes = {

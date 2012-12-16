@@ -6,19 +6,31 @@ jQuery ->
   $('.hidden').hide()
 
   $('#commande_is_livraison').change ->
-    inverse('commande_date_livraison')
+    inverseDate('commande_date_livraison')
     
   if ($('#commande_is_livraison').is(":checked"))
     show('commande_date_livraison')
      
   $('#commande_is_paiement').change ->
-    inverse('commande_date_paiement')
+    inverseDate('commande_date_paiement')
     
   if ($('#commande_is_paiement').is(":checked"))
     show('commande_date_paiement')
 
   $('#commandes').dataTable(
     sPaginationType: "full_numbers"
+    "aoColumns": [                                                                 
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": true}
+       { "bSortable": false}
+       { "bSortable": false}
+       { "bSortable": false}
+       { "bSortable": false}
+      ]  
   )
   
   # onChange sur le bon de livraison

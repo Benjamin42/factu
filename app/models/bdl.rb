@@ -41,4 +41,29 @@ class Bdl < ActiveRecord::Base
     }
     bdl_produit.save
   end
+  
+  
+
+  def bdl_service_attributes=(bdl_service_attributes)
+    if bdl_service_attributes.kind_of? Hash
+      bdl_service_attributes.each do |id, attributes|
+        bdlService = CommandeService.find(id)
+        set_service_attribute_and_save(bdlService, attributes)
+      end
+    else
+      bdl_service_attributes.each do |attributes|
+        bdlService = commande_service.build(attributes)
+        set_service_attribute_and_save(bdlService, attributes)
+      end
+    end
+  end
+  
+  def set_service_attribute_and_save(bdlService, attributes)
+    service = Service.find(attributes[:service_id])
+    bdlService.attributes = {
+      :montant => attributes[:montant],
+      :service => service
+    }
+    bdlService.save
+  end  
 end

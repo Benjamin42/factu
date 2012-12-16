@@ -31,25 +31,51 @@
   </div>	  	
 </div>
 
-<table class="table">
-	<tr>
-		<th>Produit</th>
-		<th>Quantité</th>
-		<th>Cadeau</th>
-	</tr>
-	<% for comProduit in @bdl.commande_produit %>
-	
-		<%= fields_for "bdl[bdl_produit_attributes][]", comProduit do |comProduit_form| %>
-		<tr>
-			<td><%= comProduit.produit.label %> : </td>
-			<td><%= comProduit_form.text_field :qty %></td>
-			<td><%= comProduit_form.text_field :qty_cadeau %></td>
-			<td><%= comProduit_form.hidden_field :produit_id %></td>
-		</tr>
-		<% end %>
-	<% end %>
-</table>
-  
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>Produits :</h3>
+			<table class="table">
+				<tr>
+					<th>Produit</th>
+					<th>Quantité</th>
+					<th>Cadeau</th>
+				</tr>
+				<% for comProduit in @bdl.commande_produit %>
+				
+					<%= fields_for "bdl[bdl_produit_attributes][]", comProduit do |comProduit_form| %>
+					<tr>
+						<td><%= comProduit.produit.label %> : </td>
+						<td><%= comProduit_form.text_field :qty %></td>
+						<td><%= comProduit_form.text_field :qty_cadeau %></td>
+						<%= comProduit_form.hidden_field :produit_id %>
+					</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+		<div class="span6">
+			<h3>Services :</h3>
+			<table class="table" width="100%">
+				<tr>
+					<th>Service</th>
+					<th>Prix</th>
+				</tr>
+				<% for comService in @bdl.commande_service %>
+				
+					<%= fields_for "commande[commande_service_attributes][]", comService do |comService_form| %>
+					<tr>
+						<td><%= comService.service.label %> : </td>
+						<td><%= comService_form.text_field :montant %></td>
+						<%= comService_form.hidden_field :service_id %>
+					</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
 	<i class="icon-ok icon-white"></i> Save

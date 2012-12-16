@@ -30,6 +30,22 @@ class CommandesController < ApplicationController
       format.json { render json: @commande }
     end
   end
+
+  def defreeze
+    @commande = Commande.find(params[:id])
+    @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
+    @commande.commande_service = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
+    
+    @commande.is_freeze = false
+    @commande.save
+    
+    @token = :commandes
+    
+    @q= Commande.search(params[:q], :include => [:client])
+    @commandes = @q.result
+    
+    render :action => "index"
+  end
   
   def new_with_client
     @commande = Commande.new
@@ -73,6 +89,7 @@ class CommandesController < ApplicationController
   def edit
     @commande = Commande.find(params[:id], :include => [:client])
     @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
+    @commande.commande_service = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
     @token = :commandes
   end
 
@@ -80,12 +97,20 @@ class CommandesController < ApplicationController
   # POST /commandes.json
   def create
     @commande = Commande.new(params[:commande])
+    @commande.is_freeze = @commande.mustBeFreeze
+    @commande.save
     @token = :commandes
 
       if @commande.save
         flash[:notice] = "Success"
         render :action => "show"
       else
+        @commande.commande_produit.each do |cp|
+          cp.destroy
+        end
+        @commande.commande_service.each do |cs|
+          cs.destroy
+        end
         render :action => "new"
       end
 
@@ -95,10 +120,14 @@ class CommandesController < ApplicationController
   # PUT /commandes/1.json
   def update
     @commande = Commande.find(params[:id])
+    @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
+    @commande.commande_service = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
     @token = :commandes
 
     respond_to do |format|
       if @commande.update_attributes(params[:commande])
+        @commande.is_freeze = @commande.mustBeFreeze
+        @commande.save
         format.html { redirect_to @commande, notice: 'Commande was successfully updated.' }
         format.json { head :no_content }
       else
@@ -174,7 +203,20 @@ class CommandesController < ApplicationController
   # GET /facturation/1.json
   def facturation
     @commande = Commande.find(params[:id], :include => [:client])
+    
+    @totalTTC = 0
     @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit, :tarif])
+    @commande.commande_produit.each do |cp|
+      @totalTTC += cp.calcMontantTTC
+    end
+    
+    @commande.commande_service = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
+    @commande.commande_service.each do |cs|
+      @totalTTC += cs.montant
+    end
+    
+    @totalTVA = (@totalTTC - @totalTTC * 100 / (100 + Parameter.findByName("tva").to_f)).round(2)
+    
     @gift = false
     @commande.commande_produit.each do |cp|
       if cp.qty_cadeau > 0
@@ -192,6 +234,7 @@ class CommandesController < ApplicationController
   def facture
     @commande = Commande.find(params[:id])
     @commande.date_factu = DateTime.now
+    @commande.is_freeze = true
     @commande.save
 
     redirect_to "/commandes/facturation/#{ @commande.id }"

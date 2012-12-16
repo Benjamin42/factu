@@ -16,6 +16,7 @@ Factu::Application.routes.draw do
   resources :commandes 
   #match ':controller(/:action(/:id(.:format)))'
   match 'commandes/bar/:id' => 'commandes#bar'
+  match 'commandes/defreeze/:id' => 'commandes#defreeze'
 
   match 'commandes/uploadFile' => 'commandes#uploadFile'
   match 'commandes/new_with_client/:id' => 'commandes#new_with_client'

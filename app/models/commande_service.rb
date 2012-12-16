@@ -13,4 +13,11 @@ class CommandeService < ActiveRecord::Base
     }
     return commandeService
   end  
+  
+  def self.delete_line(service)
+    @commande_services = find(:all, :conditions => ['service_id = ?', service])
+    @commande_services.each do |cs|
+      cs.destroy
+    end
+  end
 end

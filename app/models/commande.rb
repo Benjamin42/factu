@@ -98,8 +98,12 @@ class Commande < ActiveRecord::Base
     return commande
   end
   
+  def mustBeFreeze
+    return self.date_livraison != nil || self.date_paiement != nil || self.date_factu != nil
+  end
+  
   def isFreeze
-    return !self.new_record? && (self.date_livraison != nil || self.date_paiement != nil || self.date_factu != nil)
+    return self.is_freeze
   end
   
 end

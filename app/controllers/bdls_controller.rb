@@ -15,6 +15,8 @@ class BdlsController < ApplicationController
   # GET /bdls/1.json
   def show
     @bdl = Bdl.find(params[:id])
+    @bdl.commande_produit = CommandeProduit.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:produit])
+    @bdl.commande_service = CommandeService.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:service])
     @token = :bdls
 
     respond_to do |format|
@@ -31,6 +33,9 @@ class BdlsController < ApplicationController
     Produit.all.each do |produit|
       @bdl.commande_produit.push CommandeProduit.create_with_produit(nil, @bdl, produit)
     end
+    Service.all.each do |service|
+      @bdl.commande_service.push CommandeService.create_with_service(nil, @bdl, service)
+    end    
     @token = :commandes
 
     render :action => "new"
@@ -45,6 +50,9 @@ class BdlsController < ApplicationController
     Produit.all.each do |produit|
       @bdl.commande_produit.push CommandeProduit.create_with_produit(nil, @bdl, produit)
     end
+    Service.all.each do |service|
+      @bdl.commande_service.push CommandeService.create_with_service(nil, @bdl, service)
+    end    
     @token = :bdls
 
     respond_to do |format|
@@ -57,6 +65,7 @@ class BdlsController < ApplicationController
   def edit
     @bdl = Bdl.find(params[:id])
     @bdl.commande_produit = CommandeProduit.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:produit])
+    @bdl.commande_service = CommandeService.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:service])
     @token = :bdls
   end
 
@@ -67,6 +76,12 @@ class BdlsController < ApplicationController
     @token = :bdls
 
       if @bdl.save
+        @bdl.commande_produit.each do |cp|
+          cp.destroy
+        end
+        @bdl.commande_service.each do |cs|
+          cs.destroy
+        end
         flash[:notice] = "Success"
         render :action => "show"
       else
@@ -78,6 +93,8 @@ class BdlsController < ApplicationController
   # PUT /bdls/1.json
   def update
     @bdl = Bdl.find(params[:id])
+    @bdl.commande_produit = CommandeProduit.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:produit])
+    @bdl.commande_service = CommandeService.find(:all, :conditions => ['bdl_id = ?', @bdl], :include => [:service])
     @token = :bdls
 
     respond_to do |format|

@@ -12,3 +12,35 @@ tr.odd td.sorting_1 {
 tr.even td.sorting_1 {
   background-color: #D5EAF0;
 }
+
+div.cartouche {
+  display: none;
+}
+
+div.legal-footer {
+    display: none;
+}
+
+@media print
+{
+  div.navbar {
+    display: none;
+  }
+  
+  div.button {
+    display: none;
+  }
+  
+  div.well {
+    display: none;
+  }
+  
+  div.cartouche {
+    display: block;
+  }
+  
+  div.legal-footer {
+    display: block;
+  }
+}
+

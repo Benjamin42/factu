@@ -14,3 +14,13 @@ function inverse(id) {
 		hide(id);
 	}
 }
+
+function inverseDate(id) {
+	var elem = $('#' + id);
+	if (elem.is(':hidden')) {
+		show(id);
+	} else {
+		hide(id);
+		elem.val("");
+	}
+}

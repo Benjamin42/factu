@@ -25,7 +25,9 @@ ou
 	  <tr>
 	    <th>Num factu</th>
 	    <th>Client</th>
-	    <th>Date factu</th>
+	    <th>Date Factu</th>
+	    <th>Date Livraison</th>
+	    <th>Date Paiement</th>
 	    <th>Qty Totale</th>
 	    <th></th>
 	    <th></th>
@@ -39,10 +41,18 @@ ou
 		    <td><%= commande.num_factu %></td>
 		    <td><%= if commande.client != nil then commande.client.nom else "" end %></td>
 		    <td><%= if commande.date_factu != nil then commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
+		    <td><%= if commande.date_livraison != nil then commande.date_livraison.strftime('%d/%m/%Y') else "" end %></td>
+		    <td><%= if commande.date_paiement != nil then commande.date_paiement.strftime('%d/%m/%Y') else "" end %></td>
 		    <td><%= commande.qtyTotal %></td>
 		    <td><%= link_to 'Facture', "commandes/facturation/#{commande.id}", class:"btn btn-inverse" %></td>
 		    <td><%= link_to 'Show', commande, class:"btn btn-info" %></td>
-		    <td><%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %></td>
+		    <td>
+		    	<% if !commande.is_freeze %>
+		    		<%= link_to 'Edit', edit_commande_path(commande), class:"btn btn-warning" %>
+				<% else %>
+					<%= link_to 'Défreezer', "commandes/defreeze/#{ commande.id }", class:"btn btn-danger" %>
+				<% end %>
+			</td>
 		    <td><%= link_to 'Destroy', commande, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
 		  </tr>
 		<% end %>

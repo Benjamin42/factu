@@ -6,45 +6,52 @@
 
 <div class="well">
 	<p>
-		<b>Num factu :</b>
+		<b>Numéro de facture :</b>
 		<%= @commande.num_factu %>
+	</p>	
+	<p>
+		<b>Client:</b>
+		<%= @commande.client.nom %>
 	</p>
 	<p>
-		<b>Client :</b>
-		<%= @commande.client_id %>
+		<b>A livrer :</b>
+
+		<% if @commande.a_livrer %>
+			<span class="label label-important">Oui</span>
+		<%else%>
+			<span class="label label-success">Non</span>
+		<% end %>		
+		
 	</p>
 	<p>
-		<b>Date factu :</b>
-		<% if @commande.date_factu != nil %>
+		<b>Date Facturation : </b>
+		<% if @commande.date_factu && @commande.date_factu != nil %>
 			<%= @commande.date_factu.strftime('%d/%m/%Y') %>
-		<% end %>
+		<% end %>	
 	</p>
 	<p>
+		<b>Date livraison : </b>
 		<% if @commande.is_livraison && @commande.date_livraison != nil %>
-			<b>Date livraison : </b>
 			<%= @commande.date_livraison.strftime('%d/%m/%Y') %>
 		<% end %>	
 	</p>
 	<p>
+		<b>Date de paiement : </b>
 		<% if @commande.is_paiement && @commande.date_paiement != nil %>
-			<b>Date de paiement : </b>
 			<%= @commande.date_paiement.strftime('%d/%m/%Y') %>
 		<% end %>	
 	</p>
 	<p>
-		<% if @commande.a_livrer %>
-			<span class="label label-important">A livrer</span>
-		<% end %>
+		<b>Freeze : </b>
+			<%= @commande.is_freeze %>
 	</p>
 </div>
 
-<table>
-	<tr>
-		<th>Produits</th>
-		<th>Services</th>
-	</tr>
-	<tr>
-		<td width="50%">
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>Produits :</h3>
 			<table class="table " width="100%">
 				<tr>
 					<th>Produit</th>
@@ -59,8 +66,9 @@
 					</tr>
 				<%end%>
 			</table>
-		</td>
-		<td width="50%" valign="top">
+		</div>
+		<div class="span6">
+			<h3>Services :</h3>
 			<table class="table" width="100%">
 				<tr>
 					<th>Service</th>
@@ -73,11 +81,13 @@
 					</tr>
 				<%end%>
 			</table>	
-		</td>
-	</tr>
-</table>
+		</div>
+	</div>
+</div>
 
 <div class="center">
-	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %> |
-	<%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %>
+	<% if !@commande.is_freeze %>
+		 | <%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+	<%end%>
 </div>

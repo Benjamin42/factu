@@ -29,3 +29,12 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
+.table td.center, th.center {
+    text-align: center;   
+}
+
+.table td.right, th.right {
+    text-align: right;   
+}

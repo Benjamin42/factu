@@ -49,11 +49,18 @@ class ProduitsController < ApplicationController
 
     respond_to do |format|
       if @produit.save
+        # Création de tous les tarifs de ce nouveau produit
         listAnnee = Tarif.list_annee
         listAnnee.each do |anneeLine|
           tarif = Tarif.create_tarif(@produit, anneeLine.annee)
           tarif.save
         end
+        
+        # Ajout de ce produit a toutes les commandes déjà existante
+        Commande.find(:all).each do |commande|
+          CommandeProduit.create_with_produit(commande, nil, @produit).save
+        end
+        
         format.html { redirect_to @produit, notice: 'Produit was successfully created.' }
         format.json { render json: @produit, status: :created, location: @produit }
       else
@@ -85,6 +92,7 @@ class ProduitsController < ApplicationController
   def destroy
     @produit = Produit.find(params[:id])
     Tarif.delete_tarif(@produit)
+    CommandeProduit.delete_line(@produit)
     @produit.destroy
     @token = :produits
 
