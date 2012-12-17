@@ -7,6 +7,7 @@ Factu::Application.routes.draw do
 
   resources :bdls
   match 'bdls/new_with_client/:id' => 'bdls#new_with_client'
+  match 'bdls/impression/:id' => 'bdls#impression'
 
   get "commande_stats/index"
   

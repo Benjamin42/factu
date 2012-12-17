@@ -24,21 +24,43 @@
 	</p>
 </div>
 
-<table class="table ">
-	<tr>
-		<th>Produit</th>
-		<th>Quantité</th>
-		<th>Cadeau</th>
-	</tr>
-	
-	<% for produitCommande in @bdl.commande_produit %>
-		<tr>
-			<td><%= produitCommande.produit.label %></td>
-			<td><%= produitCommande.qty %></td>
-			<td><%= produitCommande.qty_cadeau %></td>
-		</tr>
-	<%end%>
-</table>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>Produits :</h3>
+			<table class="table ">
+				<tr>
+					<th>Produit</th>
+					<th>Quantité</th>
+					<th>Cadeau</th>
+				</tr>
+				
+				<% for produitCommande in @bdl.commande_produit %>
+					<tr>
+						<td><%= produitCommande.produit.label %></td>
+						<td><%= produitCommande.qty %></td>
+						<td><%= produitCommande.qty_cadeau %></td>
+					</tr>
+				<%end%>
+			</table>
+		</div>
+		<div class="span6">
+			<h3>Services :</h3>				
+			<table class="table" width="100%">
+				<tr>
+					<th>Service</th>
+					<th>Montant</th>
+				</tr>
+				<% for produitService in @bdl.commande_service %>
+					<tr>
+						<td><%= produitService.service.label %></td>
+						<td><%= produitService.montant %></td>
+					</tr>
+				<%end%>
+			</table>	
+		</div>
+	</div>
+</div>
 
 <div class="center">
 <%= link_to 'Back', bdls_path, class:"btn btn-inverse" %> |

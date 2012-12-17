@@ -22,9 +22,6 @@ gem 'best_in_place'
 
 gem 'lazy_high_charts'
 
-# Generation PDF
-# ???
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
