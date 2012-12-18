@@ -9,6 +9,36 @@
 	}
 </style>
 
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>&nbsp;</th>
+	<% Tarif.list_annee.each do |annee| %>
+		<th class="center" colspan="2"><%= link_to annee.annee, "tarifs/#{annee.annee}", confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></th>
+	<% end %>
+	</tr>
+	
+	<tr>
+		<th>&nbsp;</th>
+	<% Tarif.list_annee.each do |annee| %>
+		<th class="center">Prix</th>
+		<th class="center">Liv</th>
+	<% end %>
+	</tr>	
+	
+	<% @produits.each do |produit| %>
+		<tr>
+			<td><%= produit.label %></td>
+		<% Tarif.list_annee.each do |annee| %>
+			<% hashAnne = @tarifs[annee.annee] %>
+			<% t = hashAnne[produit.id] %>
+			<td class="center"><%= link_to "#{t.prix_unitaire_ht} €", edit_tarif_path(t), class:"btn btn-warning" %></td>
+			<td class="center"><%= link_to "#{t.prix_unitaire_ht_livraison} €", edit_tarif_path(t), class:"btn btn-warning" %></td>
+		
+		<% end %>
+		</tr>
+	<% end %>
+</table>
+
 <table class="table table-bordered table-striped" >
 	<tr>
 		<th>&nbsp;</th>

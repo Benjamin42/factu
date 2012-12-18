@@ -54,7 +54,9 @@ class TarifsController < ApplicationController
 
     respond_to do |format|
       if @tarif.update_attributes(params[:tarif])
-        format.html { redirect_to @tarif, notice: 'Tarif was successfully updated.' }
+        @produits = Produit.all
+        @tarifs = Tarif.hash_year
+        format.html { render action: "index", notice: 'Tarif was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

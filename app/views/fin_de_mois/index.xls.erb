@@ -24,6 +24,15 @@
         <%end%>
       </Row>
     <% end %>
+    	<Row></Row>
+    	<Row>
+    		<Cell><Data ss:Type="String"></Data></Cell>
+    		<Cell><Data ss:Type="String"></Data></Cell>
+    		<Cell><Data ss:Type="String">Total</Data></Cell>
+			<% @produits.each do |produit| %>
+				<Cell><Data ss:Type="Number"><%= @hashLineTotal[produit.label] %></Data></Cell>
+			<% end %>
+    	</Row>
     </Table>
   </Worksheet>
 </Workbook>

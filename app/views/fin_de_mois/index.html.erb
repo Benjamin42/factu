@@ -37,6 +37,18 @@
 	    	<%end%>
 		  </tr>
 		<% end %>
-	</tbody>
-</table>
+		
 
+	</tbody>
+
+	<tfoot>
+		<tr>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+			<th><b>Total</b></th>
+			<% @produits.each do |produit| %>
+				<th><%= @hashLineTotal[produit.label] %></th>
+			<% end %>
+		</tr>	
+	</tfoot>
+</table>

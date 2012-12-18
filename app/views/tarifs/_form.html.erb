@@ -13,15 +13,27 @@
 </div>
 <% end %>
 
-<%= f.simple_fields_for @tarif.produit do |c| %>
-	<%= c.input :id, as: :hidden %>
-	<%= c.input :label, :disabled => true, label: "Produit", input_html: { id: c.object.label } %>
-<% end %>
-              
+<div class="control-group integer optional disabled">
+	<label class="control-label float">Produit</label>
+	<div class="controls"><input type="text" disabled="disabled" value="<%= @tarif.produit.label %>"></div>
+</div>        
 <%= f.input :annee, :label => "Année", :disabled => true  %>
 
-<%= f.input :prix_unitaire_ht, :label => "Prix Unitaire" %>
-<%= f.input :prix_unitaire_ht_livraison, :label => "Prix Unitaire (livraison)"  %>
+<div class="control-group integer optional disabled">
+	<label class="control-label float">Produit</label>
+	<div class="controls">
+		<%= f.text_field :prix_unitaire_ht, :label => "Prix Unitaire" %>
+	</div>
+</div>        
+
+<div class="control-group integer optional disabled">
+	<label class="control-label float">Produit</label>
+	<div class="controls">
+		<%= f.text_field :prix_unitaire_ht_livraison, :label => "Prix Unitaire (livraison)"  %>
+	</div>
+</div>        
+
+
 
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>

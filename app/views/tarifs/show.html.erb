@@ -12,6 +12,16 @@
   <%= @tarif.annee %>
 </p>
 
+<p>
+  <b>Prix Unitaire HT :</b>
+  <%= @tarif.prix_unitaire_ht %>
+</p>
+
+<p>
+  <b>Prix Unitaire HT Livraison :</b>
+  <%= @tarif.prix_unitaire_ht_livraison %>
+</p>
+
 
 <%= link_to 'Back', tarifs_path, class:"btn btn-inverse" %> |
 <%= link_to 'Edit', edit_tarif_path(@tarif), class:"btn btn-warning" %>

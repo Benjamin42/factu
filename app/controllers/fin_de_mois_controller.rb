@@ -6,6 +6,7 @@ class FinDeMoisController < ApplicationController
     listSql = CommandeProduit.listForFinDeMois
     
     @hashLine = Hash.new
+    @hashLineTotal = Hash.new
     listSql.each do |t|
       if params["dateFilter"] == nil || /#{params["dateFilter"]}/.match(Date.parse(t.dater).strftime('%d/%m/%Y'))
         line = nil
@@ -20,6 +21,11 @@ class FinDeMoisController < ApplicationController
         end
         
         line.addProduit(t.label, t.qty, t.qty_cadeau)
+        if @hashLineTotal[t.label] == nil
+          @hashLineTotal[t.label] = t.qty + t.qty_cadeau
+        else
+          @hashLineTotal[t.label] = @hashLineTotal[t.label] + t.qty + t.qty_cadeau
+        end
         
         if t.num_bdl != nil
           @hashLine["bdl_#{t.num_bdl}"] = line
