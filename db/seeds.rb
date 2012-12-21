@@ -24,6 +24,18 @@ rose = Produit.create([label: 'Rosé', commentaire: 'La bouteille', id_columns_f
 prestige = Produit.create([label: 'Prestige', commentaire: 'La bouteille', id_columns_factu_csv: 11])
 
 Parameter.create([p_name: 'default_adresse', p_value: '11 rue des Ternes Paris', grp: 'carto'])
+Parameter.create([p_name: 'tva', p_value: '19.6', grp: 'factu'])
+Parameter.create([p_name: 'adresse_factu_rue', p_value: '18 rue Franche', grp: 'factu'])
+Parameter.create([p_name: 'adresse_factu_cp_ville', p_value: '51700 Soilly-Dormans', grp: 'factu'])
+Parameter.create([p_name: 'tel', p_value: '03.26.58.82.89', grp: 'factu'])
+Parameter.create([p_name: 'num_rc', p_value: 'RC-20715-01', grp: 'factu'])
+Parameter.create([p_name: 'num_siret', p_value: '35059931900012', grp: 'factu'])
+Parameter.create([p_name: 'code_tva', p_value: 'FR 36 350 599 379 0001', grp: 'factu'])
+Parameter.create([p_name: 'reglement1', p_value: 'Acceptant le rêglement des sommes dues par chèque libellé à son nom en sa qualité de membre d''un centre de gestion agréé par l''administration Fiscale.', grp: 'factu'])
+Parameter.create([p_name: 'reglement2', p_value: 'En cas de non respect des délais de paiement : pénalité égale au taux légal majoré de 50%.', grp: 'factu'])
+Parameter.create([p_name: 'reglement3', p_value: 'Nos vins, quel que soit le mode d''achat, voyageant aux risques et périls du destinataire, la vérification des colis à la réception est indispensable, faire toutes réserves auprès du transporteur en cas de manquant ou d''avarie.', grp: 'factu'])
+Parameter.create([p_name: 'reglement4', p_value: 'Nos marchandises sont payables à SOILLY. ', grp: 'factu'])
+Parameter.create([p_name: 'reglement5', p_value: 'En cas de non respect des délais de paiement : pénalité égale au taux légal majoré de 50%.', grp: 'factu'])
 
 Tarif.create([annee: 2010, prix_unitaire_ht: 6.9, prix_unitaire_ht_livraison: 6.9, produit: demi.first])
 Tarif.create([annee: 2010, prix_unitaire_ht: 11.9, prix_unitaire_ht_livraison: 12, produit: bouteille.first])

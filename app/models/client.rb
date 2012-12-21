@@ -33,24 +33,24 @@ class Client < ActiveRecord::Base
       #:codepostal => self.clean(row[]),
       :ville => self.clean(row[7]),
       :pays => self.clean(row[8]),
-      :long_adresse => self.concatAddresse(row),
       :tel => self.clean(row[9]),
       :portable => self.clean(row[11]),
       :fax => self.clean(row[10]),
       :email => self.clean(row[12]),
       :commentaire => self.clean(row[13])
     }
+    client.long_adresse = self.concatAddresse(client)
     return client
   end
   
-  def self.concatAddresse(row)
+  def self.concatAddresse(client)
     res = ""
     
-    add4 = self.clean(row[4])
-    add5 = self.clean(row[5])
-    add6 = self.clean(row[6])
-    add7 = self.clean(row[7])
-    add8 = self.clean(row[8])
+    add4 = self.clean(client.bat)
+    add5 = self.clean(client.num_voie)
+    add6 = self.clean(client.bp)
+    add7 = self.clean(client.ville)
+    add8 = self.clean(client.pays)
     
     if add4 != nil then
       res = res + " " + add4
@@ -79,6 +79,10 @@ class Client < ActiveRecord::Base
 
   def self.next_num_client
     return find_by_sql("select max(num_client) + 1 as num_client from clients").first.num_client
+  end
+  
+  def isGeoloc
+    return self.longitude != nil && self.latitude != nil
   end
 
 end

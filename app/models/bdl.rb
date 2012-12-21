@@ -37,7 +37,7 @@ class Bdl < ActiveRecord::Base
       :qty => attributes[:qty],
       :qty_cadeau => attributes[:qty_cadeau],
       :produit => produit,
-      :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y')),
+      :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y'))
     }
     bdl_produit.save
   end

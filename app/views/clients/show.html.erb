@@ -4,6 +4,14 @@
 	<%= notice %>
 </p>
 
+<style>
+	a.ext-link {
+		text-decoration: underline; 
+		color: blue; 
+		background-color: white;
+	}
+</style>
+
 <div class="well">
 	<table>
 		<tr>
@@ -68,10 +76,19 @@
 					<b>Commentaire:</b>
 					<%= @client.commentaire %>
 				</p>
+				<p>
+					<b>Géolocalisation :</b>
+					<% if @client.isGeoloc %>
+						<%= @client.longitude %> / <%= @client.latitude %>
+					<% else %>
+						<a href="https://maps.google.fr/maps?q=<%= @client.long_adresse %>" 
+							target="_blank" 
+							class="ext-link" ><abbr title="Rechercher sur Google Map, puis modifier l'adresse"><b>Retrouver sur Google Map </b></aabr><%= image_tag("external-link-ltr-icon.png") %></a>
+					<% end %>
+				</p>
 			</td>
 			<td style="width:100%; height:100%">
 				 <div id="map_canvas" style="width:400px; height:400px;"></div>
-				<!--<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@client.latitude}%2C#{@client.longitude}" %>-->
 			</td>
 		</tr>
 	</table>

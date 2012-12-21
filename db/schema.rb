@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216113850) do
+ActiveRecord::Schema.define(:version => 20121221123702) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121216113850) do
     t.date     "date_bdl"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "majoration"
   end
 
   create_table "clients", :force => true do |t|

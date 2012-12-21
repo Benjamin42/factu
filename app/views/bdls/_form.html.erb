@@ -22,6 +22,14 @@
 <!-- Label -->
 <%= f.input :label %>
 
+<!-- Majoration -->
+<div class="control-group integer optional disabled">
+	<label class="control-label float">Majoration (en %)</label>
+	<div class="controls">
+		<%= f.text_field :majoration, :label => "Majoration" %>
+	</div>
+</div>     
+
 <!-- Date Bon de Livraison -->
 
 <div class="control-group">

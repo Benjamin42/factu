@@ -54,4 +54,20 @@ class Tarif < ActiveRecord::Base
   def self.findTarif(produit, annee)
     return Tarif.find(:first, :conditions => ["annee = ? and produit_id = ?", annee, produit.id])
   end
+  
+  def calc_prix_unitaire_ht(majoration=nil)
+    if majoration == nil
+      return self.prix_unitaire_ht
+    else
+      return self.prix_unitaire_ht + (self.prix_unitaire_ht * majoration / 100)
+    end
+  end
+  
+  def calc_prix_unitaire_ht_livraison(majoration=nil)
+    if majoration == nil
+      return self.prix_unitaire_ht_livraison
+    else
+      return self.prix_unitaire_ht_livraison + (self.prix_unitaire_ht_livraison * majoration / 100)
+    end
+  end  
 end

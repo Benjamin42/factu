@@ -35,6 +35,7 @@
 	<thead>
 		<tr>
 			<th>N° Client</th>
+			<th>Geoloc</th>
 			<th>Nom</th>
 			<th>Num voie</th>
 			<th>CP</th>
@@ -51,6 +52,13 @@
 	<% @clients.each do |client| %>
 	<tr>
 	  <td><%= client.num_client %></td>
+	  <td class="center">
+	  	<% if !client.isGeoloc %>
+	  		<span class="label label-important"><abbr title="Pas de coordonnées de géolocalisation">Error</aabr></span>
+	  	<% else %>
+	  		<span class="label label-success">OK</span>
+	  	<% end %>
+	  </td>		
 	  <td><%= client.nom %></td>
 	  <td><%= client.num_voie %></td>
 	  <td><%= client.codepostal %></td>

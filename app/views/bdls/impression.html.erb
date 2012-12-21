@@ -103,7 +103,7 @@
 				<% if @gift %>
 					<td class="center"><%= produitCommande.qty_cadeau %></td>
 				<%end%>
-				<td class="center"><%= produitCommande.tarif.prix_unitaire_ht %> &euro;</td>
+				<td class="center"><%= produitCommande.tarif.calc_prix_unitaire_ht(@bdl.majoration).round(2) %> &euro;</td>
 			</tr>
 		<% end %>
 	<%end%>

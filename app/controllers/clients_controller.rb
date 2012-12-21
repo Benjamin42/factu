@@ -47,6 +47,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(params[:client])
     @client.num_client = Client.next_num_client
+    @client.long_adresse = Client.concatAddresse(@client)
     @token = :clients
 
     respond_to do |format|
@@ -68,6 +69,8 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
+        @client.long_adresse = Client.concatAddresse(@client)
+        @client.save
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
         format.json { head :no_content }
       else
@@ -128,4 +131,5 @@ class ClientsController < ApplicationController
 
     redirect_to "/clients"
   end
+  
 end
