@@ -9,6 +9,8 @@
 
 <%= f.input :num_client, :disabled => true  %>
 <%= f.input :num_tva %>
+<%= f.association :civilite, :collection => Type.findAllWithGroupe("civilite"), :prompt => "Choisissez une civilite",
+  :key => :id , :label_method => :form_title %>
 <%= f.input :nom %>
 <%= f.input :nom_info %>
 <%= f.input :bat %>

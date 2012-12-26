@@ -145,7 +145,7 @@ class CommandesController < ApplicationController
     @token = :commandes
 
     respond_to do |format|
-      format.html { redirect_to commandes_url }
+      format.html { redirect_to(params[:redirect_to] || commandes_url) }
       format.json { head :no_content }
     end
   end

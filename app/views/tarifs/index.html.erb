@@ -39,37 +39,6 @@
 	<% end %>
 </table>
 
-<table class="table table-bordered table-striped" >
-	<tr>
-		<th>&nbsp;</th>
-		<% @produits.each do |produit| %>
-			<th colspan="2"><%= produit.label %></th>
-		<% end %>
-	</tr>
-
-	<tr>
-		<th>Année</th>
-		<% @produits.each do |produit| %>
-			<th>Prix</th>
-			<th>Liv</th>
-		<% end %>
-	</tr>
-	
-	<% @tarifs.each do |annee,hashAnne| %>
-		<tr>
-			<td><%= link_to annee, "tarifs/#{annee}", confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
-			<% @produits.each do |produit| %>
-				<td><%= link_to "#{hashAnne[produit.id].prix_unitaire_ht} €", edit_tarif_path(hashAnne[produit.id]), class:"btn btn-warning" %></td>
-			
-				<td><%= link_to "#{hashAnne[produit.id].prix_unitaire_ht_livraison} €", edit_tarif_path(hashAnne[produit.id]), class:"btn btn-warning" %></td>
-			
-			<% end %>
-		</tr>
-	<%end%>
-
-</table>
-
-
 <br />
 <div class="center">
 	<%= link_to 'New Tarif', new_tarif_path, class:"btn btn-primary" %>

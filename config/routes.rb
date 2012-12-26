@@ -1,4 +1,7 @@
 Factu::Application.routes.draw do
+  match 'cleaning' => 'cleaning#index'
+  match 'cleaning/:id' => 'cleaning#edit'
+
   resources :services
 
   resources :parameters

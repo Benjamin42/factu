@@ -4,6 +4,8 @@ class BdlsController < ApplicationController
   def index
     @bdls = Bdl.all
     @token = :bdls
+    
+    @commandeHash = Bdl.getAllCommandeProduit
 
     respond_to do |format|
       format.html # index.html.erb

@@ -2,6 +2,7 @@
 class Client < ActiveRecord::Base
   has_many :commande
   has_many :bdl
+  belongs_to :civilite, :class_name => "Type"
   
   #attr_accessible :long_addresse, :latitude, :longitude
   geocoded_by :long_adresse
@@ -15,7 +16,7 @@ class Client < ActiveRecord::Base
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   
   def form_title
-    return " #{id} - #{nom}"
+    return "#{nom}"
   end
   
   def self.build_from_csv(row)

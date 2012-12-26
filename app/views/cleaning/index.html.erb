@@ -1,0 +1,53 @@
+<%= render :template => 'commons/_header' %>
+
+<h1>Data Cleaning Clients</h1>
+<br/>
+
+<% if flash[:error] %>
+<div class="alert alert-error fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= flash[:error] %>
+</div>
+<% end %>
+<% if flash[:notice] %>
+<div class="alert alert-block fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= flash[:notice] %>
+</div>
+<% end %>
+
+<table id="cleaning" class="table" >
+	<thead>
+		<tr>
+			<th>N° Client</th>
+			<th>Clean</th>
+			<th>Nom</th>
+			<th>Num voie</th>
+			<th>CP</th>
+			<th>Ville</th>
+			<th>Pays</th>
+			<th>&nbsp;</th>
+		</tr>
+  </thead>
+  <tbody>
+	<% @clients.each do |client| %>
+	<tr>
+	  <td><%= client.num_client %></td>
+	  <td class="center">
+	  	<% if !client.cleaning %>
+	  		<span class="label label-important"><abbr title="Pas de coordonnées de géolocalisation">Error</aabr></span>
+	  	<% else %>
+	  		<span class="label label-success">OK</span>
+	  	<% end %>
+	  </td>		
+	  <td><%= client.nom %></td>
+	  <td><%= client.num_voie %></td>
+	  <td><%= client.codepostal %></td>
+	  <td><%= client.ville %></td>
+	  <td><%= client.pays %></td>
+	  <td><%= link_to 'Clean', "cleaning/#{client.id}", class:"btn btn-primary" %></td>
+	</tr>	
+	<% end %>
+  </tbody>
+</table>
+

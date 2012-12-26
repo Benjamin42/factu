@@ -13,6 +13,36 @@ class Bdl < ActiveRecord::Base
     end
   end
   
+  def self.getAllCommandeProduit
+    query = "select c.bdl_id, c.id, c.num_factu, c.date_factu, p.label, cp.qty, cp.qty_cadeau from commande_produits cp
+              join commandes c on cp.commande_id = c.id
+              join produits p on cp.produit_id = p.id
+              where c.bdl_id is not null
+              and (cp.qty > 0 or cp.qty_cadeau > 0)"
+    resReq = find_by_sql(query)
+    
+    commandeHash = Hash.new
+    resReq.each do |line|
+      if commandeHash[line.bdl_id] == nil
+        commandeHash[line.bdl_id] = Array.new
+      end
+      
+      detailHash = Hash.new
+      detailHash["id"] = line.id
+      detailHash["num_factu"] = line.num_factu
+      if line.date_factu != nil
+        detailHash["date_factu"] = DateTime.strptime(line.date_factu, '%Y-%m-%d %H:%M:%S')
+      end
+      detailHash["label"] = line.label
+      detailHash["qty"] = line.qty
+      detailHash["qty_cadeau"] = line.qty_cadeau
+      
+      commandeHash[line.bdl_id].push detailHash
+    end
+    
+    return commandeHash
+  end
+  
   def form_title
     return " #{num_bdl} - #{label}"
   end

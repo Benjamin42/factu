@@ -1,0 +1,179 @@
+<%= simple_form_for @client, :html => {:class => "form-horizontal"} do |f| %>
+
+<% if notification = f.error_notification %>
+<div class="alert alert-error fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= notification %>
+</div>
+<% end %>
+
+<table>
+	<tr>
+		<td width="450px">
+			<%= f.input :num_client, :disabled => true  %>
+			
+			<div class="control-group">
+				<label class="control-label" >Numéro TVA</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["num_tva"] %>" disabled="disabled">
+				</div>
+			</div>		
+			
+			<div class="control-group">
+				<label class="control-label" >Civilité</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["civilite"] %>" disabled="disabled">
+				</div>
+			</div>		
+			
+			<div class="control-group">
+				<label class="control-label" >Nom</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["nom"] %>" disabled="disabled">
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" >Nom (info complémentaire)</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["nom_info"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Bat / Immeuble / Z.I</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["bat"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >N° et Voie</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["num_voie"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >BP ou Lieu-Dit</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["bp"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Codepostal</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["codepostal"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Ville</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["ville"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Pays</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["pays"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Tel</label>
+				<div class="input-prepend" style="margin-left:20px;">
+					<span class="add-on"><div class="icon-list" ></div></span>
+					<input type="text" value="<%= @oldClient["tel"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Portable</label>
+				<div class="input-prepend" style="margin-left:20px;">
+					<span class="add-on"><div class="icon-signal" ></div></span>
+					<input type="text" value="<%= @oldClient["portable"] %>" disabled="disabled">
+				</div>
+			</div>				
+			
+			<div class="control-group">
+				<label class="control-label" >Fax</label>
+				<div class="input-prepend" style="margin-left:20px;">
+					<span class="add-on"><div class="icon-print" ></div></span>
+					<input type="text" value="<%= @oldClient["fax"] %>" disabled="disabled">
+				</div>
+			</div>			
+			
+			<div class="control-group">
+				<label class="control-label" >Email</label>
+				<div class="input-prepend" style="margin-left:20px;">
+					<span class="add-on">@</span>
+					<input type="text" value="<%= @oldClient["email"] %>" disabled="disabled">
+				</div>
+			</div>				
+			
+			
+			
+			<div class="control-group">
+				<label class="control-label" >Commentaire</label>
+				<div class="controls">
+					<input type="text" value="<%= @client.commentaire %>" disabled="disabled">
+				</div>
+			</div>				
+		</td>
+		
+		<td width="200px" class="center"><div class="icon-arrow-right"></div></td>
+		
+		<td>
+			<%= f.input :num_client, :disabled => true  %>	
+			<%= f.input :num_tva %>
+			<%= f.association :civilite, :collection => Type.findAllWithGroupe("civilite"), :prompt => "Choisissez une civilite",
+  				:key => :id , :label_method => :form_title %>		
+			<%= f.input :nom %>
+			<%= f.input :nom_info %>
+			<%= f.input :bat %>
+			<%= f.input :num_voie %>
+			<%= f.input :bp %>
+			<%= f.input :codepostal %>
+			<%= f.input :ville %>
+			<%= f.input :pays %>
+			
+			<%= f.input :tel, :wrapper => :prepend do %>
+				<%= content_tag :div, :class => "add-on" do %>
+					<%= content_tag :div, :class => "icon-list" do %><% end %>
+				<% end %>
+				<%= f.input_field :tel %>
+			<% end %>
+			
+			<%= f.input :portable, :wrapper => :prepend do %>
+				<%= content_tag :div, :class => "add-on" do %>
+					<%= content_tag :div, :class => "icon-signal" do %><% end %>
+				<% end %>
+				<%= f.input_field :portable %>
+			<% end %>
+			
+			<%= f.input :fax, :wrapper => :prepend do %>
+				<%= content_tag :div, :class => "add-on" do %>
+					<%= content_tag :div, :class => "icon-print" do %><% end %>
+				<% end %>
+				<%= f.input_field :fax %>
+			<% end %>
+			
+			<%= f.input :email, :wrapper => :prepend do %>
+				<%= content_tag :div, :class => "add-on" do %>@<% end %>
+				<%= f.input_field :email %>
+			<% end %>
+			
+			<%= f.input :commentaire  %>			
+		</td>
+	</tr>
+</table>
+
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<i class="icon-ok icon-white"></i> Save
+	<% end %>
+</div>
+<% end %>

@@ -63,3 +63,9 @@ Tarif.create([annee: 2012, prix_unitaire_ht: 188, prix_unitaire_ht_livraison: 18
 Tarif.create([annee: 2012, prix_unitaire_ht: 14, prix_unitaire_ht_livraison: 14.1, produit: privilege.first])
 Tarif.create([annee: 2012, prix_unitaire_ht: 14.2, prix_unitaire_ht_livraison: 14.2, produit: rose.first])
 Tarif.create([annee: 2012, prix_unitaire_ht: 16.1, prix_unitaire_ht_livraison: 16.1, produit: prestige.first])
+
+
+Type.create([label: 'Monsieur', code: 'Mr', grp: 'civilite'])
+Type.create([label: 'Madame', code: 'Mme', grp: 'civilite'])
+Type.create([label: 'Mademoiselle', code: 'Mlle', grp: 'civilite'])
+Type.create([label: 'Entreprise', code: 'Ent', grp: 'civilite'])
