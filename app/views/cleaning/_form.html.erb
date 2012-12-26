@@ -10,6 +10,8 @@
 <table>
 	<tr>
 		<td width="450px">
+			<%= f.hidden_field :cleaning, :value => true %>
+			
 			<%= f.input :num_client, :disabled => true  %>
 			
 			<div class="control-group">
@@ -30,6 +32,13 @@
 				<label class="control-label" >Nom</label>
 				<div class="controls">
 					<input type="text" value="<%= @oldClient["nom"] %>" disabled="disabled">
+				</div>
+			</div>	
+					
+			<div class="control-group">
+				<label class="control-label" >Prénom</label>
+				<div class="controls">
+					<input type="text" value="<%= @oldClient["prenom"] %>" disabled="disabled">
 				</div>
 			</div>
 			
@@ -124,14 +133,20 @@
 			</div>				
 		</td>
 		
-		<td width="200px" class="center"><div class="icon-arrow-right"></div></td>
+		<td width="200px" class="center">
+			<div class="icon-arrow-right"></div>
+			<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+				<i class="icon-ok icon-white"></i> Save
+			<% end %>
+		</td>
 		
 		<td>
 			<%= f.input :num_client, :disabled => true  %>	
 			<%= f.input :num_tva %>
 			<%= f.association :civilite, :collection => Type.findAllWithGroupe("civilite"), :prompt => "Choisissez une civilite",
   				:key => :id , :label_method => :form_title %>		
-			<%= f.input :nom %>
+			<%= f.input :nom %>	
+			<%= f.input :prenom %>
 			<%= f.input :nom_info %>
 			<%= f.input :bat %>
 			<%= f.input :num_voie %>
@@ -171,9 +186,4 @@
 	</tr>
 </table>
 
-<div class="form-actions">
-	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-	<i class="icon-ok icon-white"></i> Save
-	<% end %>
-</div>
 <% end %>

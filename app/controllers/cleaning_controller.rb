@@ -6,13 +6,13 @@ class CleaningController < ApplicationController
     @token = :cleaning
   end
   
-  # GET /clients/1/edit
+  # GET /cleaning/1/edit
   def edit
     @client = Client.find(params[:id])
     
     @oldClient = Hash.new
     @oldClient["num_tva"] = @client.num_tva
-    if @client.num_tva != nil
+    if @client.civilite_id != nil
       @oldClient["civilite"] = Type.find(@client.civilite_id).label
     end
     @oldClient["nom"] = @client.nom
@@ -33,4 +33,24 @@ class CleaningController < ApplicationController
     
     @token = :cleaning
   end  
+  
+  # PUT /cleaning/1
+  # PUT /cleaning/1.json
+  def update
+    @client = Client.find(params[:id])
+    @token = :clients
+
+    respond_to do |format|
+      if @client.update_attributes(params[:client])
+        @client.cleaning = true
+        @client.long_adresse = Client.concatAddresse(@client)
+        @client.save
+        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

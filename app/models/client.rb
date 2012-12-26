@@ -47,26 +47,19 @@ class Client < ActiveRecord::Base
   def self.concatAddresse(client)
     res = ""
     
-    add4 = self.clean(client.bat)
-    add5 = self.clean(client.num_voie)
-    add6 = self.clean(client.bp)
-    add7 = self.clean(client.ville)
-    add8 = self.clean(client.pays)
-    
-    if add4 != nil then
-      res = res + " " + add4
-    end
-    if add5 != nil then
-      res = res + " " + add5
-    end
-    if add6 != nil then
-      res = res + " " + add6
-    end
-    if add7 != nil then
-      res = res + " " + add7
-    end
-    if add8 != nil then
-      res = res + " " + add8
+    res = self.concatElem(res, self.clean(client.bat))
+    res = self.concatElem(res, self.clean(client.num_voie))
+    res = self.concatElem(res, self.clean(client.bp))
+    res = self.concatElem(res, self.clean(client.codepostal))
+    res = self.concatElem(res, self.clean(client.ville))
+    res = self.concatElem(res, self.clean(client.pays))
+
+    return res
+  end
+  
+  def self.concatElem(res, elem)
+    if elem != nil then
+      return "#{ res } #{ elem }"
     end
     return res
   end

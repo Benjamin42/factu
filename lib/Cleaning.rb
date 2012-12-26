@@ -3,14 +3,16 @@ module Cleaning
   def clean(client)
     
     cleanCivilite(client)
-    
+    cleanPrenom(client)
     cleanNumVoie(client)
     cleanVille(client)
-    cleanPays(client)
     cleanTel(client)
     cleanPortable(client)
     cleanFax(client)
     cleanEmail(client)
+    
+    # Laisser en dernier
+    cleanPays(client)
   end
   
   def cleanCivilite(client)
@@ -35,6 +37,37 @@ module Cleaning
     end
   end
   
+  def cleanPrenom(client)
+    d = SexMachine::Detector.new(:case_sensitive => false)
+    tokeniser = client.nom.gsub(/[,\.]/, "").split(" ")
+    client.prenom = ""
+    client.nom = ""
+    tokeniser.each do |w|
+      if w.length > 2
+        if d.get_gender(w) == :andy
+          client.nom = "#{client.nom}#{ if client.nom == "" then "" else " " end }#{ w.upcase }"
+        else
+          if client.prenom != ""
+            concat = "#{ client.prenom}-#{ majuscule(w) }"
+            genderConcat = d.get_gender(concat)
+            if genderConcat != :andy
+              client.prenom = concat
+              if genderConcat == :male && client.civilite_id.nil?
+                client.civilite_id = Type.findAllWithGroupeAndCode("civilite", "Mr").id
+              end
+            else
+              client.prenom = "#{ client.prenom} et #{ majuscule(w) }"
+            end
+          else
+            client.prenom = majuscule(w)
+          end
+          
+          #client.prenom = "#{client.prenom}#{ if client.prenom == "" then "" else " " end }#{ majuscule(w) }"
+        end
+      end
+    end
+  end
+  
   def cleanNumVoie(client)
     if client.num_voie != nil
       client.num_voie = majuscule(client.num_voie.gsub(/(\d+)/) { "#{$1} " })
@@ -56,7 +89,7 @@ module Cleaning
   end
   
   def cleanPays(client)
-    if client.pays == nil
+    if client.pays == nil || client.pays == ""
       client.pays = "France"
     end
   end
@@ -74,13 +107,17 @@ module Cleaning
   end    
   
   def cleanPhoneNumber(client, number)
-    if number != nil && (client.pays == nil || client.pays == "France")
+    if number != nil
       number = number.gsub(" ", "")
-      if number.size < 10
-        number = "0#{number}"
+
+        if number != "" && (client.pays == nil || client.pays == "")
+        number = number.gsub(" ", "")
+        while number.size < 10
+          number = "0#{number}"
+        end
+        
+        number = number.gsub(/(\d{2})/) { "#{$1} " }
       end
-      
-      number = number.gsub(/(\d{2})/) { "#{$1} " }
     end    
     
     return number
