@@ -1,0 +1,42 @@
+<%= render :template => 'commons/_header' %>
+
+<h3>Liste des Villes</h3>
+<br/>
+
+<div class="center">
+	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+		Chargement par fichier
+	</button>
+
+	<div id="uploadFile" class="collapse">
+		<br />
+		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+		<%= file_field_tag :my_file %>
+		<%= submit_tag("Charger", class: "btn btn-primary") %>					
+		<% end %>
+	</div>
+</div>			
+
+<table id="cleaning-ville" class="table" >
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Nom</th>
+			<th>Nom Majuscule</th>
+			<th>Code Postal</th>
+			<th>Code INSEE</th>
+		</tr>
+  </thead>
+  <tbody>
+	<% @villes.each do |ville| %>
+	<tr>
+	  <td><%= ville.id %></td>
+	  <td><%= ville.nom %></td>
+	  <td><%= ville.nom_majuscule %></td>
+	  <td><%= ville.code_postal %></td>
+	  <td><%= ville.code_insee %></td>
+
+	</tr>	
+	<% end %>
+  </tbody>
+</table>

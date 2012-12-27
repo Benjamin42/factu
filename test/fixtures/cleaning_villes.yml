@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nom: MyString
+  nom_majuscule: MyString
+  code_postal: MyString
+  code_insee: MyString
+  code_region: MyString
+  latitude: 1.5
+  longitude: 1.5
+  eloignement: 1.5
+
+two:
+  nom: MyString
+  nom_majuscule: MyString
+  code_postal: MyString
+  code_insee: MyString
+  code_region: MyString
+  latitude: 1.5
+  longitude: 1.5
+  eloignement: 1.5

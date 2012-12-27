@@ -86,11 +86,16 @@ module Cleaning
       
     end
     client.ville = majuscule(client.ville)
+
+
+    client.codepostal = CleaningVille.findCodePostal(client.ville, client.codepostal) 
   end
   
   def cleanPays(client)
     if client.pays == nil || client.pays == ""
       client.pays = "France"
+    else
+      client.pays = majuscule(client.pays)
     end
   end
   

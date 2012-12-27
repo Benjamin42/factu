@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226185853) do
+ActiveRecord::Schema.define(:version => 20121227144456) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -21,6 +21,26 @@ ActiveRecord::Schema.define(:version => 20121226185853) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.float    "majoration"
+  end
+
+  create_table "cleaning_pays", :force => true do |t|
+    t.string   "nom"
+    t.string   "code_pay"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "cleaning_villes", :force => true do |t|
+    t.string   "nom"
+    t.string   "nom_majuscule"
+    t.string   "code_postal"
+    t.string   "code_insee"
+    t.string   "code_region"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "eloignement"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "clients", :force => true do |t|

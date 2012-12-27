@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+require 'csv'
+
 class CleaningController < ApplicationController
   include Cleaning
   
   def index
     @clients = Client.all
+    
     @token = :cleaning
   end
   
@@ -16,6 +20,7 @@ class CleaningController < ApplicationController
       @oldClient["civilite"] = Type.find(@client.civilite_id).label
     end
     @oldClient["nom"] = @client.nom
+    @oldClient["prenom"] = @client.prenom
     @oldClient["nom_info"] = @client.nom_info
     @oldClient["bat"] = @client.bat
     @oldClient["num_voie"] = @client.num_voie
@@ -29,7 +34,9 @@ class CleaningController < ApplicationController
     @oldClient["email"] = @client.email
     @oldClient["commentaire"] = @client.commentaire
     
-    clean @client
+    if @client.cleaning != true
+      clean @client
+    end
     
     @token = :cleaning
   end  
@@ -38,7 +45,7 @@ class CleaningController < ApplicationController
   # PUT /cleaning/1.json
   def update
     @client = Client.find(params[:id])
-    @token = :clients
+    @token = :cleaning
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
@@ -53,4 +60,6 @@ class CleaningController < ApplicationController
       end
     end
   end
+  
+
 end

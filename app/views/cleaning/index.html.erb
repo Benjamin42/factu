@@ -1,7 +1,8 @@
 <%= render :template => 'commons/_header' %>
 
-<h1>Data Cleaning Clients</h1>
+<h3>Data Cleaning Clients</h3>
 <br/>
+
 
 <% if flash[:error] %>
 <div class="alert alert-error fade in">
@@ -45,9 +46,10 @@
 	  <td><%= client.codepostal %></td>
 	  <td><%= client.ville %></td>
 	  <td><%= client.pays %></td>
-	  <td><%= link_to 'Clean', "cleaning/#{client.id}", class:"btn btn-primary" %></td>
+	  <td><%= link_to 'Clean', "cleaning/edit/#{client.id}", class:"btn btn-primary" %></td>
 	</tr>	
 	<% end %>
   </tbody>
 </table>
+</div>
 

@@ -1,6 +1,12 @@
 Factu::Application.routes.draw do
+  
+  resources :cleaning_pays
+
+  resources :cleaning_villes
+  match 'cleaning_villes/uploadFile' => 'cleaning_villes#uploadFile'
+
   match 'cleaning' => 'cleaning#index'
-  match 'cleaning/:id' => 'cleaning#edit'
+  match 'cleaning/edit/:id' => 'cleaning#edit'
 
   resources :services
 
