@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227144456) do
+ActiveRecord::Schema.define(:version => 20130102143621) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20121227144456) do
     t.string   "bp"
     t.string   "codepostal"
     t.string   "ville"
-    t.string   "pays"
     t.string   "tel"
     t.string   "portable"
     t.string   "fax"
@@ -67,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20121227144456) do
     t.boolean  "cleaning"
     t.integer  "civilite_id"
     t.string   "prenom"
+    t.integer  "pays_id"
   end
 
   create_table "commande_produits", :force => true do |t|

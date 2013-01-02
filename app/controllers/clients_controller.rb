@@ -27,6 +27,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.json
   def new
     @client = Client.new
+    @client.pays = CleaningPay.findByCode(Parameter.findByName("code_pays_defaut"))
     @client.num_client = Client.next_num_client
     @token = :clients
 
@@ -38,7 +39,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
-    @client = Client.find(params[:id])
+    @client = Client.find(params[:id], :include => [:pays])
     @token = :clients
   end
 

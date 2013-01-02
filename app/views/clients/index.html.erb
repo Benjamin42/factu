@@ -37,6 +37,7 @@
 			<th>N° Client</th>
 			<th>Geoloc</th>
 			<th>Nom</th>
+			<th>Prénom</th>
 			<th>Num voie</th>
 			<th>CP</th>
 			<th>Ville</th>
@@ -50,7 +51,7 @@
   </thead>
   <tbody>
 	<% @clients.each do |client| %>
-	<tr>
+	<tr class="<%= if client.isGeoloc then "success" else "error" end %>">
 	  <td><%= client.num_client %></td>
 	  <td class="center">
 	  	<% if !client.isGeoloc %>
@@ -60,10 +61,15 @@
 	  	<% end %>
 	  </td>		
 	  <td><%= client.nom %></td>
+	  <td><%= client.prenom %></td>
 	  <td><%= client.num_voie %></td>
 	  <td><%= client.codepostal %></td>
 	  <td><%= client.ville %></td>
-	  <td><%= client.pays %></td>
+	  <td>
+	  	<% if !client.pays.nil? %>
+	  		<%= client.pays.nom %>
+	  	<% end %>
+	  </td>
 	  <td><%= link_to 'Commande', "commandes/new_with_client/#{client.id}", class:"btn btn-primary" %></td>
 	  <td><%= link_to 'BdL', "bdls/new_with_client/#{client.id}", class:"btn btn-primary" %></td>
 	  <td><%= link_to 'Show', client, class:"btn btn-info" %></td>

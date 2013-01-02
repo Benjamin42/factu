@@ -6,25 +6,51 @@
 	<%= link_to 'Nouveau Paramètre', new_parameter_path, class:"btn btn-primary" %>
 
 </div>
+</br/>
 <p id="notice"><%= notice %></p>
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Description</th>
-    <th>Groupement</th>
-    <th></th>
-  </tr>
 
-<% @parameters.each do |parameter| %>
-  <tr>
-    <td><%= parameter.p_name %></td>
-    <td><%= best_in_place parameter, :p_value %></td>
-    <td><%= best_in_place parameter, :description %></td>
-    <td><%= best_in_place parameter, :grp %></td>
-    <td><%= link_to 'Destroy', parameter, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
-  </tr>
-<% end %>
-</table>
-
+<br/>
+<div class="tabbable tabs-left">
+	
+	<ul class="nav nav-tabs">
+		<% first = true %>
+		<% @parameters.each do |k, v| %>
+	  		<li class="<%= if first then "active" else "" end %>"><a href="#tab<%= k %>" data-toggle="tab"><%= k.capitalize %></a></li>
+	  		<% first = false %>
+	  	<% end %>
+	</ul>
+ 
+ 
+	<div class="tab-content">
+		<% first = true %>
+		<% @parameters.each do |k,v| %>	
+	  		<div class="tab-pane <%= if first then "active" else "" end %>" id="tab<%= k %>">
+	  			<% first = false %>
+	  			<h5>Paramétrage des élements de configuration du goupe "<%= k %>" :</h5>
+	
+				<table class="table">
+				  <tr>
+				    <th>Name</th>
+				    <th>Value</th>
+				    <th>Description</th>
+				    <th>Groupement</th>
+				    <th></th>
+				  </tr>
+				
+				
+					<% @parameters[k].each do |parameter| %>
+					  <tr>
+					    <td><%= parameter.p_name %></td>
+					    <td><%= best_in_place parameter, :p_value %></td>
+					    <td><%= best_in_place parameter, :description %></td>
+					    <td><%= best_in_place parameter, :grp %></td>
+					    <td><%= link_to 'Destroy', parameter, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+					  </tr>
+					<% end %>
+	
+				</table>
+			</div>
+	  	<% end %>
+	</div>
+</div>
 

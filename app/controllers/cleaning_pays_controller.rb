@@ -24,7 +24,7 @@ class CleaningPaysController < ApplicationController
       logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
     end
 
-    CSV.parse(csv_contents, {:headers => true, :col_sep => ";", :quote_char => '"'}) do |row|
+    CSV.parse(csv_contents, {:headers => false, :col_sep => ";", :quote_char => '"'}) do |row|
       pays = CleaningPay.build_from_csv(row)
       # Save upon valid
       # otherwise collect error records to export

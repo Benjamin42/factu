@@ -4,7 +4,8 @@
 jQuery ->
   $('#cleaning').dataTable(
     sPaginationType: "full_numbers"
-    "aoColumns": [                                                                 
+    aaSorting: [[ 0, "asc" ]]
+    aoColumns: [                                                                 
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}

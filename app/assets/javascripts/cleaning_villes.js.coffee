@@ -4,7 +4,7 @@
 jQuery ->
   $('#cleaning-ville').dataTable(
     sPaginationType: "full_numbers"
-    "aoColumns": [                                                                 
+    aoColumns: [                                                                 
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}

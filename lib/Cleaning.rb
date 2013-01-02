@@ -93,9 +93,9 @@ module Cleaning
   
   def cleanPays(client)
     if client.pays == nil || client.pays == ""
-      client.pays = "France"
+      client.pays = CleaningPay.findByCode(Parameter.findByName("code_pays_defaut"))
     else
-      client.pays = majuscule(client.pays)
+      client.pays = CleaningPay.findByNom(client.pays)
     end
   end
   

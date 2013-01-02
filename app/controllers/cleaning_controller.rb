@@ -5,7 +5,7 @@ class CleaningController < ApplicationController
   include Cleaning
   
   def index
-    @clients = Client.all
+    @clients = Client.find(:all, :include => [:pays])
     
     @token = :cleaning
   end

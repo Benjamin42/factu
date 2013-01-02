@@ -1,22 +1,23 @@
 <%= render :template => 'commons/_header' %>
 
-<h3>Listing cleaning_pays</h3>
+<h3>Liste des Pays</h3>
 <br/>
 
-<% if flash[:error] %>
-<div class="alert alert-error fade in">
-	<a class="close" data-dismiss="alert" href="#">&times;</a>
-	<%= flash[:error] %>
-</div>
-<% end %>
-<% if flash[:notice] %>
-<div class="alert alert-block fade in">
-	<a class="close" data-dismiss="alert" href="#">&times;</a>
-	<%= flash[:notice] %>
-</div>
-<% end %>
+<div class="center">
+	<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#uploadFile">
+		Chargement par fichier
+	</button>
 
-<table id="cleaning" class="table" >
+	<div id="uploadFile" class="collapse">
+		<br />
+		<%= form_tag({:action => :uploadFile}, :multipart => true) do %>
+		<%= file_field_tag :my_file %>
+		<%= submit_tag("Charger", class: "btn btn-primary") %>					
+		<% end %>
+	</div>
+</div>	
+
+<table id="cleaning-pays" class="table" >
 	<thead>
 		<tr>
 			<th>Id</th>
@@ -29,7 +30,7 @@
 	<tr>
 	  <td><%= pays.id %></td>
 	  <td><%= pays.nom %></td>
-	  <td><%= pays.code_pays %></td>
+	  <td><%= pays.code_pay %></td>
 	  
 	</tr>	
 	<% end %>

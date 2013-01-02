@@ -12,13 +12,15 @@
 <%= f.association :civilite, :collection => Type.findAllWithGroupe("civilite"), :prompt => "Choisissez une civilite",
   :key => :id , :label_method => :form_title %>
 <%= f.input :nom %>
+<%= f.input :prenom %>
 <%= f.input :nom_info %>
 <%= f.input :bat %>
 <%= f.input :num_voie %>
 <%= f.input :bp %>
 <%= f.input :codepostal %>
 <%= f.input :ville %>
-<%= f.input :pays %>
+<%= f.association :pays, :collection => CleaningPay.all, :prompt => "Choisissez un pays",
+  :label_method => :form_title %>
 
 <%= f.input :tel, :wrapper => :prepend do %>
 	<%= content_tag :div, :class => "add-on" do %>
@@ -45,6 +47,7 @@
 	<%= content_tag :div, :class => "add-on" do %>@<% end %>
 	<%= f.input_field :email %>
 <% end %>
+
 
 <%= f.input :commentaire  %>
 

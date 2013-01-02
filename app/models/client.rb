@@ -3,6 +3,7 @@ class Client < ActiveRecord::Base
   has_many :commande
   has_many :bdl
   belongs_to :civilite, :class_name => "Type"
+  belongs_to :pays, :class_name => "CleaningPay"
   
   #attr_accessible :long_addresse, :latitude, :longitude
   geocoded_by :long_adresse
@@ -33,7 +34,7 @@ class Client < ActiveRecord::Base
       :bp => self.clean(row[6]),
       #:codepostal => self.clean(row[]),
       :ville => self.clean(row[7]),
-      :pays => self.clean(row[8]),
+      :pays => CleaningPay.findByNom(self.clean(row[8])),
       :tel => self.clean(row[9]),
       :portable => self.clean(row[11]),
       :fax => self.clean(row[10]),
@@ -52,7 +53,9 @@ class Client < ActiveRecord::Base
     res = self.concatElem(res, self.clean(client.bp))
     res = self.concatElem(res, self.clean(client.codepostal))
     res = self.concatElem(res, self.clean(client.ville))
-    res = self.concatElem(res, self.clean(client.pays))
+    if !client.pays.nil?
+      res = self.concatElem(res, self.clean(client.pays.nom))
+    end
 
     return res
   end

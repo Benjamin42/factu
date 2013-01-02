@@ -1,6 +1,7 @@
 Factu::Application.routes.draw do
   
   resources :cleaning_pays
+  match 'cleaning_pays/uploadFile' => 'cleaning_pays#uploadFile'  
 
   resources :cleaning_villes
   match 'cleaning_villes/uploadFile' => 'cleaning_villes#uploadFile'

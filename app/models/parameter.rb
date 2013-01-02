@@ -11,4 +11,12 @@ class Parameter < ActiveRecord::Base
     end
     return res  
   end
+  
+  def self.findByGrp(grp)
+    Parameter.find(:all, :conditions => ['grp = ?', grp])
+  end
+  
+  def self.distinctGrp
+    find_by_sql("select distinct grp from parameters order by grp")
+  end
 end

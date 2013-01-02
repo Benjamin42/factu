@@ -36,6 +36,7 @@ Parameter.create([p_name: 'reglement2', p_value: 'En cas de non respect des dél
 Parameter.create([p_name: 'reglement3', p_value: 'Nos vins, quel que soit le mode d''achat, voyageant aux risques et périls du destinataire, la vérification des colis à la réception est indispensable, faire toutes réserves auprès du transporteur en cas de manquant ou d''avarie.', grp: 'factu'])
 Parameter.create([p_name: 'reglement4', p_value: 'Nos marchandises sont payables à SOILLY. ', grp: 'factu'])
 Parameter.create([p_name: 'reglement5', p_value: 'En cas de non respect des délais de paiement : pénalité égale au taux légal majoré de 50%.', grp: 'factu'])
+Parameter.create([p_name: 'code_pays_defaut', p_value: 'FR', grp: 'client'])
 
 Tarif.create([annee: 2010, prix_unitaire_ht: 6.9, prix_unitaire_ht_livraison: 6.9, produit: demi.first])
 Tarif.create([annee: 2010, prix_unitaire_ht: 11.9, prix_unitaire_ht_livraison: 12, produit: bouteille.first])

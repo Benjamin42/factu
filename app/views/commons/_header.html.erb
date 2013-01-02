@@ -1,47 +1,84 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    
-    <ul class="nav">
-   	  <li><a class="" href="/"><div class="icon-home icon-white" ></div></a></li>
-      <li class="<%= if @token == :produits then "active" else "" end %>"><a href="/produits">Produits</a></li>
-      <li class="<%= if @token == :clients then "active" else "" end %>"><a href="/clients">Client</a></li>
-      <li class="<%= if @token == :tarifs then "active" else "" end %>"><a href="/tarifs">Tarifs</a></li>
-      
-	  <li class="dropdown <%= if @token == :commandes then "active" else "" end %>">
-	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    	Commande<b class="caret"></b>
-	    </a>
-	    <ul class="dropdown-menu">
-	      <li class=""><a href="/commandes">Facturation</a></li>
-	      <li class=""><a href="/bdls">Bon de Livraison</a></li>
-	      <li><a href="/commande_stats">Statistiques</a></li>
-	    </ul>
-	  </li>
-	  
-      <li class="<%= if @token == :carto then "active" else "" end %>"><a href="/cartographie">Carte des livraisons</a></li>
-      
-      <li class="<%= if @token == :finDeMois then "active" else "" end %>"><a href="/fin_de_mois">Fin de mois</a></li>
+	<div class="navbar-inner">
 
-	  <li class="dropdown">
-	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    	<div class="icon-wrench icon-white"></div><b class="caret"></b>
-	    </a>
-	    <ul class="dropdown-menu">
-	      <li><a href="/parameters">Paramètrage</a></li>
-	      <li><a href="/services">Services</a></li>
-	      <li class="dropdown-submenu">
-	      	<a href="">Datacleaning</a>
-			<ul class="dropdown-menu">
-				<li><a href="/cleaning">List Client</a></li>
-	            <li><a href="/cleaning_villes">Admin Ville</a></li>
-	            <li><a href="#">Admin Pays</a></li>
-			</ul>
-		  </li>
-	    </ul>
-	  </li>
-   
-      	
-      </li>
-    </ul>
-  </div>
+		<ul class="nav">
+			<!-- Home -->
+			<li>
+				<a class="" href="/"><div class="icon-home icon-white" ></div></a>
+			</li>
+			
+			<!-- Produit -->
+			<li class="<%= if @token == :produits then "active" else "" end %>">
+				<a href="/produits">Produits</a>
+			</li>
+			
+			<!-- Client -->
+			<li class="<%= if @token == :clients then "active" else "" end %>">
+				<a href="/clients">Client</a>
+			</li>
+			
+			<!-- Tarifs -->
+			<li class="<%= if @token == :tarifs then "active" else "" end %>">
+				<a href="/tarifs">Tarifs</a>
+			</li>
+
+			<!-- Commande -->
+			<li class="dropdown <%= if @token == :commandes then "active" else "" end %>">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> Commande<b class="caret"></b> </a>
+				<ul class="dropdown-menu">
+					<li class="">
+						<a href="/commandes">Facturation</a>
+					</li>
+					<li class="">
+						<a href="/bdls">Bon de Livraison</a>
+					</li>
+					<li>
+						<a href="/commande_stats">Statistiques</a>
+					</li>
+				</ul>
+			</li>
+
+			<!-- Cartographie -->
+			<li class="<%= if @token == :carto then "active" else "" end %>">
+				<a href="/cartographie"><div class="icon-globe icon-white"></div>&nbsp;Carte des livraisons</a>
+			</li>
+
+			<!-- Fin de mois -->
+			<li class="<%= if @token == :finDeMois then "active" else "" end %>">
+				<a href="/fin_de_mois">Fin de mois</a>
+			</li>
+
+			<!-- Mailing -->
+			<li class="<%= if @token == :tarifs then "active" else "" end %>">
+				<a href="/tarifs"><div class="icon-envelope icon-white"></div>&nbsp;Mailing</a>
+			</li>
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <div class="icon-wrench icon-white"></div><b class="caret"></b> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/parameters">Paramètrage</a>
+					</li>
+					<li>
+						<a href="/services">Services</a>
+					</li>
+					<li class="dropdown-submenu">
+						<a href="">Datacleaning</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/cleaning">List Client</a>
+							</li>
+							<li>
+								<a href="/cleaning_villes">Admin Ville</a>
+							</li>
+							<li>
+								<a href="/cleaning_pays">Admin Pays</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+	</div>
 </div>

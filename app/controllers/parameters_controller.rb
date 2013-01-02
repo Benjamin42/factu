@@ -3,7 +3,12 @@ class ParametersController < ApplicationController
   # GET /parameters.json
   def index
     @parameters = Parameter.all
-
+    
+    @parameters = Hash.new
+    Parameter.distinctGrp.each do |grp|
+      @parameters[grp.grp] = Parameter.findByGrp(grp.grp)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @parameters }

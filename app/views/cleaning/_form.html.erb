@@ -153,7 +153,8 @@
 			<%= f.input :bp %>
 			<%= f.input :codepostal %>
 			<%= f.input :ville %>
-			<%= f.input :pays %>
+			<%= f.association :pays, :collection => CleaningPay.all, :prompt => "Choisissez un pays",
+  				:key => :nom, :label_method => :nom %>		
 			
 			<%= f.input :tel, :wrapper => :prepend do %>
 				<%= content_tag :div, :class => "add-on" do %>

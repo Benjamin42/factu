@@ -29,6 +29,10 @@
 					<%= @client.nom %>
 				</p>
 				<p>
+					<b>Prénom:</b>
+					<%= @client.prenom %>
+				</p>
+				<p>
 					<b>Nom info:</b>
 					<%= @client.nom_info %>
 				</p>
@@ -54,7 +58,9 @@
 				</p>
 				<p>
 					<b>Pays:</b>
-					<%= @client.pays %>
+					<% if !@client.pays.nil? %>
+						<%= @client.pays.nom %>
+					<% end %>
 				</p>
 				<p>
 					<b>Tel:</b>
