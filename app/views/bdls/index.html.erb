@@ -28,6 +28,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @bdls.each do |bdl| %>
@@ -50,7 +51,7 @@
   <% if @commandeHash[bdl.id] != nil && @commandeHash[bdl.id].size > 0 %>
 	<tr id="detail_<%= bdl.id%>" style="display: none;">
 		<td colspan="9">
-  			<table class="table">
+  			<table class="table-bordered" style="margin-left: 100px;">
   				<tr>
   					<th>&nbsp;</th>
   					<th>Num Factu</th>
@@ -58,9 +59,6 @@
   					<th>Produit</th>
   					<th>Qty</th>
   					<th>Qty Cadeau</th>
-				    <th></th>
-				    <th></th>
-				    <th></th>
 				    <th></th>
   				</tr>
   				<% @commandeHash[bdl.id].each do |detail| %>
@@ -71,13 +69,13 @@
   					<td><%= detail["label"] %></td>
   					<td><%= detail["qty"] %></td>
   					<td><%= detail["qty_cadeau"] %></td>
-				    <td><%= link_to 'Facture', "commandes/facturation/#{ detail['id'] }", class:"btn btn-inverse" %></td>
-				    <td><%= link_to 'Show', "commandes/#{ detail['id'] }", class:"btn btn-info" %></td>
-				    <td>
+				    <td><%= link_to 'Facture', "commandes/facturation/#{ detail['id'] }", class:"btn btn-inverse" %>
+				   	<%= link_to 'Show', "commandes/#{ detail['id'] }", class:"btn btn-info" %>
+				    
 				    	<%= link_to 'Edit', edit_commande_path(detail['id']), class:"btn btn-warning" %>
 						
-					</td>
-				    <td><%= link_to 'Destroy', commande_path(detail['id'], :redirect_to => bdls_path), confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>  					
+					
+				    <%= link_to 'Destroy', commande_path(detail['id'], :redirect_to => bdls_path), confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>  					
   				</tr>
 				<% end %>
   			</table>

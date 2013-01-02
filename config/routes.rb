@@ -1,5 +1,7 @@
 Factu::Application.routes.draw do
   
+  get "mailing/index"
+
   resources :cleaning_pays
   match 'cleaning_pays/uploadFile' => 'cleaning_pays#uploadFile'  
 

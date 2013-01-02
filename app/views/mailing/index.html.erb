@@ -1,0 +1,109 @@
+<%= render :template => 'commons/_header' %>
+
+<h3>Mailing</h3>
+
+<script>
+	function openPopover(id) {
+		$('.label-with-popover' + id).popover("show");
+	}
+	
+	function closePopover(id) {
+		$('.label-with-popover' + id).popover("hide");
+	}
+
+  function displayDetail(id) {
+      if ($('#' + id).is(':visible')) {
+          $('#' + id).hide();
+          $('#div_link_' + id).attr('class', 'icon-plus-sign');
+      } else {
+          $('#' + id).show();
+          $('#div_link_' + id).attr('class', 'icon-minus-sign');
+      }
+  }
+</script>
+   
+<div>
+	<a href="#" style="background: white; color: black;" onclick="displayDetail('select_client');"><div id="div_link_select_client" class="icon-plus-sign"></div><b>&nbsp;Selection des clients</b></a>
+</div>    
+       
+<div id="select_client" style="display: none;">
+	<div style="margin-left: 50px; margin-top: 50px;">
+		<table id="clients-mailing" class="table table-bordered" >
+			<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Clean</th>
+					<th>N° Client</th>
+					<th>Nom</th>
+					<th>Num voie</th>
+					<th>CP</th>
+					<th>Ville</th>
+					<th>Pays</th>
+					<th>Test</th>
+				</tr>
+		  </thead>
+		  <tbody>
+			<% @clients.each do |client| %>
+			<tr onmouseover="openPopover(<%= client.id %>)" onmouseout="closePopover(<%= client.id %>)">
+			  <td>
+			  	<input type="checkbox" />
+			  </td>
+			  <td class="center">
+			  	<% if !client.cleaning %>
+			  		<span class="label label-important">Error</span>
+			  	<% else %>
+			  		<span class="label label-success">OK</span>
+			  	<% end %>
+			  </td>			
+			  <td>
+			  	<%= client.num_client %>
+			  	<!--a href="#"  class="btn-danger label-with-popover<%= client.id %>" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="Statistique"></a-->
+			  </td>
+			  <td><%= client.nom %></td>
+			  <td><%= client.num_voie %></td>
+			  <td><%= client.codepostal %></td>
+			  <td><%= client.ville %></td>
+			  <td>
+			  	<% if !client.pays.nil? %>
+			  		<%= client.pays.nom %>
+			  	<% end %>
+			  </td>
+			  <td>
+			  	
+			  </td>
+			</tr>	
+			<% end %>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+<br/></br/>
+<div>
+	<a href="#" style="background: white; color: black;" onclick="displayDetail('text_mailing');"><div id="div_link_text_mailing" class="icon-minus-sign"></div><b>&nbsp;Texte mailing</b></a>
+</div>    
+
+<div id="text_mailing" style="display: block;">
+	<div style="margin-left: 50px; margin-top: 50px;">
+		<textarea id="some-textarea" class="wysihtml5" placeholder="Saisie du texte..." style="width: 810px; height: 400px" ></textarea>
+	</div>
+</div>
+
+<div class="center button">
+	<a href="#" class="btn btn-warning" onclick="window.print(); return false;" >Imprimer</a>
+</div>
+
+
+<div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h4>TODO :</h4>
+  <ul>
+  	<li>Création de la table "mailing" avec t_texte(text) / statut(integer : lien vers table type)</li>
+  	<li>Création de la table "mailing_client" avec mailing_id(integer) / client_id(integer)</li>
+  	<li>Quand checkbox, tenir a jour une liste d'id en string</li>
+  	<li>Ajouter boutons : Brouillon / Envoyé / Imprimer</li>
+  	<li>Appel Ajax pour enregistrer le brouillon (on effacer / remplace l'ancien brouillon et les clients)</li>
+  	<li>Changement de statut a coder</li>
+  	<li>Click sur bouton Imprimer : modifier l'ecran pour creer une div invisible avec toutes les info</li>
+  </ul>
+</div>

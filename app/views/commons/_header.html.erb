@@ -38,26 +38,26 @@
 				</ul>
 			</li>
 
-			<!-- Cartographie -->
-			<li class="<%= if @token == :carto then "active" else "" end %>">
-				<a href="/cartographie"><div class="icon-globe icon-white"></div>&nbsp;Carte des livraisons</a>
-			</li>
-
 			<!-- Fin de mois -->
 			<li class="<%= if @token == :finDeMois then "active" else "" end %>">
 				<a href="/fin_de_mois">Fin de mois</a>
 			</li>
 
+			<!-- Cartographie -->
+			<li class="<%= if @token == :carto then "active" else "" end %>">
+				<a href="/cartographie"><div class="icon-globe icon-white"></div>&nbsp;Carte des livraisons</a>
+			</li>
+
 			<!-- Mailing -->
-			<li class="<%= if @token == :tarifs then "active" else "" end %>">
-				<a href="/tarifs"><div class="icon-envelope icon-white"></div>&nbsp;Mailing</a>
+			<li class="<%= if @token == :mailing then "active" else "" end %>">
+				<a href="/mailing/index"><div class="icon-envelope icon-white"></div>&nbsp;Mailing</a>
 			</li>
 
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <div class="icon-wrench icon-white"></div><b class="caret"></b> </a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="/parameters">Paramètrage</a>
+						<a href="/parameters">Paramétrage</a>
 					</li>
 					<li>
 						<a href="/services">Services</a>

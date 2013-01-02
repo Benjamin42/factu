@@ -6,10 +6,13 @@ fr:
           attributes:
             nom:
               blank: "Le Nom doit &ecirc;tre saisi"
+              taken: "Ce client existe d&eacute;j&agrave;" 
             num_voie:
               blank: "Le Num&eacute;ro de voie doit &ecirc;tre saisi"
             ville:
                blank: "La Ville doit &ecirc;tre saisie"
+            email:
+               invalid: "L'email est invalide"
     models:
       client: "Client"
     attributes:

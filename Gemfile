@@ -24,6 +24,10 @@ gem 'best_in_place'
 # Verification existance prenom
 gem 'sexmachine'
 
+# Editeur de texte HTML pour mailing
+gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-wysihtml5-rails.git'
+
 gem 'lazy_high_charts'
 
 # Gems used only for assets and not required

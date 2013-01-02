@@ -12,14 +12,19 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require_tree .
 //= require jquery-ui
 //= require jquery.purr
 //= require best_in_place
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require_tree .
+//= require bootstrap-popover.js
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/fr-FR
+
 //= require dataTables/jquery.dataTables
 //= require highcharts
+
 
 
 //= require bootstrap-datepicker/core
