@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102143621) do
+ActiveRecord::Schema.define(:version => 20130103114107) do
 
   create_table "bdls", :force => true do |t|
     t.integer  "client_id"
@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(:version => 20130102143621) do
     t.boolean "is_paiement"
     t.boolean "a_livrer"
     t.boolean "is_freeze"
+  end
+
+  create_table "mailings", :force => true do |t|
+    t.text     "t_texte"
+    t.integer  "statut_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "parameters", :force => true do |t|

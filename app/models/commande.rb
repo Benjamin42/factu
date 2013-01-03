@@ -3,6 +3,7 @@ class Commande < ActiveRecord::Base
   has_many :commande_service
   belongs_to :bdl
   belongs_to :client
+  validates_associated :commande_produit
 
   validates_presence_of :client
   

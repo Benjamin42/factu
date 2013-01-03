@@ -1,3 +1,22 @@
 // Place all the styles related to the mailing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.to_be_printed {
+  display: none;
+}
+
+@media print
+{
+  div.print-hidden {
+    display: none;
+  }
+    
+  div.to_be_printed {
+    display: block;
+  }  
+  
+  div.to_be_printed.client {
+    page-break-after: always;
+  }
+}

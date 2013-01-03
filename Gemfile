@@ -25,8 +25,7 @@ gem 'best_in_place'
 gem 'sexmachine'
 
 # Editeur de texte HTML pour mailing
-gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails',
-                              :git => 'git://github.com/Nerian/bootstrap-wysihtml5-rails.git'
+gem 'bootstrap-wysihtml5-rails'
 
 gem 'lazy_high_charts'
 

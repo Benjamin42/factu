@@ -1,5 +1,6 @@
 class Type < ActiveRecord::Base
   has_many :client
+  has_many :mailing
   
   def form_title
     return "#{label}"

@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery -> 
+  loadBdl
   $('.datepicker').datepicker({"autoclose": true, "format": "dd/mm/yyyy", defaultDate:+0}) 
   $('.hidden').hide()
 
@@ -19,7 +20,7 @@ jQuery ->
 
   $('#commandes').dataTable(
     sPaginationType: "full_numbers"
-    "aoColumns": [                                                                 
+    aoColumns: [                                                                 
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}
@@ -33,8 +34,7 @@ jQuery ->
       ]  
   )
   
-  # onChange sur le bon de livraison
-  $("#commande_bdl_id").change(() ->
+  loadBdl = () ->
     bdlId = $("#commande_bdl_id").val()
     if bdlId isnt ""
       $.getJSON("/commandes/bar/" + bdlId , (data) ->
@@ -48,7 +48,9 @@ jQuery ->
     else
       $("#commande_client_id").val("")
       $("#stockBdl").html("")
-  );
+  
+  # onChange sur le bon de livraison
+  $("#commande_bdl_id").change(loadBdl);
   
   # onChange sur le client : on clean le BdL
   $("#commande_client_id").change(() ->

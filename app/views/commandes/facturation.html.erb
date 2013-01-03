@@ -126,13 +126,13 @@
 				<%end%>
 				<td class="center">
 					<% if @commande.a_livrer then %>	
-						<%= produitCommande.tarif.prix_unitaire_ht_livraison %>
+						<%= sprintf("%.2f", produitCommande.tarif.prix_unitaire_ht_livraison) %>
 					<% else %>
-						<%= produitCommande.tarif.prix_unitaire_ht %>
+						<%= sprintf("%.2f", produitCommande.tarif.prix_unitaire_ht) %>
 					<% end %>
 					 &euro;
 				</td>
-				<td class="center"><%= produitCommande.calcMontantTTC %> &euro;</td>
+				<td class="center"><%= sprintf("%.2f", produitCommande.calcMontantTTC) %> &euro;</td>
 			</tr>
 		<% end %>
 	<%end%>
@@ -155,7 +155,7 @@
 		<% if serviceCommande.montant != nil && serviceCommande.montant > 0 %>
 			<td><%= serviceCommande.service.label %></td>
 			<td colspan="<%= if @gift then 3 else 2 end %>"><%= serviceCommande.service.commentaire %></td>
-			<td class="center"><%= serviceCommande.montant %> &euro;</td>
+			<td class="center"><%= sprintf("%.2f", serviceCommande.montant) %> &euro;</td>
 		<% end %>
 	<% end %>
 	
@@ -173,7 +173,7 @@
 			<td colspan="2"></td>
 		<% end %>
 		<td colspan="1" class="right"><b>Total TTC</b></td>
-		<td class="center"><%= @totalTTC %> &euro;</td>
+		<td class="center"><%= sprintf("%.2f", @totalTTC) %> &euro;</td>
 	</tr>
 	<tr>
 		<% if @gift %>
@@ -182,7 +182,7 @@
 			<td colspan="2"></td>
 		<% end %>
 		<td colspan="1" class="right"><b>dont TVA <%= Parameter.findByName "tva" %>%</b></td>
-		<td class="center"><%= @totalTVA %> &euro;</td>
+		<td class="center"><%= sprintf("%.2f", @totalTVA) %> &euro;</td>
 	</tr>
 	<tr>
 		<% if @gift %>
@@ -191,7 +191,7 @@
 			<td colspan="2"></td>
 		<% end %>
 		<td colspan="1" class="right"><b>Net à Payer</b></td>
-		<td class="center"><%= @totalTTC %> &euro;</td>
+		<td class="center"><%= sprintf("%.2f", @totalTTC) %> &euro;</td>
 	</tr>
 	
 </table>

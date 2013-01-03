@@ -5,7 +5,6 @@
 	<%= notification %>
 </div>
 <% end %>
-
 <table>
 	<tr>
 		<td>
@@ -61,7 +60,7 @@
 				
 					<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
 					<tr>
-						<td><%= comProduit.produit.label %> : </td>
+						<td><%= comProduit.produit.label %> : <%= comProduit.errors.each do |e| e end %></td>
 						<td><%= comProduit_form.text_field :qty, :disabled => @commande.isFreeze %></td>
 						<td><%= comProduit_form.text_field :qty_cadeau, :disabled => @commande.isFreeze %></td>
 						<%= comProduit_form.hidden_field :produit_id %>

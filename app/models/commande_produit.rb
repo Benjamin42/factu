@@ -6,6 +6,16 @@ class CommandeProduit < ActiveRecord::Base
   
   scope :bouteille, joins(:produit).where('produits.label' => 'Bouteille')
   
+  validate :check_qty_bdl
+  validates_presence_of :qty
+  
+  def check_qty_bdl
+    if qty == 2
+      self.errors.add(:qty, "Quantite")
+    end
+
+  end    
+  
   def self.create_with_produit(commande, bdl, produit)
     commandeProduit = CommandeProduit.new()
     commandeProduit.attributes = {
