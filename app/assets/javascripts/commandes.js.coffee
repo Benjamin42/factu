@@ -1,8 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-jQuery -> 
-  loadBdl
+$ -> 
   $('.datepicker').datepicker({"autoclose": true, "format": "dd/mm/yyyy", defaultDate:+0}) 
   $('.hidden').hide()
 
@@ -45,15 +44,21 @@ jQuery ->
           $("#stockBdl").html(tabStock)
           
       )
+      $('input[id$="_qty_cadeau"]').attr("disabled", true)
     else
       $("#commande_client_id").val("")
       $("#stockBdl").html("")
+      $('input[id$="_qty_cadeau"]').attr("disabled", false)
+      
+    
   
   # onChange sur le bon de livraison
   $("#commande_bdl_id").change(loadBdl);
+  $("#commande_bdl_id").ready(loadBdl);
   
   # onChange sur le client : on clean le BdL
   $("#commande_client_id").change(() ->
     $("#commande_bdl_id").val("")
     $("#stockBdl").html("")
+    $('input[id$="_qty_cadeau"]').attr("disabled", false)
    );

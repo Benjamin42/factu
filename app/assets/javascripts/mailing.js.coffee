@@ -63,7 +63,7 @@ jQuery ->
     )
     
   addPrintedClient = (divs, client) ->
-    divs = "#{ divs }<div class='to_be_printed client'>#{ client }</div>"
+    divs = "#{ divs }<div class='to_be_printed client'>#{ client }<img src='/assets/logo.png'></div>"
     return divs
     
   # Bouton IMPRIMER 

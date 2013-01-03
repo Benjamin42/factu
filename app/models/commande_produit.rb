@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class CommandeProduit < ActiveRecord::Base
   belongs_to :commande
   belongs_to :bdl
@@ -10,10 +11,18 @@ class CommandeProduit < ActiveRecord::Base
   validates_presence_of :qty
   
   def check_qty_bdl
-    if qty == 2
-      self.errors.add(:qty, "Quantite")
+    if !commande.bdl.nil?
+      result = CommandeProduit.getTotalRestBdl(commande.bdl)
+    
+      result.each do |res|
+        if res.label == produit.label
+          if qty != nil && (qty < 0 || res == nil || qty > res.qty)
+            self.errors.add(:qty, "Quantitée insuffisante")
+          end
+        end
+        
+      end
     end
-
   end    
   
   def self.create_with_produit(commande, bdl, produit)
@@ -68,6 +77,10 @@ class CommandeProduit < ActiveRecord::Base
         JOIN PRODUITS P ON P.id = CP.produit_id
         WHERE B.date_bdl is not null
       ) ORDER BY dater")
+  end
+  
+  def self.getTotalRestBdl(bdl)
+    find_by_sql("select p.label, cp.qty, cp.qty - (select sum(qty) from commande_produits cp2 join commandes c on cp2.commande_id = c.id where produit_id = p.id and c.bdl_id = #{ bdl.id } ) as rest from commande_produits cp join produits p on cp.produit_id = p.id where cp.bdl_id = #{ bdl.id }")
   end
 
 end

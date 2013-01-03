@@ -13,7 +13,7 @@
 			
 			<!-- Bon de livraison -->
 			<%= f.association :bdl, :collection => Bdl.all, :prompt => "Choisissez un Bon de Livraison",
-			  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze%>
+			  :key => :id , :label_method => :form_title , :disabled => @commande.isFreeze %>
 			
 			<!-- Client -->
 			<%= f.association :client, :collection => Client.all, :prompt => "Choisissez un client",
@@ -59,9 +59,18 @@
 				<% for comProduit in @commande.commande_produit %>
 				
 					<%= fields_for "commande[commande_produit_attributes][]", comProduit do |comProduit_form| %>
-					<tr>
-						<td><%= comProduit.produit.label %> : <%= comProduit.errors.each do |e| e end %></td>
-						<td><%= comProduit_form.text_field :qty, :disabled => @commande.isFreeze %></td>
+					<tr class="<%= if !comProduit.errors.nil? && comProduit.errors.size > 0  then "error" else "" end %>">
+						<td>
+							<div style="color:<%= if !comProduit.errors.nil? && comProduit.errors.size > 0  then "#B94A48" else "" end %>">
+							<%= comProduit.produit.label %> : 
+							<% if !comProduit.errors.nil? %>
+								<% comProduit.errors.each do |k,v| %>
+									<%= "#{ v }"  %>
+								<%end %>
+							<% end %>
+							</div>
+						</td>
+						<td><%= comProduit_form.text_field :qty, :disabled => @commande.isFreeze, :class => "error" %></td>
 						<td><%= comProduit_form.text_field :qty_cadeau, :disabled => @commande.isFreeze %></td>
 						<%= comProduit_form.hidden_field :produit_id %>
 					</tr>

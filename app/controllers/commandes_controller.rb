@@ -245,8 +245,7 @@ class CommandesController < ApplicationController
 
     tabOrigin = ""
     
-    result = CommandeProduit.find_by_sql("select p.label, cp.qty, cp.qty - (select sum(qty) from commande_produits cp2 join commandes c on cp2.commande_id = c.id where produit_id = p.id and c.bdl_id = #{ @bdl.id } ) as rest from commande_produits cp join produits p on cp.produit_id = p.id where cp.bdl_id = #{ @bdl.id }")
-
+    result = CommandeProduit.getTotalRestBdl(@bdl)
     
     result.each do |res|
       if res.qty != nil && res.qty != 0

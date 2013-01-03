@@ -33,8 +33,9 @@ class Commande < ActiveRecord::Base
   def set_produit_attribute_and_save(commande_produit, attributes)
     produit = Produit.find(attributes[:produit_id])
     commande_produit.attributes = {
-      :qty => attributes[:qty],
+      :qty => if attributes[:qty] == nil || attributes[:qty] == "" then 0 else attributes[:qty] end,
       :qty_cadeau => attributes[:qty_cadeau],
+      :commande => self,
       :produit => produit,
       :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y')),
     }
