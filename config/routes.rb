@@ -1,8 +1,10 @@
 Factu::Application.routes.draw do
   
   get "mailing/index"
+  get "mailing/envoi"
   match 'mailing/saveBrouillon' => 'mailing#saveBrouillon'
   match 'mailing/saveEnvoi' => 'mailing#saveEnvoi'
+  match 'mailing/createDivToPrint' => 'mailing#createDivToPrint'
 
   resources :cleaning_pays
   match 'cleaning_pays/uploadFile' => 'cleaning_pays#uploadFile'  

@@ -62,14 +62,27 @@ jQuery ->
         editorInstance.setValue('', true);
     )
     
-  addPrintedClient = (divs, client) ->
-    divs = "#{ divs }<div class='to_be_printed client'>#{ client }<img src='/assets/logo.png'></div>"
-    return divs
-    
   # Bouton IMPRIMER 
   $("#btn-print").click ->
-    divs = ""
-    divs = addPrintedClient(divs, client) for client in ["moi", "toi", "lui"]
-    $("#to_be_printed").html(divs)
-    window.print()
+    # Creation de la liste
+    listId = ""
+    sep = ""
+    $(":checkbox:checked").each(
+      () ->
+        listId = "#{ listId }#{ sep }#{ this.value }"
+        sep = ","
+    )
+    params =
+      listId : listId    
+    
+    $.getJSON("/mailing/createDivToPrint", params, (data) ->
+        divs = data.print.replace(new RegExp("<@ message @>", 'g'), $('#message-textarea').val())
+        
+        $("#to_be_printed").html(divs)
+        window.print()        
+    )    
+    
+
+    
+
     

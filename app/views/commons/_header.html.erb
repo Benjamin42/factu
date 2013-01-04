@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top print-hidden">
 	<div class="navbar-inner">
 
 		<ul class="nav">
@@ -49,10 +49,19 @@
 			</li>
 
 			<!-- Mailing -->
-			<li class="<%= if @token == :mailing then "active" else "" end %>">
-				<a href="/mailing/index"><div class="icon-envelope icon-white"></div>&nbsp;Mailing</a>
-			</li>
-
+			<li class="dropdown <%= if @token == :mailing then "active" else "" end %>">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <div class="icon-envelope icon-white"></div>&nbsp;Mailing<b class="caret"></b> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/mailing/envoi">Envoi</a>
+					</li>
+					<li>
+						<a href="/mailing/index">Liste</a>
+					</li>
+				</ul>
+			</li>			
+			
+			<!-- Configuration -->
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <div class="icon-wrench icon-white"></div><b class="caret"></b> </a>
 				<ul class="dropdown-menu">
