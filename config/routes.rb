@@ -1,7 +1,7 @@
 Factu::Application.routes.draw do
   
   get "mailing/index"
-  get "mailing/envoi"
+  match 'mailing/envoi' => 'mailing#envoi', :via => [:get, :post], :as => :search
   match 'mailing/saveBrouillon' => 'mailing#saveBrouillon'
   match 'mailing/saveEnvoi' => 'mailing#saveEnvoi'
   match 'mailing/createDivToPrint' => 'mailing#createDivToPrint'

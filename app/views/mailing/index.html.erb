@@ -3,19 +3,54 @@
 <h3>Liste des mailings</h3>
 <br />
 
+<script>
+	function showModal(text) {
+		$("#directionsPanel").html(text);
+	}
+	
+</script>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="right" style="padding: 10px;">
+		<button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Fermer la fenêtre</button>
+	</div>
+  	<div class="modal-body">
+    	<div id="directionsPanel" >
+  		</div>
+	</div>
+	<br />
+</div>	
+
 <table id="mailing" class="table" >
 	<thead>
 		<tr>
 			<th>Id</th>
-			<th>Texte</th>
 			<th>Statut</th>
+			<th>Message</th>
+			<th>Date Création</th>
+			<th>Date Modification</th>
 		</tr>
   </thead>
   <tbody>
 	<% @mailings.each do |mailing| %>	
 	  <td><%= mailing.id %></td>
-	  <td><%= mailing.t_texte %></td>
-	  <td><%= mailing.statut.label %></td>
+	  
+	  <td>
+	  	<% if mailing.statut.code == "Tmp" %>
+	  		<span class="label label-warning">
+	  	<% else %>
+	  		<span class="label label-success">
+	  	<%end %>
+	  	<%= mailing.statut.label %>
+	  	</span>
+	  </td>
+	  
+	  <td><a href="#myModal" onclick="showModal('<%= mailing.t_texte %>');" data-toggle="modal" class="btn btn-primary">Afficher Message</a></td>
+	  
+	  <td><%= if mailing.created_at != nil then mailing.created_at.strftime('%d/%m/%Y %Hh%M') else "" end %></td>
+	  <td><%= if mailing.updated_at != nil then mailing.updated_at.strftime('%d/%m/%Y %Hh%M') else "" end %></td>
 	</tr>	
 	<% end %>
   </tbody>
+</table>

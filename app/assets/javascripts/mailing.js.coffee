@@ -6,7 +6,7 @@ jQuery ->
     sPaginationType: "full_numbers"
     aaSorting: [[ 1, "asc" ]]
     aoColumns: [                                                                 
-       { "bSortable": true}                                                   
+       { "bSortable": false}                                                   
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}

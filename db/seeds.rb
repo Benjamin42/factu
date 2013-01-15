@@ -72,4 +72,4 @@ Type.create([label: 'Mademoiselle', code: 'Mlle', grp: 'civilite'])
 Type.create([label: 'Entreprise', code: 'Ent', grp: 'civilite'])
 
 Type.create([label: 'Brouillon', code: 'Tmp', grp: 'mailingStatut'])
-Type.create([label: 'Envoyé', code: 'Env', grp: 'mailingStatut'])
+Type.create([label: 'Envoy&eacute;', code: 'Env', grp: 'mailingStatut'])

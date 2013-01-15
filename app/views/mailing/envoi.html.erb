@@ -29,6 +29,22 @@
 	      }
 	  }
 	  
+	function checkAll() {
+		var re = new RegExp(/^check_\d+$/);
+	       					
+		var checked = $('#checkAllAuto').is(':checked');
+		var tab = $('#clients-mailing').dataTable();
+		if (checked){
+			$('input', tab.fnGetNodes()).each( function() {
+				$('input', tab.fnGetNodes()).attr('checked','checked');
+			} );
+		} else {
+			$('input', tab.fnGetNodes()).each( function() {
+				$('input', tab.fnGetNodes()).removeAttr("checked");
+			} );     				
+    	}	
+    }	
+	  
 	</script>
 
 	<div>
@@ -36,11 +52,37 @@
 	</div>    
 	       
 	<div id="select_client" style="display: none;">
+
+		<!-- Moteur de Recherche Des Clients -->
+		<%= search_form_for @search, :url => "envoi",
+                        :html => {:method => :post, :class => "form-horizontal"} do |f| %>
+		  <div class="field">
+		  	
+		  	<!-- Nom -->
+			<div class="control-group">
+				<label class="control-label" >Nom</label>
+				<div class="controls">
+					<%= f.text_field :nom_cont %>
+				</div>
+			</div>	
+			
+			<!-- Ville -->
+			<div class="control-group">
+				<label class="control-label" >Ville</label>
+				<div class="controls">
+					<%= f.text_field :ville_cont %>
+				</div>
+			</div>						  	
+		  	
+		  </div>
+		  <div class="actions"><%= f.submit "Search" %></div>
+		<% end %>		
+		
 		<div style="margin-left: 50px; margin-top: 50px;">
 			<table id="clients-mailing" class="table table-bordered" >
 				<thead>
 					<tr>
-						<th>&nbsp;</th>
+						<th><input type="checkbox" id="checkAllAuto" onclick="checkAll();" /></th>
 						<th>Clean</th>
 						<th>N° Client</th>
 						<th>Nom</th>
@@ -55,7 +97,7 @@
 				<% @clients.each do |client| %>
 				<tr onmouseover="openPopover(<%= client.id %>)" onmouseout="closePopover(<%= client.id %>)">
 				  <td>
-				  	<input type="checkbox" id="check_<%= client.id %>" value="<%= client.id %>" />
+				  	<input type="checkbox" name="exportchk" id="check_<%= client.id %>" value="<%= client.id %>" />
 				  </td>
 				  <td class="center">
 				  	<% if !client.cleaning %>
@@ -115,3 +157,9 @@
 	  </ul>
 	</div>
 </div>	
+
+<% if @openSearch %>
+<script>
+	displayDetail('select_client');	
+</script>
+<% end %>

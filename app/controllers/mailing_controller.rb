@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class MailingController < ApplicationController
   
   def index
@@ -7,7 +9,12 @@ class MailingController < ApplicationController
   end  
   
   def envoi
-    @clients = Client.all
+    @search = Client.search(params[:q])
+    @clients = @search.result    
+    if !params[:q].nil?
+      @openSearch = true
+    end
+    
     @mailing = Mailing.find(:first, :conditions => ["statut_id = ?", Type.findAllWithGroupeAndCode("mailingStatut", "Tmp")])
     
     @token = :mailing
