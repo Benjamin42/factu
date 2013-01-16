@@ -51,7 +51,7 @@ class CommandesController < ApplicationController
     @commande = Commande.new
     @commande.date_factu = Date.today.strftime('%d/%m/%Y')
     @commande.num_factu = Commande.next_num_factu
-    @commande.client_id = params[:id]
+    @commande.client = Client.find(params[:id])
     Produit.all.each do |produit|
       @commande.commande_produit.push CommandeProduit.create_with_produit(@commande, nil, produit)
     end
@@ -103,7 +103,8 @@ class CommandesController < ApplicationController
 
       if @commande.save
         flash[:notice] = "Success"
-        render :action => "show"
+        createVarForFactu
+        redirect_to "/commandes/facturation/#{ @commande.id }"
       else
         @commande.commande_produit.each do |cp|
           cp.destroy
@@ -199,11 +200,7 @@ class CommandesController < ApplicationController
     redirect_to "/commandes"
   end
   
-  # GET /facturation/1
-  # GET /facturation/1.json
-  def facturation
-    @commande = Commande.find(params[:id], :include => [:client])
-    
+  def createVarForFactu
     @totalTTC = 0
     @commande.commande_produit = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit, :tarif])
     @commande.commande_produit.each do |cp|
@@ -223,6 +220,15 @@ class CommandesController < ApplicationController
         @gift = true
       end
     end
+  end
+  
+  # GET /facturation/1
+  # GET /facturation/1.json
+  def facturation
+    @commande = Commande.find(params[:id], :include => [:client])
+    
+    createVarForFactu
+
     @token = :commandes
 
     respond_to do |format|

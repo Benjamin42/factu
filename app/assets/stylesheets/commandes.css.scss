@@ -21,6 +21,14 @@ div.legal-footer {
     display: none;
 }
 
+div.footer {
+  display: none;
+}
+
+.very-small {
+  font-size: 65%;
+}
+
 @media print
 {
   div.navbar {
@@ -37,6 +45,21 @@ div.legal-footer {
   
   div.cartouche {
     display: block;
+    margin-top:-50px;
+  }
+  
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  div.footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
   }
   
   div.legal-footer {

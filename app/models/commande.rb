@@ -76,6 +76,17 @@ class Commande < ActiveRecord::Base
 
     return count
   end
+  
+  def mntTotalService
+    count = 0
+    self.commande_service.all.each do |commandeService|
+      if commandeService.montant != nil && commandeService.montant > 0
+        count += commandeService.montant
+      end
+    end
+
+    return count
+  end
 
   def self.build_from_csv(row)
     # find existing customer from email or create new

@@ -3,6 +3,12 @@
 <h3>Cartographie</h3>
 <br />
 
+<style>
+	input[type="text"] {
+		margin-bottom: 0px;
+	}
+</style>
+
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="right" style="padding: 10px;">
@@ -29,7 +35,7 @@
 					<td valign="middle">Adresse de départ : </td>
 					<td valign="middle"><input type="text" id="startAdresse" value="<%= @adresseOrigin %>" disabled="true" /></td>
 					<td valign="middle">
-						<a href="#myModal" onclick="calcRoute();" data-toggle="modal" class="btn btn-primary">Calculer Trajet</a>
+						<a id="linkCalc" style="visibility: hidden;" href="#myModal" onclick="calcRoute();" data-toggle="modal" class="btn btn-primary">Calculer Trajet</a>
 					</td>
 					
 				</tr>
@@ -79,6 +85,7 @@
 	var map;
 	var hashMarcker = {};
 	var lastOpenInfoWindow = null;
+	var countMarcker = 0;
 	
 	function checkAll() {
 		var re = new RegExp(/^checkboxChange_\d+$/);
@@ -103,15 +110,27 @@
 			map.setOptions(options);
 		}
     }	
+    
+    function showOrHiddenLink() {
+		if (countMarcker > 0) {
+			$("#linkCalc").attr("style", "visibility:block");
+		} else {
+			$("#linkCalc").attr("style", "visibility:hidden");
+		}	
+    }
 	
 	function inverseMarck(id) {
 		var marcker = hashMarcker[id];
 		
 		if (marcker.getMap() == null) {
 			marcker.setMap(map);
+			countMarcker++;
 		} else {
 			marcker.setMap(null);
+			countMarcker--;
 		}
+		
+		showOrHiddenLink();
 	}
 	
 	function addMarck(latitude, longitude, name, id, adresse) {

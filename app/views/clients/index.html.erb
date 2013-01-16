@@ -51,7 +51,7 @@
   </thead>
   <tbody>
 	<% @clients.each do |client| %>
-	<tr class="<%= if client.isGeoloc then "success" else "error" end %>">
+	<tr>
 	  <td><%= client.num_client %></td>
 	  <td class="center">
 	  	<% if !client.isGeoloc %>

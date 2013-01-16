@@ -33,7 +33,7 @@ $ ->
       ]  
   )
   
-  loadBdl = () ->
+  loadBdl = (init=false) ->
     bdlId = $("#commande_bdl_id").val()
     if bdlId isnt ""
       $.getJSON("/commandes/bar/" + bdlId , (data) ->
@@ -45,7 +45,7 @@ $ ->
           
       )
       $('input[id$="_qty_cadeau"]').attr("disabled", true)
-    else
+    else if !init
       $("#commande_client_id").val("")
       $("#stockBdl").html("")
       $('input[id$="_qty_cadeau"]').attr("disabled", false)
@@ -54,7 +54,7 @@ $ ->
   
   # onChange sur le bon de livraison
   $("#commande_bdl_id").change(loadBdl);
-  $("#commande_bdl_id").ready(loadBdl);
+  $("#commande_bdl_id").ready(loadBdl true);
   
   # onChange sur le client : on clean le BdL
   $("#commande_client_id").change(() ->
