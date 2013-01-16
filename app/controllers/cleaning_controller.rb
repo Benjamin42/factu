@@ -45,6 +45,27 @@ class CleaningController < ApplicationController
   # PUT /cleaning/1.json
   def update
     @client = Client.find(params[:id])
+    
+    @oldClient = Hash.new
+    @oldClient["num_tva"] = @client.num_tva
+    if @client.civilite_id != nil
+      @oldClient["civilite"] = Type.find(@client.civilite_id).label
+    end
+    @oldClient["nom"] = @client.nom
+    @oldClient["prenom"] = @client.prenom
+    @oldClient["nom_info"] = @client.nom_info
+    @oldClient["bat"] = @client.bat
+    @oldClient["num_voie"] = @client.num_voie
+    @oldClient["bp"] = @client.bp
+    @oldClient["codepostal"] = @client.codepostal
+    @oldClient["ville"] = @client.ville
+    @oldClient["pays"] = @client.pays
+    @oldClient["tel"] = @client.tel
+    @oldClient["portable"] = @client.portable
+    @oldClient["fax"] = @client.fax
+    @oldClient["email"] = @client.email
+    @oldClient["commentaire"] = @client.commentaire
+    
     @token = :cleaning
 
     respond_to do |format|
@@ -52,7 +73,9 @@ class CleaningController < ApplicationController
         @client.cleaning = true
         @client.long_adresse = Client.concatAddresse(@client)
         @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
+        @clients = Client.find(:all, :include => [:pays])
+        flash[:notice] = "Client was successfully updated."
+        format.html { redirect_to "/cleaning" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

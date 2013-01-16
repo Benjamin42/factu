@@ -14,10 +14,12 @@ Factu::Application.routes.draw do
 
   match 'cleaning' => 'cleaning#index'
   match 'cleaning/edit/:id' => 'cleaning#edit'
+  match 'cleaning/update/:id' => 'cleaning#update'
 
   resources :services
 
   resources :parameters
+  resources :types
 
   resources :fin_de_mois
 

@@ -1,0 +1,43 @@
+<%= render :template => 'commons/_header' %>
+
+<h3>Gestion des Paramètres</h3>
+
+<br/>
+<div class="tabbable tabs-left">
+	
+	<ul class="nav nav-tabs">
+		<% first = true %>
+		<% @types.each do |k, v| %>
+	  		<li class="<%= if first then "active" else "" end %>"><a href="#tab<%= k %>" data-toggle="tab"><%= k.capitalize %></a></li>
+	  		<% first = false %>
+	  	<% end %>
+	</ul>
+ 
+ 
+	<div class="tab-content">
+		<% first = true %>
+		<% @types.each do |k,v| %>	
+	  		<div class="tab-pane <%= if first then "active" else "" end %>" id="tab<%= k %>">
+	  			<% first = false %>
+	  			<h5>Typages des élements de configuration du goupe "<%= k %>" :</h5>
+	
+				<table class="table">
+				  <tr>
+				    <th>Code</th>
+				    <th>Value</th>
+				  </tr>
+				
+				
+					<% @types[k].each do |type| %>
+					  <tr>
+					    <td><%= type.code %></td>
+					    <td><%= best_in_place type, :label %></td>
+					  </tr>
+					<% end %>
+	
+				</table>
+			</div>
+	  	<% end %>
+	</div>
+</div>
+

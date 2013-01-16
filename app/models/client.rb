@@ -18,9 +18,12 @@ class Client < ActiveRecord::Base
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   
   def must_be_unique
-    query = "SELECT * FROM CLIENTS WHERE upper(NOM) = upper('#{ nom }') and upper(PRENOM) = upper('#{ prenom }')"
+    query = "SELECT * FROM CLIENTS WHERE upper(NOM) = upper('#{ nom }') AND upper(PRENOM) = upper('#{ prenom }')"
+    if !id.nil?
+      query = "#{ query } AND id != #{ id }"
+    end
     res = Client.find_by_sql(query)
-    if !res.nil? || res.size > 0
+    if !res.nil? && res.size > 0
       self.errors.add(:nom, "Ce client existe d&eacute;j&agrave;")
     end
   end

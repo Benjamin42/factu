@@ -16,3 +16,6 @@ jQuery ->
        { "bSortable": false}
       ]    
   )
+
+  $("#client_nom").change ->
+    $("#client_nom").val($("#client_nom").val().toUpperCase())    
