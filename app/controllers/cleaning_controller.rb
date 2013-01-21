@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'csv'
+require 'Cleaning'
 
 class CleaningController < ApplicationController
   include Cleaning

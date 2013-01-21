@@ -114,15 +114,12 @@ ActiveRecord::Schema.define(:version => 20130103114107) do
   end
 
   create_table "parameters", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.string   "type"
+    t.string   "p_name"
+    t.string   "p_value"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "grp"
     t.string   "description"
-    t.string   "p_name"
-    t.string   "p_value"
   end
 
   create_table "produits", :force => true do |t|
