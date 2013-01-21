@@ -24,7 +24,7 @@ class CleaningPay < ActiveRecord::Base
   end  
   
   def self.findByCode(code)
-    self.find(:first, :conditions => ["code_pay = ?", code])
+    self.find(:first, :conditions => ["code_pays = ?", code])
   end  
   
   def self.findByNom(nom)

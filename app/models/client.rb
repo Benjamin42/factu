@@ -88,7 +88,12 @@ class Client < ActiveRecord::Base
   end
 
   def self.next_num_client
-    return find_by_sql("select max(num_client) + 1 as num_client from clients").first.num_client
+    first = find_by_sql("select max(num_client) + 1 as num_client from clients").first
+    if first != nil && first.num_client != nil
+      return first.num_client
+    else
+      return '0'
+    end
   end
   
   def isGeoloc

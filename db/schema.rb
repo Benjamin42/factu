@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130103114107) do
 
   create_table "cleaning_pays", :force => true do |t|
     t.string   "nom"
-    t.string   "code_pay"
+    t.string   "code_pays"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
