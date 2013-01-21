@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130103114107) do
 
   create_table "cleaning_pays", :force => true do |t|
     t.string   "nom"
-    t.string   "code_pay"
+    t.string   "code_pays"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -90,18 +90,20 @@ ActiveRecord::Schema.define(:version => 20130103114107) do
   end
 
   create_table "commandes", :force => true do |t|
-    t.integer "num_factu"
-    t.integer "bdl_id"
-    t.integer "client_id"
-    t.date    "date_factu"
-    t.integer "nb_etiquette"
-    t.string  "statut"
-    t.date    "date_livraison"
-    t.date    "date_paiement"
-    t.boolean "is_livraison"
-    t.boolean "is_paiement"
-    t.boolean "a_livrer"
-    t.boolean "is_freeze"
+    t.integer  "num_factu"
+    t.integer  "bdl_id"
+    t.integer  "client_id"
+    t.date     "date_factu"
+    t.integer  "nb_etiquette"
+    t.string   "statut"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.date     "date_livraison"
+    t.date     "date_paiement"
+    t.boolean  "is_livraison"
+    t.boolean  "is_paiement"
+    t.boolean  "a_livrer"
+    t.boolean  "is_freeze"
   end
 
   create_table "mailings", :force => true do |t|
@@ -112,12 +114,15 @@ ActiveRecord::Schema.define(:version => 20130103114107) do
   end
 
   create_table "parameters", :force => true do |t|
-    t.string   "p_name"
-    t.string   "p_value"
+    t.string   "name"
+    t.string   "value"
+    t.string   "type"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "grp"
     t.string   "description"
+    t.string   "p_name"
+    t.string   "p_value"
   end
 
   create_table "produits", :force => true do |t|
