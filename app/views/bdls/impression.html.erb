@@ -3,6 +3,10 @@
 	p {
 	  margin: 0 0 0;
 	}	
+	
+	.container-fluid {
+		padding-left: 0;
+	}
 </style>
 
 <p id="notice">
@@ -19,28 +23,30 @@
 			</div>
 			
 			<div class="span6">
-				<p>Soilly, le <%= DateTime.now.strftime('%d/%m/%Y') %></p>
+				<br/>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soilly, le <%= DateTime.now.strftime('%d/%m/%Y') %></p>
 				
 				<br/>
 				
-				<%= @bdl.client.nom %><br/>
-				<% if @bdl.client.nom_info != nil %>
+				<%= @bdl.client.prenom %> <%= @bdl.client.nom %><br/>
+				<% if @bdl.client.nom_info != "" %>
 					<%= @bdl.client.nom_info %><br/>
 				<%end%>
-				<% if @bdl.client.bat != nil %>
+				
+				<% if @bdl.client.bat != "" %>
 					<%= @bdl.client.bat %><br/>
 				<%end%>
-				<% if @bdl.client.num_voie != nil %>
+				<% if @bdl.client.num_voie != "" %>
 					<%= @bdl.client.num_voie %><br/>
 				<%end%>
-				<% if @bdl.client.bp != nil %>
+				<% if @bdl.client.bp != "" %>
 					<%= @bdl.client.bp %><br/>
 				<%end%>
-				<% if @bdl.client.ville != nil %>
-					<%= @bdl.client.ville %><br/>
+				<% if @bdl.client.codepostal != "" || @bdl.client.ville != "" %>
+					<%= @bdl.client.codepostal %> <%= @bdl.client.ville %><br/>
 				<%end%>
-				<% if @bdl.client.pays != nil %>
-					<%= @bdl.client.pays %><br/>
+				<% if @bdl.client.pays != nil && @bdl.client.pays != "" %>
+					<%= @bdl.client.pays.nom %><br/>
 				<%end%>
 				
 			</div>
@@ -49,22 +55,33 @@
 	
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span6">
-				<p><%= Parameter.findByName("adresse_factu_rue") %></p>
-				<p><%= Parameter.findByName("adresse_factu_cp_ville") %></p>
-				<p>Tel - Fax : <%= Parameter.findByName("tel") %></p>
-				<p><small><%= Parameter.findByName("num_rc") %></small></p>
-				<p><small>N° SIRET <%= Parameter.findByName("num_siret") %></small></p>
-				<p><small>Code T.V.A <%= Parameter.findByName("code_tva") %></small></p>
+			<div class="span8">
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="span6">
+								<p><%= Parameter.findByName("adresse_factu_rue") %></p>
+								<p><%= Parameter.findByName("adresse_factu_cp_ville") %></p>
+								<p>Tel : <%= Parameter.findByName("tel") %>/<%= Parameter.findByName("port") %></p>
+							</div>
+							
+							<div class="span6">
+								<p><%= Parameter.findByName("siteweb") %></p>
+							</div>
+						</div>
+					</div>
+				
 			</div>
-			<div class="span6">
-				<div class="">
-					<b>Bon de livraison N° <%= @bdl.num_bdl %> C.R.D</b>
-				</div>
+			<div class="span4">
+
 			</div>
 		</div>
 	</div>
-	<br/>
+	
+	<div class="center">
+		<h4>Bon de Livraison N° <%= @bdl.num_bdl %></h4>
+		<h4>C.R.D</h4>
+	</div>
+	
 </div>
 
 <div class="well">
@@ -141,11 +158,20 @@
 	<%= link_to '< Back', bdls_path, class:"btn btn-inverse" %>
 </div>
 
-<div class="legal-footer">
-	<p><small><%= Parameter.findByName "reglement1" %></small></p>
-	<p><small><%= Parameter.findByName "reglement2" %></small></p>
-	<p><small><%= Parameter.findByName "reglement3" %></small></p>
-	<p><small><%= Parameter.findByName "reglement4" %></small></p>
-	<p><small><%= Parameter.findByName "reglement5" %></small></p>
+<div class="footer">
 	
+	<div class="legal-footer">
+		<p class="very-small"><%= Parameter.findByName "reglement1" %></p>
+		<p class="very-small"><small><%= Parameter.findByName "reglement1" %></small></p>
+		<p class="very-small"><small><%= Parameter.findByName "reglement2" %></small></p>
+		<p class="very-small"><small><%= Parameter.findByName "reglement3" %></small></p>
+		<p class="very-small"><small><%= Parameter.findByName "reglement4" %></small></p>
+		<p class="very-small"><small><%= Parameter.findByName "reglement5" %></small></p>
+	</div>
+	
+	<div class="center">
+		<p class="very-small"><small>TVA Intracomunautaire : <%= Parameter.findByName("code_tva") %></small></p>
+		<p class="very-small"><small>Siret : <%= Parameter.findByName("num_siret") %></small></p>
+		
+	</div>
 </div>
