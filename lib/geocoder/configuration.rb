@@ -13,10 +13,10 @@ def self.options_and_defaults
     [:use_https, false],
 
     # HTTP proxy server (user:pass@host:port)
-    [:http_proxy, "corbara:Nfvsnxdh2@10.198.237.3:8080"],
+    #[:http_proxy, "corbara:Nfvsnxdh2@10.198.237.3:8080"],
 
     # HTTPS proxy server (user:pass@host:port)
-    [:https_proxy, "corbara:Nfvsnxdh2@10.198.237.3:8080"],
+    #[:https_proxy, "corbara:Nfvsnxdh2@10.198.237.3:8080"],
 
     # API key for geocoding service
     [:api_key, nil],

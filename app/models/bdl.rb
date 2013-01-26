@@ -64,8 +64,8 @@ class Bdl < ActiveRecord::Base
   def set_attribute_and_save(bdl_produit, attributes)
     produit = Produit.find(attributes[:produit_id])
     bdl_produit.attributes = {
-      :qty => attributes[:qty],
-      :qty_cadeau => attributes[:qty_cadeau],
+      :qty => if attributes[:qty] == nil || attributes[:qty] == "" then 0 else attributes[:qty] end,
+      :qty_cadeau => if attributes[:qty_cadeau] == nil || attributes[:qty_cadeau] == "" then 0 else  attributes[:qty_cadeau] end,
       :produit => produit,
       :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y'))
     }
@@ -91,7 +91,7 @@ class Bdl < ActiveRecord::Base
   def set_service_attribute_and_save(bdlService, attributes)
     service = Service.find(attributes[:service_id])
     bdlService.attributes = {
-      :montant => attributes[:montant],
+      :montant => if attributes[:montant] == nil || attributes[:montant] == "" then 0 else attributes[:montant] end,
       :service => service
     }
     bdlService.save

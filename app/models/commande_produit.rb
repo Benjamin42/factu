@@ -11,7 +11,7 @@ class CommandeProduit < ActiveRecord::Base
   validates_presence_of :qty
   
   def check_qty_bdl
-    if !commande.bdl.nil?
+    if !commande.nil? && !commande.bdl.nil?
       result = CommandeProduit.getTotalRestBdl(commande.bdl)
     
       result.each do |res|

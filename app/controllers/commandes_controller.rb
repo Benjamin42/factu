@@ -142,6 +142,14 @@ class CommandesController < ApplicationController
   # DELETE /commandes/1.json
   def destroy
     @commande = Commande.find(params[:id])
+    produits = CommandeProduit.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:produit])
+    produits.each do |p|
+      p.destroy
+    end
+    services = CommandeService.find(:all, :conditions => ['commande_id = ?', @commande], :include => [:service])
+    services.each do |s|
+      s.destroy
+    end
     @commande.destroy
     @token = :commandes
 

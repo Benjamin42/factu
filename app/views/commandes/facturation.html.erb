@@ -45,7 +45,7 @@
 				<% if @commande.client.codepostal != "" || @commande.client.ville != "" %>
 					<%= @commande.client.codepostal %> <%= @commande.client.ville %><br/>
 				<%end%>
-				<% if @commande.client.pays != "" %>
+				<% if @commande.client.pays != nil && @commande.client.pays != "" %>
 					<%= @commande.client.pays.nom %><br/>
 				<%end%>
 				

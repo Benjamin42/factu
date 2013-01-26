@@ -34,7 +34,7 @@ class Commande < ActiveRecord::Base
     produit = Produit.find(attributes[:produit_id])
     commande_produit.attributes = {
       :qty => if attributes[:qty] == nil || attributes[:qty] == "" then 0 else attributes[:qty] end,
-      :qty_cadeau => attributes[:qty_cadeau],
+      :qty_cadeau => if attributes[:qty_cadeau] == nil || attributes[:qty_cadeau] == "" then 0 else attributes[:qty_cadeau] end,
       :commande => self,
       :produit => produit,
       :tarif => Tarif.findTarif(produit, DateTime.now.strftime('%Y')),
@@ -59,7 +59,7 @@ class Commande < ActiveRecord::Base
   def set_service_attribute_and_save(commande_service, attributes)
     service = Service.find(attributes[:service_id])
     commande_service.attributes = {
-      :montant => attributes[:montant],
+      :montant => if attributes[:montant] == nil || attributes[:montant] == "" then 0 else attributes[:montant] end,
       :service => service
     }
     commande_service.save

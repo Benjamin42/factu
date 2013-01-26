@@ -114,6 +114,14 @@ class BdlsController < ApplicationController
   # DELETE /bdls/1.json
   def destroy
     @bdl = Bdl.find(params[:id])
+    produits = CommandeProduit.find(:all, :conditions => ['bdl_id = ?', @bdl])
+    produits.each do |p|
+      p.destroy
+    end
+    services = CommandeService.find(:all, :conditions => ['bdl_id = ?', @bdl])
+    services.each do |s|
+      s.destroy
+    end
     @bdl.destroy
     @token = :bdls
 
