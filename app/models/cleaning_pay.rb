@@ -10,7 +10,7 @@ class CleaningPay < ActiveRecord::Base
     pays = find_or_initialize_by_id(row[0])
     pays.attributes = {
       :id => self.clean(row[0]),
-      :code_pay => self.clean(row[1]),
+      :code_pays => self.clean(row[1]),
       :nom => self.clean(row[2])
     }
     return pays

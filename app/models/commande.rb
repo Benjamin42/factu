@@ -98,14 +98,13 @@ class Commande < ActiveRecord::Base
       commande = find_or_initialize_by_num_factu(row[0])
       commande.attributes = {
         :num_factu => row[0],
-        #:bdl_id => row[1], # TODO
         :client_id => client.id,
         :date_factu => dateFactu,
-        #:nb_etiquette => row[21],
         :is_livraison => true,
         :date_livraison => dateFactu,
         :is_paiement => true,
-        :date_paiement => dateFactu
+        :date_paiement => dateFactu,
+        :a_livrer => row[21] == "x"
       }
     end
     return commande

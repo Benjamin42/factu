@@ -9,12 +9,90 @@
   </ul>
 </div>
 
+<style>
+	a.lien {
+		color:black; 
+		background-color: white; 
+		text-decoration: underline;
+	}
+</style>
 
-<h4>Dernier Client créé</h4>
-<%= @client.nom %>
+<div style="margin-left : 20px;">
+	
+	<h4>Dernier <a href="/clients" class="lien" >Client</a> créé :</h4>
+	<% if @client.nil? %>
+		<p>Pas de client</p>
+	<% else %>
+		<table class="table ">
+			<tr>
+				<th>N° Client</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Num voie</th>
+				<th>CP</th>
+				<th>Ville</th>
+				<th>Pays</th>
+			</tr>
+			<tr>
+			  <td><%= @client.num_client %></td>
+			  <td><%= @client.nom %></td>
+			  <td><%= @client.prenom %></td>
+			  <td><%= @client.num_voie %></td>
+			  <td><%= @client.codepostal %></td>
+			  <td><%= @client.ville %></td>
+			  <td>
+			  	<% if !@client.pays.nil? %>
+			  		<%= @client.pays.nom %>
+			  	<% end %>
+			  </td>
+			</tr>
+		</table>
+	<% end %>
 
+	<h4>Dernière <a href="/commandes" class="lien" >Commande</a> créée :</h4>
+	<% if @commande.nil? %>
+		<p>Pas de commande</p>
+	<% else %>
+		
+		<table class="table">
+			<tr>
+				<th>Num factu</th>
+			    <th>Client</th>
+			    <th>Date Factu</th>
+			    <th>Date Livraison</th>
+			    <th>Date Paiement</th>
+			    <th>Qty Totale</th>
+			</tr>
+			<tr>
+			    <td><%= @commande.num_factu %></td>
+			    <td><%= if @commande.client != nil then @commande.client.nom else "" end %></td>
+			    <td><%= if @commande.date_factu != nil then @commande.date_factu.strftime('%d/%m/%Y') else "" end %></td>
+			    <td><%= if @commande.date_livraison != nil then @commande.date_livraison.strftime('%d/%m/%Y') else "" end %></td>
+			    <td><%= if @commande.date_paiement != nil then @commande.date_paiement.strftime('%d/%m/%Y') else "" end %></td>
+			    <td><%= @commande.qtyTotal %></td>
+			</tr>
+		</table>
+	<% end %>
 
-<h4>Dernière Commande créée</h4>
-
-
-<h4>Dernier Bon de Livraison créé</h4>
+	<h4>Dernier <a href="/bdls" class="lien" >Bon de Livraison</a> créé :</h4>
+	<% if @bdl.nil? %>
+		<p>Pas de bon de livraison</p>
+	<% else %>
+		<table class="table">
+			<tr>
+				<th>Num bdl</th>
+			    <th>Client</th>
+			    <th>Label</th>
+			    <th>Date bdl</th>
+			</tr>
+			<tr>
+			  	<td><%= @bdl.num_bdl %></td>
+			    <td><%= if @bdl.client != nil then @bdl.client.nom else "" end %></td>
+			    <td><%= @bdl.label %></td>
+			    <td><%= if @bdl.date_bdl != nil then @bdl.date_bdl.strftime('%d/%m/%Y') else "" end %></td>
+	
+			</tr>	
+			
+		</table>
+	<% end %>
+</div>
