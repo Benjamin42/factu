@@ -94,3 +94,13 @@
 		</ul>
 	</div>
 </div>
+
+<% if !Tarif.existTarifCurrentYear %>
+<div class="alert alert-danger">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h4>ATTENTION !</h4>
+  <ul>
+  	<li>Il n'existe aucun tarif pour l'année en cours. Les création de commandes et de BDLs ont été bloqués.</li>
+  </ul>
+</div>
+<% end %>

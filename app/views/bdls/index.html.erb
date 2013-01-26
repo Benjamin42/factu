@@ -2,9 +2,11 @@
 
 <h3>Listing bdls</h3>
 
-<div class="center">
-	<%= link_to 'Nouveau Bon de Livraison', new_bdl_path, class:"btn btn-primary" %>
-</div>
+<% if Tarif.existTarifCurrentYear %>
+	<div class="center">
+		<%= link_to 'Nouveau Bon de Livraison', new_bdl_path, class:"btn btn-primary" %>
+	</div>
+<% end %>
 
 <script>
       function displayDetail(id) {

@@ -2,6 +2,11 @@ class Tarif < ActiveRecord::Base
   belongs_to :produit
   has_many :commande_produit
   
+  def self.existTarifCurrentYear
+    tabTarif = Tarif.find(:all, :conditions => ['annee = ?', Date.current.year])
+    return !tabTarif.nil? && !tabTarif.first.nil?
+  end
+  
   def self.find_by_produit(produit)
     Tarif.find(:all, :conditions => ['produit_id = ?', produit])
     # find_by_sql("select * from tarifs where produit_id = #{idProduit}")
