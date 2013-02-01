@@ -4,7 +4,7 @@
 jQuery ->
   $('#clients').dataTable(
     sPaginationType: "full_numbers"
-    "aoColumns": [                                                                 
+    aoColumns: [                                                                 
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}
@@ -17,7 +17,10 @@ jQuery ->
        { "bSortable": false}
        { "bSortable": false}
        { "bSortable": false}
-       { "bSortable": false}
-      ]    
+      ]
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true      
+    sAjaxSource: $('#clients').data('source')  
   )
   

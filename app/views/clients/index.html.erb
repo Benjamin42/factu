@@ -31,7 +31,9 @@
 	</div>
 </div>
 
-<table id="clients" class="table" >
+<br/>
+
+<table id="clients" class="display" data-source="<%= clients_url(format: "json") %>">
 	<thead>
 		<tr>
 			<th>N° Client</th>
@@ -50,41 +52,6 @@
 		</tr>
   </thead>
   <tbody>
-	<% @clients.each do |client| %>
-	<tr>
-	  <td><%= client.num_client %></td>
-	  <td class="center">
-	  	<% if !client.isGeoloc %>
-	  		<span class="label label-important"><abbr title="Pas de coordonnées de géolocalisation">Error</aabr></span>
-	  	<% else %>
-	  		<span class="label label-success">OK</span>
-	  	<% end %>
-	  </td>		
-	  <td><%= client.nom %></td>
-	  <td><%= client.prenom %></td>
-	  <td><%= client.num_voie %></td>
-	  <td><%= client.codepostal %></td>
-	  <td><%= client.ville %></td>
-	  <td>
-	  	<% if !client.pays.nil? %>
-	  		<%= client.pays.nom %>
-	  	<% end %>
-	  </td>
-	  <td>
-	  	<% if Tarif.existTarifCurrentYear %>
-	  		<%= link_to 'Commande', "commandes/new_with_client/#{client.id}", class:"btn btn-primary" %>
-	  	<% end %>
-	  	</td>
-	  <td>
-	  	<% if Tarif.existTarifCurrentYear %>
-	  		<%= link_to 'BdL', "bdls/new_with_client/#{client.id}", class:"btn btn-primary" %>
-	  	<% end %>	
-	  	</td>
-	  <td><%= link_to 'Show', client, class:"btn btn-info" %></td>
-	  <td><%= link_to 'Edit', edit_client_path(client), class:"btn btn-warning" %></td>
-	  <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
-	</tr>	
-	<% end %>
   </tbody>
 </table>
 

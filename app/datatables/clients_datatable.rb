@@ -18,16 +18,24 @@ private
 
   def data
     clients.map do |client|
+      geoLoc = "";
+      if !client.isGeoloc
+        geoLoc = "<span class='label label-important'><abbr title='Pas de coordonn&eacute;es de g&eacute;olocalisation'>Error</aabr></span>"
+      else
+        geoLoc = "<span class='label label-success'>OK</span>"        
+      end
+      
       [
-        h(client.num_client),
-        h(client.nom),
-        h(client.num_voie),
-        h(client.ville),
-        h(client.pays),
-        h(client.email),
-        h(client.latitude),
-        h(client.longitude),
+        client.num_client,
+        geoLoc,
+        client.nom,
+        client.prenom,
+        client.num_voie,
+        client.codepostal,
+        client.ville,
+        client.pays,
         link_to("Commande", "commandes/new_with_client/#{client.id}",  class: "btn btn-primary"),
+        link_to("Bdl", "bdls/new_with_client/#{client.id}",  class: "btn btn-primary"),
         link_to("Show", client, class: "btn btn-info"),
         link_to("Edit", "clients/#{client.id}/edit", class: "btn btn-warning"),
         link_to("Destroy", client, confirm: 'Are you sure?', method: :delete, class: "btn btn-danger"),
@@ -57,7 +65,7 @@ private
   end
 
   def sort_column
-    columns = %w[num_client nom num_voie ville pays email latitude longitude]
+    columns = %w[num_client longitude nom prenom num_voie codepostal ville pays_id]
     columns[params[:iSortCol_0].to_i]
   end
 

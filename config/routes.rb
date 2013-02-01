@@ -49,9 +49,7 @@ Factu::Application.routes.draw do
 
   resources :tarifs
 
-  resources :clients do
-    collection { post :search, to: 'clients#index' }
-  end
+  resources :clients
   match 'clients/uploadFile' => 'clients#uploadFile'
 
   resources :produits
