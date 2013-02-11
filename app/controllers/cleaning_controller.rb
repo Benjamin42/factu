@@ -6,9 +6,12 @@ class CleaningController < ApplicationController
   include Cleaning
   
   def index
-    @clients = Client.find(:all, :include => [:pays])
-    
     @token = :cleaning
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: ClientsCleaningDatatable.new(view_context) }
+    end
   end
   
   # GET /cleaning/1/edit

@@ -14,7 +14,11 @@ jQuery ->
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": false}
-      ]    
+      ]
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true      
+    sAjaxSource: $('#cleaning').data('source')  
   )
 
   $("#client_nom").change ->

@@ -31,6 +31,10 @@ $ ->
        { "bSortable": false}
        { "bSortable": false}
       ]  
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true      
+    sAjaxSource: $('#commandes').data('source') 
   )
   
   loadBdl = (init=false) ->

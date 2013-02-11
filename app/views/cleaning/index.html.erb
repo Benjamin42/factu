@@ -17,7 +17,7 @@
 </div>
 <% end %>
 
-<table id="cleaning" class="table" >
+<table id="cleaning" class="display" data-source="<%= cleaning_url(format: "json") %>" >
 	<thead>
 		<tr>
 			<th>Clean</th>
@@ -31,28 +31,6 @@
 		</tr>
   </thead>
   <tbody>
-	<% @clients.each do |client| %>
-	<tr>
-	  <td class="center">
-	  	<% if !client.cleaning %>
-	  		<span class="label label-important"><abbr title="Pas de coordonnées de géolocalisation">Error</aabr></span>
-	  	<% else %>
-	  		<span class="label label-success">OK</span>
-	  	<% end %>
-	  </td>			
-	  <td><%= client.num_client %></td>
-	  <td><%= client.nom %></td>
-	  <td><%= client.num_voie %></td>
-	  <td><%= client.codepostal %></td>
-	  <td><%= client.ville %></td>
-	  <td>
-	  	<% if !client.pays.nil? %>
-	  		<%= client.pays.nom %>
-	  	<% end %>
-	  </td>
-	  <td><%= link_to 'Clean', "cleaning/edit/#{client.id}", class:"btn btn-primary" %></td>
-	</tr>	
-	<% end %>
   </tbody>
 </table>
 </div>

@@ -22,9 +22,9 @@ class FinDeMoisController < ApplicationController
         
         line.addProduit(t.label, t.qty, t.qty_cadeau)
         if @hashLineTotal[t.label] == nil
-          @hashLineTotal[t.label] = t.qty + t.qty_cadeau
+          @hashLineTotal[t.label] = if t.qty.nil? then 0 else t.qty end + if t.qty_cadeau.nil? then 0 else t.qty_cadeau end
         else
-          @hashLineTotal[t.label] = @hashLineTotal[t.label] + t.qty + t.qty_cadeau
+          @hashLineTotal[t.label] = @hashLineTotal[t.label] + if t.qty.nil? then 0 else t.qty end + if t.qty_cadeau.nil? then 0 else t.qty_cadeau end
         end
         
         if t.num_bdl != nil

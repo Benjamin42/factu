@@ -35,6 +35,10 @@ class Client < ActiveRecord::Base
     return "#{nom}"
   end
   
+  def printable_name
+    return "#{nom} #{prenom}"
+  end
+  
   def self.build_from_csv(row)
     # find existing customer from email or create new
     client = find_or_initialize_by_nom(row[2])

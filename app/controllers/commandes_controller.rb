@@ -12,8 +12,8 @@ class CommandesController < ApplicationController
     @token = :commandes
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @commandes }
+      format.html
+      format.json { render json: CommandesDatatable.new(view_context) }
     end
   end
 
