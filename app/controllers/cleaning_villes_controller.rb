@@ -2,11 +2,10 @@ class CleaningVillesController < ApplicationController
   # GET /cleaning_villes
   # GET /cleaning_villes.json
   def index
-    @villes = CleaningVille.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @cleaning_villes }
+      format.html
+      format.json { render json: VillesCleaningDatatable.new(view_context) }
     end
   end
 

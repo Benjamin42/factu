@@ -9,4 +9,8 @@ jQuery ->
        { "bSortable": true}
        { "bSortable": true}
       ]    
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true      
+    sAjaxSource: $('#cleaning-pays').data('source')
   )  

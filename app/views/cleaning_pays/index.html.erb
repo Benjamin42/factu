@@ -17,8 +17,9 @@ Fichiers pays téléchargeable <a target="_blank" style="color: blue; background
 		<% end %>
 	</div>
 </div>	
+<br />
 
-<table id="cleaning-pays" class="table" >
+<table id="cleaning-pays" class="display" data-source="<%= cleaning_pays_url(format: "json") %>" >
 	<thead>
 		<tr>
 			<th>Id</th>
@@ -27,14 +28,6 @@ Fichiers pays téléchargeable <a target="_blank" style="color: blue; background
 		</tr>
   </thead>
   <tbody>
-	<% @pays.each do |pays| %>
-	<tr>
-	  <td><%= pays.id %></td>
-	  <td><%= pays.nom %></td>
-	  <td><%= pays.code_pays %></td>
-	  
-	</tr>	
-	<% end %>
   </tbody>
 </table>
 </div>

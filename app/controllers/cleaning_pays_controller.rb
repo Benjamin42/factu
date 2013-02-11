@@ -2,11 +2,9 @@ class CleaningPaysController < ApplicationController
   # GET /cleaning_pays
   # GET /cleaning_pays.json
   def index
-    @pays = CleaningPay.all
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @cleaning_pays }
+      format.html
+      format.json { render json: PaysCleaningDatatable.new(view_context) }
     end
   end
 

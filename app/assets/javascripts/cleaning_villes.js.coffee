@@ -9,6 +9,10 @@ jQuery ->
        { "bSortable": true}
        { "bSortable": true}
        { "bSortable": true}
-       { "bSortable": true}
+       { "bSortable": true}    
       ]    
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true      
+    sAjaxSource: $('#cleaning-ville').data('source')
   )  
