@@ -7,4 +7,7 @@
 <div class="center">
 	<%= link_to 'Back', clients_path, class:"btn btn-inverse" %> |
 	<%= link_to 'Show', @client, class:"btn btn-info" %>
+	<% if @client.countRef == 0 %>
+		 | <%= link_to 'Destroy', @client, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %>
+	<% end %>
 </div>

@@ -31,6 +31,10 @@ div.footer {
 
 @media print
 {
+  p.notice {
+    display: none;
+  }
+
   div.navbar {
     display: none;
   }

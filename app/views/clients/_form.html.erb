@@ -51,9 +51,13 @@
 
 <%= f.input :commentaire  %>
 
+Nombre de références : <%= @client.countRef %>
+
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
 	<i class="icon-ok icon-white"></i> Save
 	<% end %>
 </div>
+
+
 <% end %>

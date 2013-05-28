@@ -97,11 +97,14 @@ class CommandesController < ApplicationController
   # POST /commandes.json
   def create
     @commande = Commande.new(params[:commande])
-    @commande.is_freeze = @commande.mustBeFreeze
-    @commande.save
+    if @commande.date_factu == nil
+      @commande.date_factu = Date.today.strftime('%d/%m/%Y')
+    end
     @token = :commandes
 
       if @commande.save
+        @commande.is_freeze = @commande.mustBeFreeze
+        @commande.save
         flash[:notice] = "Success"
         createVarForFactu
         redirect_to "/commandes/facturation/#{ @commande.id }"
@@ -224,7 +227,7 @@ class CommandesController < ApplicationController
     
     @gift = false
     @commande.commande_produit.each do |cp|
-      if cp.qty_cadeau > 0
+      if cp.qty_cadeau != nil && cp.qty_cadeau > 0
         @gift = true
       end
     end

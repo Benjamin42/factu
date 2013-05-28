@@ -34,7 +34,8 @@ $ ->
     bJQueryUI: true
     bProcessing: true
     bServerSide: true      
-    sAjaxSource: $('#commandes').data('source') 
+    sAjaxSource: $('#commandes').data('source')
+    aaSorting: [[2, 'desc']] 
   )
   
   loadBdl = (init=false) ->
