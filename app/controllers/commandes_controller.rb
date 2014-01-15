@@ -227,11 +227,7 @@ class CommandesController < ApplicationController
     
     @gift = false
     @commande.commande_produit.each do |cp|
-<<<<<<< HEAD
       if !cp.qty_cadeau.nil? && cp.qty_cadeau > 0
-=======
-      if cp.qty_cadeau != nil && cp.qty_cadeau > 0
->>>>>>> 68babc55209b7a75e16af402522763ec8db02380
         @gift = true
       end
     end

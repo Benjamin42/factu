@@ -136,14 +136,11 @@ loadScript();
 </script>
 
 <div class="center">
-<<<<<<< HEAD
+
 	<%= link_to 'Retour', clients_path, class:"btn btn-inverse" %> |
 	<%= link_to 'Editer', edit_client_path(@client), class:"btn btn-warning" %>
-=======
-	<%= link_to 'Back', clients_path, class:"btn btn-inverse" %> |
-	<%= link_to 'Edit', edit_client_path(@client), class:"btn btn-warning" %>
+
 	<% if @client.countRef == 0 %>
-		 | <%= link_to 'Destroy', @client, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %>
+		 | <%= link_to 'Supprimer', @client, confirm: 'Etes vous sur ?', method: :delete, class:"btn btn-danger" %>
 	<% end %>
->>>>>>> 68babc55209b7a75e16af402522763ec8db02380
 </div>
