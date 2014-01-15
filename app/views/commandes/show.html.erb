@@ -90,8 +90,8 @@
 </div>
 
 <div class="center">
-	<%= link_to 'Back', commandes_path, class:"btn btn-inverse" %>
+	<%= link_to 'Retour', commandes_path, class:"btn btn-inverse" %>
 	<% if !@commande.is_freeze %>
-		 | <%= link_to 'Edit', edit_commande_path(@commande), class:"btn btn-warning" %>
+		 | <%= link_to 'Editer', edit_commande_path(@commande), class:"btn btn-warning" %>
 	<%end%>
 </div>

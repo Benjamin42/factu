@@ -34,8 +34,9 @@ jQuery ->
         sum = 0       
         if iEnd - iStart > 0
           for i in [iStart..(iEnd-1)]
-            sum += parseInt(aaData[ aiDisplay[i] ][col])
-        
+            if aaData[ aiDisplay[i] ][col] != ""
+              sum += parseInt(aaData[ aiDisplay[i] ][col])
+            
         nCells[col].innerHTML = sum
   )
   updateFilter()

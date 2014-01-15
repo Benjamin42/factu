@@ -20,11 +20,11 @@
 	<tr>
 		<td><%= produit.label %></td>
 		<td><%= produit.commentaire %></td>
-		<td><%= link_to 'Show', produit, class:"btn btn-info" %></td>
-		<td><%= link_to 'Edit', edit_produit_path(produit), class:"btn btn-warning" %></td>
+		<td><%= link_to 'Afficher', produit, class:"btn btn-info" %></td>
+		<td><%= link_to 'Editer', edit_produit_path(produit), class:"btn btn-warning" %></td>
 		<td>
 			<% if produit.countRef == 0 %>
-				<%= link_to 'Destroy', produit, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+				<%= link_to 'Supprimer', produit, confirm: 'Etes vous sur ?', method: :delete, class:"btn btn-danger" %></td>
 			<%end%>			
 		</td>	
 	</tr>

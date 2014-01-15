@@ -20,14 +20,14 @@
 <%= f.input :annee, :label => "Année", :disabled => true  %>
 
 <div class="control-group integer optional disabled">
-	<label class="control-label float">Produit</label>
+	<label class="control-label float">Prix Unitaire</label>
 	<div class="controls">
 		<%= f.text_field :prix_unitaire_ht, :label => "Prix Unitaire" %>
 	</div>
 </div>        
 
 <div class="control-group integer optional disabled">
-	<label class="control-label float">Produit</label>
+	<label class="control-label float">Prix Livraison</label>
 	<div class="controls">
 		<%= f.text_field :prix_unitaire_ht_livraison, :label => "Prix Unitaire (livraison)"  %>
 	</div>
@@ -37,7 +37,7 @@
 
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-	<i class="icon-ok icon-white"></i> Save
+	<i class="icon-ok icon-white"></i> Enregistrer
 	<% end %>
 </div>
 <% end %>

@@ -33,12 +33,12 @@ private
         client.num_voie,
         client.codepostal,
         client.ville,
-        client.pays,
+        if client.pays != nil then client.pays.nom else "" end,
         link_to("Commande", "commandes/new_with_client/#{client.id}",  class: "btn btn-primary"),
         link_to("Bdl", "bdls/new_with_client/#{client.id}",  class: "btn btn-primary"),
-        link_to("Show", client, class: "btn btn-info"),
-        link_to("Edit", "clients/#{client.id}/edit", class: "btn btn-warning"),
-        link_to("Destroy", client, confirm: 'Are you sure?', method: :delete, class: "btn btn-danger"),
+        link_to("Afficher", client, class: "btn btn-info"),
+        link_to("Editer", "clients/#{client.id}/edit", class: "btn btn-warning"),
+        link_to("Supprimer", client, confirm: 'Etes vous sur ?', method: :delete, class: "btn btn-danger"),
       ]
     end
   end

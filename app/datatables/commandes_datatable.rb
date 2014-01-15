@@ -26,9 +26,9 @@ private
         if commande.date_paiement != nil then commande.date_paiement.strftime('%d/%m/%Y') else "" end,
         commande.qtyTotal,
         link_to('Facture', "commandes/facturation/#{commande.id}", class:"btn btn-inverse"),
-        link_to('Show', commande, class:"btn btn-info"),
-        if !commande.is_freeze then link_to('Edit', "/commandes/#{ commande.id}/edit", class:"btn btn-warning") else link_to('Defreezer', "commandes/defreeze/#{ commande.id }", class:"btn btn-danger") end,
-        link_to('Destroy', commande, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger"),
+        link_to('Afficher', commande, class:"btn btn-info"),
+        if !commande.is_freeze then link_to('Editer', "/commandes/#{ commande.id}/edit", class:"btn btn-warning") else link_to('Defreezer', "commandes/defreeze/#{ commande.id }", class:"btn btn-danger") end,
+        link_to('Supprimer', commande, confirm: 'Etes vous sur ?', method: :delete, class:"btn btn-danger"),
       ]
     end
   end

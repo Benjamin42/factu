@@ -26,29 +26,33 @@
 				<br/>
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soilly, le <%= DateTime.now.strftime('%d/%m/%Y') %></p>
 				
-				<br/>
-				
+				<br/><br/><br/>
+				<center>
 				<%= @commande.client.prenom %> <%= @commande.client.nom %><br/>
-				<% if @commande.client.nom_info != "" %>
+				<% if !@commande.client.nom_info.nil? && @commande.client.nom_info != "" %>
 					<%= @commande.client.nom_info %><br/>
 				<%end%>
 				
-				<% if @commande.client.bat != "" %>
+				<% if !@commande.client.bat.nil? && @commande.client.bat != "" %>
 					<%= @commande.client.bat %><br/>
 				<%end%>
-				<% if @commande.client.num_voie != "" %>
+				
+				<% if !@commande.client.num_voie.nil? && @commande.client.num_voie != "" %>
 					<%= @commande.client.num_voie %><br/>
 				<%end%>
-				<% if @commande.client.bp != "" %>
+				
+				<% if !@commande.client.bp.nil? && @commande.client.bp != "" %>
 					<%= @commande.client.bp %><br/>
 				<%end%>
+				
 				<% if @commande.client.codepostal != "" || @commande.client.ville != "" %>
 					<%= @commande.client.codepostal %> <%= @commande.client.ville %><br/>
 				<%end%>
+				
 				<% if @commande.client.pays != nil && @commande.client.pays != "" %>
 					<%= @commande.client.pays.nom %><br/>
 				<%end%>
-				
+				</center>
 			</div>
 		</div>
 	</div>
@@ -156,7 +160,7 @@
 	
 	<tr>
 		<th class="center">Service</th>
-		<th class="center" colspan="<%= if @gift then 3 else 2 end %>">Description</th>
+		<th class="center" colspan="2">Description</th>
 		<th class="center">Montant TTC</th>
 	</tr>
 	<% end %>

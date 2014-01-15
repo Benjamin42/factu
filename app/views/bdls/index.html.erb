@@ -45,9 +45,9 @@
     <td><%= bdl.label %></td>
     <td><%= if bdl.date_bdl != nil then bdl.date_bdl.strftime('%d/%m/%Y') else "" end %></td>
     <td><%= link_to 'Impression', "bdls/impression/#{bdl.id}", class:"btn btn-inverse" %></td>
-    <td><%= link_to 'Show', bdl, class:"btn btn-info" %></td>
-    <td><%= link_to 'Edit', edit_bdl_path(bdl), class:"btn btn-warning" %></td>
-    <td><%= link_to 'Destroy', bdl, confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>
+    <td><%= link_to 'Afficher', bdl, class:"btn btn-info" %></td>
+    <td><%= link_to 'Editer', edit_bdl_path(bdl), class:"btn btn-warning" %></td>
+    <td><%= link_to 'Supprimer', bdl, confirm: 'Etes vous sur ?', method: :delete, class:"btn btn-danger" %></td>
   </tr>
   
   <% if @commandeHash[bdl.id] != nil && @commandeHash[bdl.id].size > 0 %>
@@ -72,12 +72,12 @@
   					<td><%= detail["qty"] %></td>
   					<td><%= detail["qty_cadeau"] %></td>
 				    <td><%= link_to 'Facture', "commandes/facturation/#{ detail['id'] }", class:"btn btn-inverse" %>
-				   	<%= link_to 'Show', "commandes/#{ detail['id'] }", class:"btn btn-info" %>
+				   	<%= link_to 'Afficher', "commandes/#{ detail['id'] }", class:"btn btn-info" %>
 				    
-				    	<%= link_to 'Edit', edit_commande_path(detail['id']), class:"btn btn-warning" %>
+				    	<%= link_to 'Editer', edit_commande_path(detail['id']), class:"btn btn-warning" %>
 						
 					
-				    <%= link_to 'Destroy', commande_path(detail['id'], :redirect_to => bdls_path), confirm: 'Are you sure?', method: :delete, class:"btn btn-danger" %></td>  					
+				    <%= link_to 'Supprimer', commande_path(detail['id'], :redirect_to => bdls_path), confirm: 'Etes vous sur ?', method: :delete, class:"btn btn-danger" %></td>  					
   				</tr>
 				<% end %>
   			</table>

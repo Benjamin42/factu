@@ -26,20 +26,20 @@
 				<br/>
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soilly, le <%= DateTime.now.strftime('%d/%m/%Y') %></p>
 				
-				<br/>
-				
+				<br/><br/><br/>
+				<center>
 				<%= @bdl.client.prenom %> <%= @bdl.client.nom %><br/>
-				<% if @bdl.client.nom_info != "" %>
+				<% if @bdl.client.nom_info != nil && @bdl.client.nom_info != "" %>
 					<%= @bdl.client.nom_info %><br/>
 				<%end%>
 				
-				<% if @bdl.client.bat != "" %>
+				<% if @bdl.client.bat != nil && @bdl.client.bat != "" %>
 					<%= @bdl.client.bat %><br/>
 				<%end%>
-				<% if @bdl.client.num_voie != "" %>
+				<% if @bdl.client.num_voie != nil && @bdl.client.num_voie != "" %>
 					<%= @bdl.client.num_voie %><br/>
 				<%end%>
-				<% if @bdl.client.bp != "" %>
+				<% if @bdl.client.bp != nil && @bdl.client.bp != "" %>
 					<%= @bdl.client.bp %><br/>
 				<%end%>
 				<% if @bdl.client.codepostal != "" || @bdl.client.ville != "" %>
@@ -48,7 +48,7 @@
 				<% if @bdl.client.pays != nil && @bdl.client.pays != "" %>
 					<%= @bdl.client.pays.nom %><br/>
 				<%end%>
-				
+				</center>
 			</div>
 		</div>
 	</div>
@@ -155,7 +155,7 @@
 <br/>
 
 <div class="center button">
-	<%= link_to '< Back', bdls_path, class:"btn btn-inverse" %>
+	<%= link_to '< Retour', bdls_path, class:"btn btn-inverse" %>
 </div>
 
 <div class="footer">

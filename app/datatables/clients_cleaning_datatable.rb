@@ -33,7 +33,7 @@ private
         client.codepostal,
         client.ville,
         if !client.pays.nil? then client.pays.nom else "" end,
-        link_to('Clean', "cleaning/edit/#{client.id}", class:"btn btn-primary")
+        link_to('Nettoyer', "cleaning/edit/#{client.id}", class:"btn btn-primary")
       ]
     end
   end

@@ -22,6 +22,8 @@
 
 </div>	
 
+<div id="directionsPanelToPrint" ></div>
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span6">
@@ -36,6 +38,7 @@
 					<td valign="middle"><input type="text" id="startAdresse" value="<%= @adresseOrigin %>" disabled="true" /></td>
 					<td valign="middle">
 						<a id="linkCalc" style="visibility: hidden;" href="#myModal" onclick="calcRoute();" data-toggle="modal" class="btn btn-primary">Calculer Trajet</a>
+						<a id="linkCalcPrint" style="visibility: hidden;"href="#" class="btn btn-primary" onclick="window.print();" >Imprimer Trajet</a>
 					</td>
 					
 				</tr>
@@ -81,6 +84,7 @@
 
 <script>
 	var directionDisplay;
+	var directionsDisplayToPrint;
 	var directionsService;;
 	var map;
 	var hashMarcker = {};
@@ -116,6 +120,7 @@
 			$("#linkCalc").attr("style", "visibility:block");
 		} else {
 			$("#linkCalc").attr("style", "visibility:hidden");
+			$("#linkCalcPrint").attr("style", "visibility:hidden");
 		}	
     }
 	
@@ -176,6 +181,7 @@
 	function initialize() {
 		directionsService = new google.maps.DirectionsService()
 		directionsDisplay = new google.maps.DirectionsRenderer();
+		directionsDisplayToPrint = new google.maps.DirectionsRenderer();
 		
 		var mapOptions = createMapOptions(new google.maps.LatLng(46.227638, 2.213749), 6);
 	  
@@ -189,9 +195,15 @@
 		
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+        directionsDisplayToPrint.setMap(map);
+        directionsDisplayToPrint.setPanel(document.getElementById('directionsPanelToPrint'));
         		
 		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
           computeTotalDistance(directionsDisplay.directions);
+        });
+        
+        google.maps.event.addListener(directionsDisplayToPrint, 'directions_changed', function() {
+          computeTotalDistance(directionsDisplayToPrint.directions);
         });
 	}
 	
@@ -248,7 +260,10 @@
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        directionsDisplayToPrint.setDirections(response);
 
+		
+			$("#linkCalcPrint").attr("style", "visibility:block");
       }
     });
     

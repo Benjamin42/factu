@@ -25,14 +25,29 @@
   display: none;
 }
 
+div#directionsPanelToPrint {
+  display: none;
+}
+
+
 @media print {
-  #map-canvas {
-    height: 500px;
-    margin: 0;
-  }
+
 
   #directionsPanel {
-    float: none;
-    width: auto;
+    display: none;
   }
+  
+  div#directionsPanelToPrint {
+    display: block;
+
+  }
+  
+  .container-fluid {
+    display: none;
+  }
+  
+  .myModal {
+    display:none;
+  }
+
 }

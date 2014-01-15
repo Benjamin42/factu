@@ -42,7 +42,7 @@ $ ->
     if document.URL.indexOf("commande") > 0
       if bdlId isnt ""
         $.getJSON("/commandes/bar/" + bdlId , (data) ->
-            $("#commande_client_id").val(data.idClient)
+            #$("#commande_client_id").val(data.idClient)
             
             tabStock = "Stocks du Bon de Livraison <b>\"#{ data.labelBdl }\"</b> : "
             tabStock += "<table class='table table-bordered'><tr><th>Produit</th><th>Quantité Initiale</th><th>Quantité Restante</th></tr>#{ data.tabOrigin }</table>"
@@ -51,7 +51,7 @@ $ ->
         )
         $('input[id$="_qty_cadeau"]').attr("disabled", true)
       else if !init
-        $("#commande_client_id").val("")
+        #$("#commande_client_id").val("")
         $("#stockBdl").html("")
         $('input[id$="_qty_cadeau"]').attr("disabled", false)
         
@@ -63,7 +63,7 @@ $ ->
   
   # onChange sur le client : on clean le BdL
   $("#commande_client_id").change(() ->
-    $("#commande_bdl_id").val("")
-    $("#stockBdl").html("")
-    $('input[id$="_qty_cadeau"]').attr("disabled", false)
+    #$("#commande_bdl_id").val("")
+    #$("#stockBdl").html("")
+    #$('input[id$="_qty_cadeau"]').attr("disabled", false)
    );
