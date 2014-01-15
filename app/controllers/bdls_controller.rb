@@ -75,6 +75,7 @@ class BdlsController < ApplicationController
   # POST /bdls.json
   def create
     @bdl = Bdl.new(params[:bdl])
+    @bdl.date_bdl = Date.today.strftime('%d/%m/%Y')
     @token = :bdls
 
       if @bdl.save

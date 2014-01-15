@@ -106,4 +106,7 @@ class Client < ActiveRecord::Base
     return self.longitude != nil && self.latitude != nil
   end
 
+  def countRef
+    Commande.find(:all, :conditions => ["client_id = ?", id]).size + Bdl.find(:all, :conditions => ["client_id = ?", id]).size
+  end
 end
