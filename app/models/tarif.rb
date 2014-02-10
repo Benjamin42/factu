@@ -36,6 +36,10 @@ class Tarif < ActiveRecord::Base
   def self.list_annee
     return find_by_sql("select distinct annee as annee from tarifs order by annee desc limit 5").reverse
   end  
+  
+  def self.list_all_annee
+    return find_by_sql("select distinct annee as annee from tarifs order by annee")
+  end  
 
   def self.create_tarif(produit, annee)
     tarif = Tarif.new()

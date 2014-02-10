@@ -50,7 +50,7 @@ class ProduitsController < ApplicationController
     respond_to do |format|
       if @produit.save
         # Création de tous les tarifs de ce nouveau produit
-        listAnnee = Tarif.list_annee
+        listAnnee = Tarif.list_all_annee
         listAnnee.each do |anneeLine|
           tarif = Tarif.create_tarif(@produit, anneeLine.annee)
           tarif.save
