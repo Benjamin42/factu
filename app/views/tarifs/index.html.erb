@@ -31,9 +31,10 @@
 		<% Tarif.list_annee.each do |annee| %>
 			<% hashAnne = @tarifs[annee.annee] %>
 			<% t = hashAnne[produit.id] %>
+			<% if !t.nil? then %>
 			<td class="center"><%= link_to "#{t.prix_unitaire_ht} €", edit_tarif_path(t), class:"btn btn-warning" %></td>
 			<td class="center"><%= link_to "#{t.prix_unitaire_ht_livraison} €", edit_tarif_path(t), class:"btn btn-warning" %></td>
-		
+			<%end%>
 		<% end %>
 		</tr>
 	<% end %>
